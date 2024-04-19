@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Kibutz"
+include ':app'
+include ':domain'
+include ':domain:user'
+include ':domain:rental'
+include ':feature'
+include ':data'
+include ':feature:common'
+include ':feature:auth'
+include ':feature:common:ui'
