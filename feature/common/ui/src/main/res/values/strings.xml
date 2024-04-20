@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Kibutz</string>
+    <string name="kibutz_slogan">Если недвижимость, то Кибуц!</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Регистрация</string>
 </resources>
