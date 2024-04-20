@@ -6,4 +6,8 @@
     <string name="email_hint">Введите адрес электронной почтыдля создания Кибуц ID. Мы отправим на него ссылку-подтверждение.</string>
     <string name="email">Email</string>
     <string name="next">Далее</string>
+    <string name="create_password_header">Придумайте пароль</string>
+    <string name="create_password_hint">Сделайте его надежным - нельзя пускать чужих в свой кибуц!</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
 </resources>
