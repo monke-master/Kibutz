@@ -14,4 +14,8 @@
     <string name="name">Имя</string>
     <string name="gender">Пол</string>
     <string name="date_of_birth">Дата рождения</string>
+    <string name="in_kibutz">В кибуц!</string>
+    <string name="sign_in_hdr">Войдите с Кибуц ID</string>
+    <string name="forgot_password">Не помню пароль</string>
+    <string name="create_id">Создать ID</string>
 </resources>

@@ -68,7 +68,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_slogan" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sign_up"
         style="@style/OutlinedButton"
