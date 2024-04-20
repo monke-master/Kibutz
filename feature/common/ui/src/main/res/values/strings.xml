@@ -3,4 +3,7 @@
     <string name="kibutz_slogan">Если недвижимость, то Кибуц!</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Регистрация</string>
+    <string name="email_hint">Введите адрес электронной почтыдля создания Кибуц ID. Мы отправим на него ссылку-подтверждение.</string>
+    <string name="email">Email</string>
+    <string name="next">Далее</string>
 </resources>
