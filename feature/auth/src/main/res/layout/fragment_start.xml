@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:theme="@style/Base.Theme.Kibutz">
 
-
     <ImageView
         android:id="@+id/img_onboarding"
         android:layout_width="match_parent"

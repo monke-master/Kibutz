@@ -32,6 +32,7 @@ dependencies {
 
     implementation project(':feature:common:ui')
     implementation project(":feature:auth")
+    implementation project(':feature:main')
 
     implementation libs.appcompat
     implementation libs.material

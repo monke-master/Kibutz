@@ -18,4 +18,8 @@
     <string name="sign_in_hdr">Войдите с Кибуц ID</string>
     <string name="forgot_password">Не помню пароль</string>
     <string name="create_id">Создать ID</string>
+    <string name="recommendations_header">Вам может подойти</string>
+    <string name="profile_warning">Чтобы получить рекомендации, заполните кибуц-анкету</string>
+    <string name="fill">Заполнить</string>
+    <string name="all">Все</string>
 </resources>

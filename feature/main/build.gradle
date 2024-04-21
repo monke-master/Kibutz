@@ -1,9 +1,9 @@
 plugins {
-    id 'com.android.library'
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    namespace 'com.monke.feature'
+    namespace 'com.monke.main'
     compileSdk 34
 
     defaultConfig {
@@ -29,9 +29,12 @@ dependencies {
 
     implementation libs.appcompat
     implementation libs.material
+    implementation libs.legacy.support.v4
+    implementation libs.lifecycle.livedata.ktx
+    implementation libs.lifecycle.viewmodel.ktx
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    implementation libs.recyclerview
+    implementation project(':feature:common:ui')
 }
