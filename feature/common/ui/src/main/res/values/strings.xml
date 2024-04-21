@@ -22,4 +22,6 @@
     <string name="profile_warning">Чтобы получить рекомендации, заполните кибуц-анкету</string>
     <string name="fill">Заполнить</string>
     <string name="all">Все</string>
+    <string name="respond">Откликнуться</string>
+    <string name="recommendations">Рекомендации</string>
 </resources>
