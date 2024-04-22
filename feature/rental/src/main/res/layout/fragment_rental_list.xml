@@ -10,7 +10,7 @@
         android:id="@+id/txt_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="1312 объявлений"
+        android:text="@string/your_rental"
         style="@style/Header"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -28,6 +28,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_count"
         tools:itemCount="20"
-        tools:listitem="@layout/item_rental" />
+        tools:listitem="@layout/item_rental"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button4"
+        style="@style/IconOnlyButton"
+        android:backgroundTint="?attr/colorOnPrimary"
+        app:iconTint="?attr/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:icon="@drawable/ic_new"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
