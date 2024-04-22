@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <com.yandex.mapkit.mapview.MapView
-        android:id="@+id/mapview"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="com.monke.search.RentalListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </com.yandex.mapkit.mapview.MapView>
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_filter"
