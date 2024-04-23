@@ -29,4 +29,9 @@
     <string name="house">Дом</string>
     <string name="flat">Квартира</string>
     <string name="choose_rental_type">Выберите тип недвижимости</string>
+    <string name="choose_address">Укажите адрес недвижимости</string>
+    <string name="area_flat">Площадь квартиры</string>
+    <string name="common_area">Общая, м<sup>2</sup></string>
+    <string name="living_area">Жилая, м<sup>2</sup></string>
+    <string name="kitchen">Кухня, м<sup>2</sup></string>
 </resources>
