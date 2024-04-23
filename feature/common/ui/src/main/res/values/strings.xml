@@ -37,4 +37,6 @@
     <string name="floor">Этаж</string>
     <string name="flat_floor">Этаж квартиры</string>
     <string name="floors_count">Этажей в доме</string>
+    <string name="rooms_count">Сколько комнат в квартире</string>
+    <string name="enter_rooms_count">Введите количество комнат</string>
 </resources>
