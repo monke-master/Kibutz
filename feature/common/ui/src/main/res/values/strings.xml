@@ -34,4 +34,7 @@
     <string name="common_area">Общая, м<sup>2</sup></string>
     <string name="living_area">Жилая, м<sup>2</sup></string>
     <string name="kitchen">Кухня, м<sup>2</sup></string>
+    <string name="floor">Этаж</string>
+    <string name="flat_floor">Этаж квартиры</string>
+    <string name="floors_count">Этажей в доме</string>
 </resources>
