@@ -42,5 +42,11 @@
     <string name="roommates_hdr">Сколько ищите соседей</string>
     <string name="more_rooms">Больше %s</string>
     <string name="requirements">Требования к соседям</string>
-
+    <string name="photos">Фотографии</string>
+    <string name="price">Цена</string>
+    <string name="price_monthly">Цена в месяц</string>
+    <string name="description">Описание</string>
+    <string name="contacts">Контакты</string>
+    <string name="phone">Телефон</string>
+    <string name="telegramm">Телеграм</string>
 </resources>
