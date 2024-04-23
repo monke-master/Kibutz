@@ -25,4 +25,8 @@
     <string name="respond">Откликнуться</string>
     <string name="recommendations">Рекомендации</string>
     <string name="your_rental">Ваши объявления</string>
+    <string name="new_rental">Разместить объявление</string>
+    <string name="house">Дом</string>
+    <string name="flat">Квартира</string>
+    <string name="choose_rental_type">Выберите тип недвижимости</string>
 </resources>
