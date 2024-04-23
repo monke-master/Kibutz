@@ -39,4 +39,8 @@
     <string name="floors_count">Этажей в доме</string>
     <string name="rooms_count">Сколько комнат в квартире</string>
     <string name="enter_rooms_count">Введите количество комнат</string>
+    <string name="roommates_hdr">Сколько ищите соседей</string>
+    <string name="more_rooms">Больше %s</string>
+    <string name="requirements">Требования к соседям</string>
+
 </resources>

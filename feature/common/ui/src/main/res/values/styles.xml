@@ -72,4 +72,10 @@
         <item name="chipStrokeColor">?attr/colorPrimary</item>
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
+
+    <style name="IconChip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipIconVisible">true</item>
+        <item name="chipStrokeColor">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
 </resources>
