@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.monke.rental.R;
 
-public class NewRentalFragment extends Fragment {
+public class AddressFragment extends Fragment {
 
-    private NewRentalViewModel mViewModel;
+    private AddressViewModel mViewModel;
 
-    public static NewRentalFragment newInstance() {
-        return new NewRentalFragment();
+    public static AddressFragment newInstance() {
+        return new AddressFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_rental, container, false);
+        return inflater.inflate(R.layout.fragment_address, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(NewRentalViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(AddressViewModel.class);
         // TODO: Use the ViewModel
     }
 
