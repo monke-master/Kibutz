@@ -31,7 +31,7 @@
     <string name="choose_rental_type">Выберите тип недвижимости</string>
     <string name="choose_address">Укажите адрес недвижимости</string>
     <string name="area_flat">Площадь квартиры</string>
-    <string name="common_area">Общая, м<sup>2</sup></string>
+    <string name="common_area_square">Общая, м<sup>2</sup></string>
     <string name="living_area">Жилая, м<sup>2</sup></string>
     <string name="kitchen">Кухня, м<sup>2</sup></string>
     <string name="floor">Этаж</string>
@@ -50,4 +50,7 @@
     <string name="phone">Телефон</string>
     <string name="telegramm">Телеграм</string>
     <string name="kibutz">Кибуц!</string>
+    <string name="common">общая площадь</string>
+    <string name="flatmates">Соседи</string>
+    <string name="about_flat">О квартире</string>
 </resources>

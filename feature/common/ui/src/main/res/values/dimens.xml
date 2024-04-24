@@ -6,4 +6,8 @@
     <dimen name="button_padding">15dp</dimen>
 
     <dimen name="logo_height">30dp</dimen>
+
+    <dimen name="rental_image_size">200dp</dimen>
+
+    <dimen name="flatmate_pic_size">50dp</dimen>
 </resources>
