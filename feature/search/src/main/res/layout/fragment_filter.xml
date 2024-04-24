@@ -17,7 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="@string/filters"/>
+        app:title="@string/filters">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DefaultText"
+            android:textColor="?attr/colorSecondary"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:text="@string/clear"/>
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_txt_email"

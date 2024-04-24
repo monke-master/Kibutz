@@ -62,4 +62,8 @@
     <string name="sleeps_count">Количество спальных мест</string>
     <string name="from">От</string>
     <string name="to">До</string>
+<<<<<<< HEAD
+=======
+    <string name="clear">Сбросить</string>
+>>>>>>> f4058a1 (filter fragment)
 </resources>
