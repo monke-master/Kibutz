@@ -1,19 +1,16 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    namespace 'com.monke.kibutz'
+    namespace 'com.example.profile'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.monke.kibutz"
-        minSdk 26
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -30,18 +27,11 @@ android {
 
 dependencies {
 
-    implementation project(':feature:common:ui')
-    implementation project(":feature:auth")
-    implementation project(':feature:main')
-    implementation project(':feature:search')
-    implementation project(':feature:rental')
-    implementation project(':feature:profile')
+    implementation project(":feature:common:ui")
 
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.constraintlayout
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-    implementation libs.yandex.map.kit
 }
