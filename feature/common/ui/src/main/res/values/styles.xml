@@ -78,4 +78,10 @@
         <item name="chipStrokeColor">?attr/colorPrimary</item>
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
+
+    <style name="OutlinedIconButton" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="shapeAppearance">@style/ButtonShape</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:paddingVertical">@dimen/button_padding</item>
+    </style>
 </resources>
