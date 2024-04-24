@@ -62,12 +62,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_req">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip"
+            android:id="@+id/chip_add"
             style="@style/IconChip"
             app:chipIcon="@drawable/ic_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/more_rooms" />
+            android:text="@string/add" />
 
     </com.google.android.material.chip.ChipGroup>
 

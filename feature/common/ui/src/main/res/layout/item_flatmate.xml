@@ -10,7 +10,7 @@
         android:id="@+id/image"
         android:layout_width="@dimen/flatmate_pic_size"
         android:layout_height="@dimen/flatmate_pic_size"
-        android:src="@tools:sample/avatars"
+        tools:src="@tools:sample/avatars"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

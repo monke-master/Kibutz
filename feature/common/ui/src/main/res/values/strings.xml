@@ -42,6 +42,7 @@
     <string name="roommates_hdr">Сколько ищите соседей</string>
     <string name="more_rooms">Больше %s</string>
     <string name="requirements">Требования к соседям</string>
+    <string name="add">Добавить</string>
     <string name="photos">Фотографии</string>
     <string name="price">Цена</string>
     <string name="price_monthly">Цена в месяц</string>
@@ -53,4 +54,12 @@
     <string name="common">общая площадь</string>
     <string name="flatmates">Соседи</string>
     <string name="about_flat">О квартире</string>
+    <string name="filters">Фильтры</string>
+    <string name="address">Адрес</string>
+    <string name="rental_type">Тип недвижимости</string>
+    <string name="rooms_count_filter">Количество комнат</string>
+    <string name="flootmates_count_filter">Количество соседей</string>
+    <string name="sleeps_count">Количество спальных мест</string>
+    <string name="from">От</string>
+    <string name="to">До</string>
 </resources>
