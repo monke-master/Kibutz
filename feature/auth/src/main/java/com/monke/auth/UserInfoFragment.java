@@ -1,4 +1,4 @@
-package com.example.profile;
+package com.monke.auth;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,24 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProfileFragment extends Fragment {
+public class UserInfoFragment extends Fragment {
 
-    private ProfileViewModel mViewModel;
+    private UserInfoViewModel mViewModel;
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static UserInfoFragment newInstance() {
+        return new UserInfoFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_user_info, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(UserInfoViewModel.class);
         // TODO: Use the ViewModel
     }
 

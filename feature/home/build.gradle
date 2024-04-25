@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.monke.profile'
+    namespace 'com.monke.main'
     compileSdk 34
 
     defaultConfig {
@@ -27,8 +27,6 @@ android {
 
 dependencies {
 
-    implementation project(':feature:common:ui')
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.legacy.support.v4
@@ -37,4 +35,6 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    implementation project(':feature:common:ui')
 }

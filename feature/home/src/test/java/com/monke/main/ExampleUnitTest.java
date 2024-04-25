@@ -1,4 +1,4 @@
-package com.example.profile;
+package com.monke.main;
 
 import org.junit.Test;
 

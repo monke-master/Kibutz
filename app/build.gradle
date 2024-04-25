@@ -32,9 +32,10 @@ dependencies {
 
     implementation project(':feature:common:ui')
     implementation project(":feature:auth")
-    implementation project(':feature:main')
+    implementation project(':feature:home')
     implementation project(':feature:search')
     implementation project(':feature:rental')
+    implementation project(':feature:main')
     implementation project(':feature:profile')
 
     implementation libs.appcompat
@@ -44,4 +45,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     implementation libs.yandex.map.kit
+
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
 }

@@ -70,4 +70,7 @@
     <string name="about_myself">О себе</string>
     <string name="save">Сохранить</string>
     <string name="about_me">Обо мне</string>
+    <string name="home">Главная</string>
+    <string name="search">Поиск</string>
+    <string name="rentals">Объявления</string>
 </resources>

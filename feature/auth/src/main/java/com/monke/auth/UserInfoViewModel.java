@@ -1,7 +1,7 @@
-package com.example.profile;
+package com.monke.auth;
 
 import androidx.lifecycle.ViewModel;
 
-public class UserViewModel extends ViewModel {
+public class UserInfoViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 }
