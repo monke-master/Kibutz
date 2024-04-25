@@ -30,17 +30,20 @@ android {
 
 dependencies {
 
+    implementation project(':feature:common:ui')
+
     implementation libs.appcompat
     implementation libs.material
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation libs.legacy.support.v4
+    implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.viewmodel
     implementation libs.constraintlayout
+
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation project(':feature:common:ui')
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
 }
