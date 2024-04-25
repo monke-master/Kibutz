@@ -10,4 +10,7 @@
     <dimen name="rental_image_size">200dp</dimen>
 
     <dimen name="flatmate_pic_size">50dp</dimen>
+
+    <dimen name="profile_image_height">150dp</dimen>
+    <dimen name="profile_image_width">100dp</dimen>
 </resources>
