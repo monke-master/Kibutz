@@ -67,6 +67,7 @@
     <string name="edit_profile">Редактировать анкету</string>
     <string name="your_responses">Ваши отклики</string>
     <string name="user_profile">Анкета</string>
-    <string name="about_me">О себе</string>
+    <string name="about_myself">О себе</string>
     <string name="save">Сохранить</string>
+    <string name="about_me">Обо мне</string>
 </resources>
