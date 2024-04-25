@@ -1,4 +1,4 @@
-package com.monke.auth;
+package com.monke.auth.ui;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,24 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class PasswordFragment extends Fragment {
+import com.monke.auth.R;
 
-    private PasswordViewModel mViewModel;
+public class EmailFragment extends Fragment {
 
-    public static PasswordFragment newInstance() {
-        return new PasswordFragment();
+    private EmailViewModel mViewModel;
+
+    public static EmailFragment newInstance() {
+        return new EmailFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_password, container, false);
+        return inflater.inflate(R.layout.fragment_email, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PasswordViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(EmailViewModel.class);
         // TODO: Use the ViewModel
     }
 

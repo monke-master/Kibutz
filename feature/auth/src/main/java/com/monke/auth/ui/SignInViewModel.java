@@ -1,7 +1,7 @@
-package com.monke.auth;
+package com.monke.auth.ui;
 
 import androidx.lifecycle.ViewModel;
 
-public class StartViewModel extends ViewModel {
+public class SignInViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 }

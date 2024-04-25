@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/identity" />
             <option value="$PROJECT_DIR$/domain/rental" />
             <option value="$PROJECT_DIR$/domain/user" />
             <option value="$PROJECT_DIR$/feature" />

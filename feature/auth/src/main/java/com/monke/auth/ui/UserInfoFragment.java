@@ -1,4 +1,4 @@
-package com.monke.auth;
+package com.monke.auth.ui;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,24 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class StartFragment extends Fragment {
+import com.monke.auth.R;
 
-    private StartViewModel mViewModel;
+public class UserInfoFragment extends Fragment {
 
-    public static StartFragment newInstance() {
-        return new StartFragment();
+    private UserInfoViewModel mViewModel;
+
+    public static UserInfoFragment newInstance() {
+        return new UserInfoFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_start, container, false);
+        return inflater.inflate(R.layout.fragment_user_info, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(StartViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(UserInfoViewModel.class);
         // TODO: Use the ViewModel
     }
 

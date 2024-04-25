@@ -1,7 +1,6 @@
-package com.monke.auth;
+package com.monke.auth.ui;
 
 import androidx.lifecycle.ViewModel;
 
 public class EmailViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 }

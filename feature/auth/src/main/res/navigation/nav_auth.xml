@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.monke.auth.StartFragment"
+        android:name="com.monke.auth.ui.StartFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_emailFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
-        android:name="com.monke.auth.EmailFragment"
+        android:name="com.monke.auth.ui.EmailFragment"
         android:label="fragment_email"
         tools:layout="@layout/fragment_email" >
         <action
@@ -27,12 +27,12 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.monke.auth.SignInFragment"
+        android:name="com.monke.auth.ui.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
     <fragment
         android:id="@+id/passwordFragment"
-        android:name="com.monke.auth.PasswordFragment"
+        android:name="com.monke.auth.ui.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.monke.auth.UserInfoFragment"
+        android:name="com.monke.auth.ui.UserInfoFragment"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
 </navigation>
