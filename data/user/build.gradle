@@ -29,6 +29,7 @@ dependencies {
     implementation project(':domain:user')
 
     implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
 
     implementation libs.appcompat
     implementation libs.material

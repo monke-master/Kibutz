@@ -2,6 +2,7 @@ package com.monke.auth.ui;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,26 +14,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.monke.auth.R;
+import com.monke.auth.di.AuthComponentProvider;
 
-public class StartFragment extends Fragment {
+public class AuthFragment extends Fragment {
 
-    private StartViewModel mViewModel;
+    private AuthViewModel mViewModel;
 
-    public static StartFragment newInstance() {
-        return new StartFragment();
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_start, container, false);
+        return inflater.inflate(R.layout.fragment_auth, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(StartViewModel.class);
-        // TODO: Use the ViewModel
+        mViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        mViewModel.init();
     }
 
 }
