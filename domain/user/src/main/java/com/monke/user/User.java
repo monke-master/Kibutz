@@ -12,7 +12,6 @@ public class User {
     private List<Rental> responses;
     private Profile profile;
 
-
     public User(String id, String name, long dateOfBirth, List<Rental> responses, Profile profile) {
         this.id = id;
         this.name = name;

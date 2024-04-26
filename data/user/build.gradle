@@ -1,9 +1,9 @@
 plugins {
-    id 'com.android.library'
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    namespace 'com.monke.auth'
+    namespace 'com.monke.user'
     compileSdk 34
 
     defaultConfig {
@@ -23,31 +23,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
-
     implementation project(':domain:user')
-    implementation project(':feature:common:ui')
+
+    implementation libs.dagger2
 
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.legacy.support.v4
-    implementation libs.lifecycle.livedata
-    implementation libs.lifecycle.viewmodel
-    implementation libs.constraintlayout
-
-    implementation libs.navigation.fragment
-    implementation libs.navigation.ui
-
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-
-    implementation libs.dagger2
-    annotationProcessor libs.dagger.compiler
 
 }

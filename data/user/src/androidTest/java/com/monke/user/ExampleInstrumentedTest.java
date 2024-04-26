@@ -1,4 +1,4 @@
-package com.monke.data;
+package com.monke.user;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.monke.data.test", appContext.getPackageName());
+        assertEquals("com.monke.user.test", appContext.getPackageName());
     }
 }

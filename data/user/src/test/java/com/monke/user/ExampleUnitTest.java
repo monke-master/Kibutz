@@ -1,4 +1,4 @@
-package com.monke.data;
+package com.monke.user;
 
 import org.junit.Test;
 

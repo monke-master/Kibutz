@@ -6,6 +6,9 @@ legacy-support-v4 = "1.0.0"
 lifecycle-livedata = "2.7.0"
 lifecycle-viewmodel = "2.7.0"
 recyclerview = "1.3.2"
+map-kit = "4.5.1-full"
+dagger = "2.48"
+dagger-compiler = "2.11"
 [libraries]
 appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
@@ -19,7 +22,9 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "lifecycle-livedata" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-yandex-map-kit = { module = "com.yandex.android:maps.mobile", version = "4.5.1-full"}
+yandex-map-kit = { module = "com.yandex.android:maps.mobile", version.ref = "map-kit" }
+dagger2 = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = 'com.google.dagger:dagger-compiler', version.ref = "dagger-compiler" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
