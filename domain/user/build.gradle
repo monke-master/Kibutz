@@ -10,4 +10,8 @@ java {
 dependencies {
     implementation project(':domain:identity')
     implementation project(':domain:rental')
+
+    implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
+
 }

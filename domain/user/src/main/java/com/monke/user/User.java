@@ -8,15 +8,69 @@ import java.util.Objects;
 public class User {
     private String id;
     private String name;
+    private String email;
     private long dateOfBirth;
     private List<Rental> responses;
     private Profile profile;
 
-    public User(String id, String name, long dateOfBirth, List<Rental> responses, Profile profile) {
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User(String id, String name, String email, long dateOfBirth,
+                List<Rental> responses, Profile profile) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.responses = responses;
+        this.profile = profile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(long dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<Rental> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(List<Rental> responses) {
+        this.responses = responses;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
         this.profile = profile;
     }
 

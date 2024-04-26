@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_txt_email"
+        android:id="@+id/edit_txt_email_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_txt_email"
             android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -68,6 +69,6 @@
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_txt_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_txt_email_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

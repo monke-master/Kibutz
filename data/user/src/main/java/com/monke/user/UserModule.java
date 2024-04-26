@@ -10,5 +10,5 @@ public interface UserModule {
     UserRepository bindUserRepository(UserRepositoryImpl i);
 
     @Binds
-    UserCacheDataSource bindUserCacheDataSource(UserCacheDataSource i);
+    UserCacheDataSource bindUserCacheDataSource(UserCacheDataSourceImpl i);
 }
