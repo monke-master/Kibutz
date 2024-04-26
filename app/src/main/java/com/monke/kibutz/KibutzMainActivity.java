@@ -1,7 +1,10 @@
 package com.monke.kibutz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.monke.kibutz.databinding.ActivityMainBinding;

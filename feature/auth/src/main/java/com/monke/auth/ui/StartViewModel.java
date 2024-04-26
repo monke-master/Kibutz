@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.monke.auth.di.AuthComponentProvider;
 
-public class AuthViewModel extends ViewModel {
+public class StartViewModel extends ViewModel {
 
     public void init() {
         AuthComponentProvider.initialize();
