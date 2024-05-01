@@ -18,7 +18,6 @@ public class Profile {
         this.identities = identities;
     }
 
-
     public String getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.monke.auth.ui;
+package com.monke.auth.ui.info;
 
 import androidx.lifecycle.ViewModelProvider;
 

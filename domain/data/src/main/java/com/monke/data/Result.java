@@ -1,8 +1,8 @@
 package com.monke.data;
 
-public abstract class Result<T> {
+public sealed abstract class Result<T> {
 
-    public static class Failure<T> extends Result<T> {
+    public static final class Failure<T> extends Result<T> {
         private final Exception exception;
 
         public Failure(Exception exception) {
@@ -14,7 +14,7 @@ public abstract class Result<T> {
         }
     }
 
-    public static class Success<T> extends Result<T> {
+    public static final class Success<T> extends Result<T> {
 
         private final T data;
 

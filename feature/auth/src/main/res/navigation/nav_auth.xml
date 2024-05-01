@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.monke.auth.ui.UserInfoFragment"
+        android:name="com.monke.auth.ui.info.UserInfoFragment"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
 </navigation>

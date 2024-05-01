@@ -73,4 +73,6 @@
     <string name="home">Главная</string>
     <string name="search">Поиск</string>
     <string name="rentals">Объявления</string>
+    <string name="male">Мужчина</string>
+    <string name="female">Женщина</string>
 </resources>

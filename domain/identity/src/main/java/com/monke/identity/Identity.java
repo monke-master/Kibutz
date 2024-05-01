@@ -8,7 +8,6 @@ public class Identity {
     private String iconUrl;
     private String oppositeId;
 
-
     public Identity(String id, String name, String iconUrl, String opposite) {
         this.id = id;
         this.name = name;
