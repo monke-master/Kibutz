@@ -12,6 +12,7 @@ public class User {
     private long dateOfBirth;
     private List<Rental> responses;
     private Profile profile;
+    private String password;
 
     public User(String email) {
         this.email = email;
@@ -72,6 +73,14 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

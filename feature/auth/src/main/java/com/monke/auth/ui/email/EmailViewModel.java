@@ -1,4 +1,4 @@
-package com.monke.auth.ui;
+package com.monke.auth.ui.email;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -27,7 +27,7 @@ public class EmailViewModel extends ViewModel {
     }
 
     public void verifyEmail() {
-
+        saveEmailUseCase.execute(email);
     }
 
     public static class Factory implements ViewModelProvider.Factory {

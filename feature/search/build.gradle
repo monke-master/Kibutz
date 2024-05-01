@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    implementation project(':feature:common:ui')
+    implementation project(':core:ui')
 
     implementation libs.appcompat
     implementation libs.material

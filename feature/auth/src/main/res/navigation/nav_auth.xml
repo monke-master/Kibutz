@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
-        android:name="com.monke.auth.ui.EmailFragment"
+        android:name="com.monke.auth.ui.email.EmailFragment"
         android:label="fragment_email"
         tools:layout="@layout/fragment_email" >
         <action
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_sign_in" />
     <fragment
         android:id="@+id/passwordFragment"
-        android:name="com.monke.auth.ui.PasswordFragment"
+        android:name="com.monke.auth.ui.password.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password" >
         <action

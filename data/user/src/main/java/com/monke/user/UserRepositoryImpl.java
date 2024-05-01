@@ -1,7 +1,10 @@
 package com.monke.user;
 
+import com.monke.user.di.AuthScope;
+
 import javax.inject.Inject;
 
+@AuthScope
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
@@ -19,5 +22,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void saveUser(User user) {
         cacheDataSource.saveUser(user);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return cacheDataSource.getUser();
     }
 }

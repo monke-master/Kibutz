@@ -36,5 +36,5 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    implementation project(':feature:common:ui')
+    implementation project(':core:ui')
 }

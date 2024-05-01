@@ -1,4 +1,4 @@
-package com.monke.auth.ui;
+package com.monke.auth.ui.email;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -63,9 +63,11 @@ public class EmailFragment extends Fragment {
     }
 
     private void initNextBtn() {
-        mViewModel.verifyEmail();
-        mBinding.btnNext.setOnClickListener(v -> NavHostFragment
-                .findNavController(this).navigate(
-                        R.id.action_emailFragment_to_passwordFragment));
+        mBinding.btnNext.setOnClickListener(v -> {
+            mViewModel.verifyEmail();
+            NavHostFragment
+                    .findNavController(this)
+                    .navigate(R.id.action_emailFragment_to_passwordFragment);
+        });
     }
 }
