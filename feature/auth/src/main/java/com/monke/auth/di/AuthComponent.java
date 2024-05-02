@@ -2,14 +2,18 @@ package com.monke.auth.di;
 
 import com.monke.auth.ui.email.EmailFragment;
 import com.monke.auth.ui.StartFragment;
+import com.monke.auth.ui.info.UserInfoFragment;
 import com.monke.auth.ui.password.PasswordFragment;
-import com.monke.user.di.AuthScope;
+import com.monke.di.AuthScope;
+import com.monke.identity.di.IdentityModule;
 import com.monke.user.di.UserModule;
 
 import dagger.Component;
 
-
-@Component(modules = { UserModule.class }
+@Component(modules = {
+        UserModule.class,
+        IdentityModule.class
+}
 )
 @AuthScope
 public interface AuthComponent {
@@ -19,6 +23,8 @@ public interface AuthComponent {
     void inject(EmailFragment fragment);
 
     void inject(PasswordFragment fragment);
+
+    void inject(UserInfoFragment fragment);
 
     @Component.Builder
     interface Builder {

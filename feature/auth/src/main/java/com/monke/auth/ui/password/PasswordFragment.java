@@ -56,21 +56,21 @@ public class PasswordFragment extends Fragment {
     }
 
     private void initPasswordEditText() {
-        binding.editTxtPassword.setText(mViewModel.getUiState().getValue().getPassword());
+        binding.editTxtPassword.setText(mViewModel.getUiState().getPassword());
         binding.editTxtPassword.addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
-                mViewModel.setPassword(s.toString());
+                mViewModel.getUiState().setPassword(s.toString());
             }
         });
     }
 
     private void initRepeatPasswordEditText() {
-        binding.editTxtPassword.setText(mViewModel.getUiState().getValue().getRepeatedPassword());
+        binding.editTxtPassword.setText(mViewModel.getUiState().getRepeatedPassword());
         binding.editTxtRepeatPassword.addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
-                mViewModel.setRepeatedPassword(s.toString());
+                mViewModel.getUiState().setRepeatedPassword(s.toString());
             }
         });
     }

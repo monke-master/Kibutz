@@ -1,4 +1,4 @@
-package com.monke.user.di;
+package com.monke.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

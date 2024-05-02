@@ -1,6 +1,9 @@
 package com.monke.data;
 
-public sealed class UiStatusState {
+public sealed class UiStatusState permits
+        UiStatusState.Default,
+        UiStatusState.Error,
+        UiStatusState.Success {
 
     public boolean isSuccess() {
         return this instanceof Success;

@@ -2,7 +2,8 @@ package com.monke.user;
 
 import android.util.Log;
 
-import com.monke.user.di.AuthScope;
+
+import com.monke.di.AuthScope;
 
 import javax.inject.Inject;
 

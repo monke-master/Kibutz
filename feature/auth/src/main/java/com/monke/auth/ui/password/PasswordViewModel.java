@@ -18,9 +18,7 @@ public class PasswordViewModel extends ViewModel {
     private final SavePasswordUseCase savePasswordUseCase;
     private final VerifyPasswordUseCase verifyPasswordUseCase;
 
-    private MutableLiveData<PasswordUiState> _passwordUiState =
-            new MutableLiveData<>(new PasswordUiState());
-    private LiveData<PasswordUiState> uiState = _passwordUiState;
+    private PasswordUiState passwordUiState = new PasswordUiState();
 
     private MutableLiveData<UiStatusState> _uiStatusState =
             new MutableLiveData<>(new UiStatusState.Default());
@@ -34,41 +32,25 @@ public class PasswordViewModel extends ViewModel {
 
     public void savePassword() {
         Result<Boolean> result = verifyPasswordUseCase.execute(
-                _passwordUiState.getValue().getPassword(),
-                _passwordUiState.getValue().getRepeatedPassword());
+                passwordUiState.getPassword(),
+                passwordUiState.getRepeatedPassword());
 
         if (result instanceof Result.Success<Boolean>) {
-            savePasswordUseCase.execute(_passwordUiState.getValue().getPassword());
+            savePasswordUseCase.execute(passwordUiState.getPassword());
 
-            PasswordUiState state = _passwordUiState.getValue();
             _uiStatusState.setValue(new UiStatusState.Success());
-            _passwordUiState.setValue(state);
         } else {
-            PasswordUiState state = _passwordUiState.getValue();
             var exception = ((Result.Failure<?>)result).getException();
             _uiStatusState.setValue(new UiStatusState.Error(exception));
-            _passwordUiState.setValue(state);
         }
     }
 
-    public LiveData<PasswordUiState> getUiState() {
-        return uiState;
+    public PasswordUiState getUiState() {
+        return passwordUiState;
     }
 
     public LiveData<UiStatusState> getUiStatus() {
         return uiStatus;
-    }
-
-    public void setPassword(String password) {
-        PasswordUiState state = _passwordUiState.getValue();
-        state.setPassword(password);
-        _passwordUiState.setValue(state);
-    }
-
-    public void setRepeatedPassword(String repeatedPassword) {
-        PasswordUiState state = _passwordUiState.getValue();
-        state.setRepeatedPassword(repeatedPassword);
-        _passwordUiState.setValue(state);
     }
 
     public void clearStatus() {

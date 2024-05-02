@@ -26,6 +26,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
       <module name="Kibutz.berkoff" target="17" />
+      <module name="Kibutz.core.data" target="17" />
+      <module name="Kibutz.feature.common" target="17" />
+      <module name="Kibutz.feature.common.ui" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

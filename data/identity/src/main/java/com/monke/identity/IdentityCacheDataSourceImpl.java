@@ -11,6 +11,7 @@ public class IdentityCacheDataSourceImpl implements IdentityCacheDataSource {
 
     @Inject
     public IdentityCacheDataSourceImpl() {
+        identities = new ArrayList<>();
         identities.add(Identities.MALE);
         identities.add(Identities.FEMALE);
     }

@@ -75,4 +75,9 @@
     <string name="rentals">Объявления</string>
     <string name="male">Мужчина</string>
     <string name="female">Женщина</string>
+
+    <string-array name="genders">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
 </resources>
