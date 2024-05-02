@@ -6,4 +6,12 @@
 
 
     <include app:graph="@navigation/nav_auth" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.monke.main.MainFragment"
+        android:label="MainFragment">
+
+        <deepLink app:uri="@string/main_fragment_deeplink"/>
+    </fragment>
+
 </navigation>

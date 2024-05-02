@@ -5,11 +5,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDeepLinkRequest;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
 import android.text.InputType;
@@ -23,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 
+import com.monke.auth.R;
 import com.monke.auth.databinding.FragmentUserInfoBinding;
 import com.monke.auth.di.AuthComponentProvider;
 import com.monke.data.UiStatusState;
@@ -127,7 +131,10 @@ public class UserInfoFragment extends Fragment {
     private void observeUiStatus() {
         mViewModel.getUiStatusState().observe(getViewLifecycleOwner(), uiStatusState -> {
             if (uiStatusState.isSuccess()) {
-                Log.d("UserInfoFragment", "SUCCESS MOTHERFUCKER!");
+                NavDeepLinkRequest request = NavDeepLinkRequest.Builder
+                        .fromUri(Uri.parse(getString(com.monke.ui.R.string.main_fragment_deeplink)))
+                        .build();
+                NavHostFragment.findNavController(this).navigate(request);
             }
         });
     }
