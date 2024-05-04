@@ -27,6 +27,8 @@ android {
 
 dependencies {
 
+    implementation project(':domain:identity')
+
     implementation libs.appcompat
     implementation libs.material
     testImplementation libs.junit
