@@ -1,5 +1,6 @@
 package com.monke.profile;
 
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -52,6 +53,11 @@ public class EditProfileFragment extends Fragment {
         fillUserInfo();
         initEditTextBio();
         initAddIdentityChip();
+
+        getParentFragmentManager().setFragmentResultListener(IdentitiesFragment.RESULT_KEY,
+                getViewLifecycleOwner(), (requestKey, result) -> {
+
+        });
     }
 
     private void fillUserInfo() {

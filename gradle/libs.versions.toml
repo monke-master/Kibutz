@@ -11,6 +11,7 @@ dagger = "2.48"
 dagger-compiler = "2.15"
 activity = "1.8.0"
 rxjava = "3.0.2"
+fragment = "1.7.0"
 [libraries]
 appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
@@ -29,6 +30,7 @@ dagger2 = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = 'com.google.dagger:dagger-compiler', version.ref = "dagger-compiler" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 rxjava = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava" }
+fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

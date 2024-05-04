@@ -21,11 +21,11 @@ import javax.inject.Inject;
 public class IdentitiesFragment extends Fragment {
 
     private FragmentIdentitiesBinding mBinding;
-
     private IdentitiesViewModel mViewModel;
 
     @Inject
     public IdentitiesViewModel.Factory factory;
+    public static String RESULT_KEY = "CHIPS_RESULT";
 
     @Override
     public void onAttach(@NonNull Context context) {
