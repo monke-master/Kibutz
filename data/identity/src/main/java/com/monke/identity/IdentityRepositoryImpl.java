@@ -21,7 +21,7 @@ public class IdentityRepositoryImpl implements IdentityRepository {
 
     @Override
     public List<Identity> getIdentities() {
-        return null;
+        return identityCacheDataSource.getIdentities();
     }
 
 

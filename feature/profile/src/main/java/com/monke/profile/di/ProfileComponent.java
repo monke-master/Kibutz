@@ -1,5 +1,6 @@
 package com.monke.profile.di;
 
+import com.monke.identity.di.IdentityModule;
 import com.monke.profile.EditProfileFragment;
 import com.monke.profile.IdentitiesFragment;
 import com.monke.profile.ProfileFragment;
@@ -8,7 +9,9 @@ import com.monke.user.di.UserModule;
 import dagger.Component;
 
 @Component(modules = {
-        UserModule.class
+        UserModule.class,
+        IdentityModule.class
+
 })
 public interface ProfileComponent {
 

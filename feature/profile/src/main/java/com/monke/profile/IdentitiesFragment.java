@@ -12,9 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.monke.identity.Identity;
 import com.monke.profile.databinding.FragmentIdentitiesBinding;
 import com.monke.profile.di.ProfileComponentProvider;
+import com.monke.ui.IdentityChipAdapter;
 
 import javax.inject.Inject;
 
@@ -32,7 +32,7 @@ public class IdentitiesFragment extends Fragment {
         super.onAttach(context);
         ProfileComponentProvider.getInstance().inject(this);
         mViewModel = new ViewModelProvider(this, factory).get(IdentitiesViewModel.class);
-
+        mViewModel.init();
     }
 
     @Override
@@ -51,10 +51,7 @@ public class IdentitiesFragment extends Fragment {
 
 
     private void observeIdentitiesList() {
-        mViewModel.identities.observe(getViewLifecycleOwner(), identities -> {
-            for (Identity identity: identities) {
-
-            }
-        });
+        IdentityChipAdapter adapter = new IdentityChipAdapter(mBinding.chipsIdentities, getLayoutInflater());
+        mViewModel.identities.observe(getViewLifecycleOwner(), adapter::bind);
     }
 }
