@@ -10,7 +10,7 @@ import javax.inject.Inject;
 @AuthScope
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
-    private User user = null;
+    private User user = Mocks.mockUser;
 
     @Inject
     public UserCacheDataSourceImpl() {

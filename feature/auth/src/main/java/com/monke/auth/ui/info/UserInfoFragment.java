@@ -135,6 +135,7 @@ public class UserInfoFragment extends Fragment {
                         .fromUri(Uri.parse(getString(com.monke.ui.R.string.main_fragment_deeplink)))
                         .build();
                 NavHostFragment.findNavController(this).navigate(request);
+                AuthComponentProvider.clear();
             }
         });
     }

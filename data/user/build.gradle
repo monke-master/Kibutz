@@ -28,6 +28,8 @@ android {
 dependencies {
     implementation project(':domain:user')
     implementation project(':core:di')
+    implementation project(':domain:identity')
+    implementation project(':domain:rental')
 
     implementation libs.dagger2
     annotationProcessor libs.dagger.compiler

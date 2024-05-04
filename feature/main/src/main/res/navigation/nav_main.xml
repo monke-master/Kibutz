@@ -18,8 +18,5 @@
         android:id="@+id/rentalListFragment"
         android:name="com.monke.rental.RentalListFragment"
         android:label="RentalListFragment" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.monke.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+    <include app:graph="@navigation/nav_profile" />
 </navigation>

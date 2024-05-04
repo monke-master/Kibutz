@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_sign_up"
+        android:id="@+id/btn_edit_profile"
         style="@style/OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/your_responses"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_rental"
