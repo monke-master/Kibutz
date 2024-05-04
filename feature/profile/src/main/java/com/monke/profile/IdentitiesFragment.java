@@ -26,6 +26,7 @@ public class IdentitiesFragment extends Fragment {
     @Inject
     public IdentitiesViewModel.Factory factory;
     public static String RESULT_KEY = "CHIPS_RESULT";
+    public static String IDENTITIES_KEY = "IDENTITIES";
 
     @Override
     public void onAttach(@NonNull Context context) {
