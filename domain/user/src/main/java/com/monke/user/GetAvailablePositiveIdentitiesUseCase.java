@@ -2,19 +2,18 @@ package com.monke.user;
 
 import com.monke.identity.Identity;
 import com.monke.identity.IdentityRepository;
-import com.monke.identity.IdentityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class GetAvailableIdentitiesUseCase {
+public class GetAvailablePositiveIdentitiesUseCase {
 
     private IdentityRepository identityRepository;
 
     @Inject
-    public GetAvailableIdentitiesUseCase(
+    public GetAvailablePositiveIdentitiesUseCase(
             IdentityRepository identityRepository
     ) {
         this.identityRepository = identityRepository;
@@ -24,8 +23,8 @@ public class GetAvailableIdentitiesUseCase {
         var identities = identityRepository.getIdentities();
         var result = new ArrayList<Identity>();
         for (Identity identity: identities) {
-            if (!user.getProfile().getIdentities().contains(identity)
-                    && !IdentityUtils.isGender(identity)) {
+            if (!user.getProfile().getIdentities().contains(identity) &&
+                    identity.getType() == Identity.Type.POSITIVE) {
                 result.add(identity);
             }
         }

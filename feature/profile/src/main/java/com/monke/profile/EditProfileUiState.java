@@ -2,12 +2,13 @@ package com.monke.profile;
 
 import com.monke.identity.Identity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditProfileUiState {
 
     private String bio = "";
-    private List<Identity> identities;
+    private ArrayList<Identity> identities = new ArrayList<>();
 
     public String getBio() {
         return bio;
@@ -21,7 +22,7 @@ public class EditProfileUiState {
         return identities;
     }
 
-    public void setIdentities(List<Identity> identities) {
-        this.identities = identities;
+    public void addIdentities(List<Identity> identities) {
+        this.identities.addAll(identities);
     }
 }

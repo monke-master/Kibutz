@@ -10,29 +10,31 @@ public class Identities {
             Constants.MALE_ID,
             StringProvider.getString(com.monke.ui.R.string.male),
             "",
-            Constants.FEMALE_ID
+            Constants.FEMALE_ID,
+            Identity.Type.GENDER
     );
 
     public static Identity FEMALE = new Identity(
             Constants.FEMALE_ID,
             StringProvider.getString(com.monke.ui.R.string.female),
             "",
-            Constants.MALE_ID
+            Constants.MALE_ID,
+            Identity.Type.GENDER
     );
 
     public static Identity SMOKING = new Identity(
             Constants.SMOKING_ID,
             "Курю",
             "",
-            Constants.SMOKING_ID
+            Constants.SMOKING_ID,
+            Identity.Type.POSITIVE
     );
 
     public static Identity NO_SMOKING = new Identity(
             Constants.NO_SMOKING_ID,
             "Не курю",
             "",
-            Constants.NO_SMOKING_ID
+            Constants.NO_SMOKING_ID,
+            Identity.Type.NEGATIVE
     );
-
-
 }

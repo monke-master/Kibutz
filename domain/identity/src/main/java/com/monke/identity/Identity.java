@@ -4,18 +4,19 @@ import java.util.Objects;
 
 public class Identity {
 
+    private String id;
     private String name;
     private String iconUrl;
     private String oppositeId;
+    private Type type;
 
-    public Identity(String id, String name, String iconUrl, String opposite) {
+    public Identity(String id, String name, String iconUrl, String opposite, Type type) {
         this.id = id;
         this.name = name;
         this.iconUrl = iconUrl;
         this.oppositeId = opposite;
+        this.type = type;
     }
-
-    private String id;
 
     public String getId() {
         return id;
@@ -57,11 +58,24 @@ public class Identity {
         return Objects.equals(name, identity.name) &&
                Objects.equals(iconUrl, identity.iconUrl) &&
                Objects.equals(oppositeId, identity.oppositeId) &&
-               Objects.equals(id, identity.id);
+               Objects.equals(id, identity.id) &&
+               Objects.equals(type, identity.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, iconUrl, oppositeId, id);
+        return Objects.hash(name, iconUrl, oppositeId, id, type);
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public enum Type {
+        GENDER, POSITIVE, NEGATIVE
     }
 }

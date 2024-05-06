@@ -10,6 +10,10 @@ import java.util.List;
 
 public class IdentityChipAdapter {
 
+    public interface OnChipSelectedListener {
+        void onCheckedChangeListener(Identity identity, boolean isChecked);
+    }
+
     private ChipGroup parent;
     private LayoutInflater inflater;
 
@@ -18,16 +22,35 @@ public class IdentityChipAdapter {
         this.inflater = inflater;
     }
 
-
-    private void bindChip(Identity identity) {
-        Chip chip = (Chip) inflater.inflate(R.layout.item_identity_chip, parent, false);
-        chip.setText(identity.getName());
-        parent.addView(chip);
+    private void bindChip(Identity identity, OnChipSelectedListener listener) {
+        Chip chip = bindChip(identity, parent.getChildCount(), true);
+        chip.setOnCheckedChangeListener((buttonView, isChecked) ->
+                listener.onCheckedChangeListener(identity, isChecked));
     }
 
-    public void bind(List<Identity> identities) {
+    private Chip bindChip(Identity identity, int position, boolean isCheckable) {
+        Chip chip = (Chip) inflater.inflate(R.layout.item_identity_chip, parent, false);
+        chip.setText(identity.getName());
+        chip.setCheckable(isCheckable);
+        parent.addView(chip, position);
+        return chip;
+    }
+
+    public void bind(List<Identity> identities, OnChipSelectedListener listener) {
         for (Identity identity: identities) {
-            bindChip(identity);
+            bindChip(identity, listener);
+        }
+    }
+
+    public void bind(List<Identity> identities, boolean isCheckable) {
+        for(Identity identity: identities) {
+            bindChip(identity,parent.getChildCount() - 1, isCheckable );
+        }
+    }
+
+    public void bindFromLast(List<Identity> identities, boolean isCheckable) {
+        for(Identity identity: identities) {
+            bindChip(identity, parent.getChildCount() - 1, isCheckable);
         }
     }
 }

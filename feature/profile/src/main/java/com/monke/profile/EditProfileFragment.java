@@ -1,6 +1,5 @@
 package com.monke.profile;
 
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -16,9 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.monke.identity.Identity;
+import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
+import com.monke.ui.IdentityChipAdapter;
 import com.monke.ui.TextChangedListener;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -26,6 +31,7 @@ public class EditProfileFragment extends Fragment {
 
     private EditProfileViewModel mViewModel;
     private FragmentEditProfileBinding mBinding;
+    private IdentityChipAdapter mAdapter;
 
     @Inject
     public EditProfileViewModel.Factory factory;
@@ -50,14 +56,25 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
         fillUserInfo();
         initEditTextBio();
         initAddIdentityChip();
+        setFragmentResultListener();
+        observeIdentities();
+        initSaveButton();
+    }
 
+    private void setFragmentResultListener() {
         getParentFragmentManager().setFragmentResultListener(IdentitiesFragment.RESULT_KEY,
                 getViewLifecycleOwner(), (requestKey, result) -> {
-
-        });
+                    List<Identity> identities =
+                            result.getParcelableArrayList(IdentitiesFragment.IDENTITIES_KEY)
+                                    .stream()
+                                    .map(i -> ((IdentityModel)i).getIdentity())
+                                    .collect(Collectors.toList());
+                    mViewModel.addIdentities(identities);
+                });
     }
 
     private void fillUserInfo() {
@@ -81,6 +98,19 @@ public class EditProfileFragment extends Fragment {
             NavHostFragment
                     .findNavController(this)
                     .navigate(R.id.action_editProfileFragment_to_identitiesFragment);
+        });
+    }
+
+    private void observeIdentities() {
+        mViewModel.identities.observe(getViewLifecycleOwner(), identities -> {
+            mAdapter.bindFromLast(identities, false);
+        });
+    }
+
+    private void initSaveButton() {
+        mBinding.btnSave.setOnClickListener(v -> {
+            mViewModel.save();
+            NavHostFragment.findNavController(this).navigateUp();
         });
     }
 }
