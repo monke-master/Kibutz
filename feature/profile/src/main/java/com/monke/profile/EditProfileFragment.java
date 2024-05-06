@@ -1,5 +1,8 @@
 package com.monke.profile;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -9,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -20,8 +24,10 @@ import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.IdentityChipAdapter;
+import com.monke.ui.ProfilePictureRWAdapter;
 import com.monke.ui.TextChangedListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +37,19 @@ public class EditProfileFragment extends Fragment {
 
     private EditProfileViewModel mViewModel;
     private FragmentEditProfileBinding mBinding;
-    private IdentityChipAdapter mAdapter;
+    private IdentityChipAdapter mChipAdapter;
+    private ProfilePictureRWAdapter mPictureAdapter;
+
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+            registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                if (uri != null) {
+                    mViewModel.addPhoto(uri.toString());
+                }
+            });
 
     @Inject
     public EditProfileViewModel.Factory factory;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,13 +71,15 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
+        mChipAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
         fillUserInfo();
         initEditTextBio();
         initAddIdentityChip();
         setFragmentResultListener();
         observeIdentities();
+        initPhotosRecyclerView();
         initSaveButton();
+        observePhotos();
     }
 
     private void setFragmentResultListener() {
@@ -103,14 +120,32 @@ public class EditProfileFragment extends Fragment {
 
     private void observeIdentities() {
         mViewModel.identities.observe(getViewLifecycleOwner(), identities -> {
-            mAdapter.bindFromLast(identities, false);
+            mChipAdapter.bindFromLast(identities, false);
         });
+    }
+
+    private void initPhotosRecyclerView() {
+        mPictureAdapter = new ProfilePictureRWAdapter(mViewModel.photos.getValue());
+        mPictureAdapter.setAddButtonClickedListener(() -> {
+            pickMedia.launch(new PickVisualMediaRequest.Builder()
+                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                    .build());
+        });
+
+        mBinding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mBinding.recyclerView.setAdapter(mPictureAdapter);
     }
 
     private void initSaveButton() {
         mBinding.btnSave.setOnClickListener(v -> {
             mViewModel.save();
             NavHostFragment.findNavController(this).navigateUp();
+        });
+    }
+
+    private void observePhotos() {
+        mViewModel.photos.observe(getViewLifecycleOwner(), photos -> {
+            mPictureAdapter.setPhotoUris(photos);
         });
     }
 }

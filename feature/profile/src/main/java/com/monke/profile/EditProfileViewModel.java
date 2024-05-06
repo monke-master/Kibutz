@@ -29,6 +29,9 @@ public class EditProfileViewModel extends ViewModel {
     private MutableLiveData<List<Identity>> _identities = new MutableLiveData<>(new ArrayList<>());
     public LiveData<List<Identity>> identities = _identities;
 
+    private MutableLiveData<List<String>> _photos = new MutableLiveData<>(new ArrayList<>());
+    public LiveData<List<String>> photos = _photos;
+
     public EditProfileUiState uiState = new EditProfileUiState();
 
     public EditProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
@@ -49,6 +52,12 @@ public class EditProfileViewModel extends ViewModel {
         var list = new ArrayList<Identity>(_identities.getValue());
         list.addAll(identities);
         _identities.setValue(list);
+    }
+
+    public void addPhoto(String uri) {
+        var list = new ArrayList<>(_photos.getValue());
+        list.add(uri);
+        _photos.setValue(list);
     }
 
     public void save() {
