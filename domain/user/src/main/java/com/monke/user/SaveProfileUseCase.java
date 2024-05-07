@@ -15,11 +15,12 @@ public class SaveProfileUseCase {
         this.userRepository = userRepository;
     }
 
-    public void execute(String bio, List<Identity> identities) {
+    public void execute(String bio, List<Identity> identities, List<String> photos) {
         User user = userRepository.getCurrentUser();
         Profile profile = user.getProfile();
         profile.setIdentities(identities);
         profile.setBio(bio);
+        profile.setPhotosUrl(photos);
         user.setProfile(profile);
         userRepository.saveUser(user);
     }

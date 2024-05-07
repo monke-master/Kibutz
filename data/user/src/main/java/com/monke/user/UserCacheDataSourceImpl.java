@@ -6,8 +6,9 @@ import android.util.Log;
 import com.monke.di.AuthScope;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-@AuthScope
+@Singleton
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
     private User user = Mocks.mockUser;

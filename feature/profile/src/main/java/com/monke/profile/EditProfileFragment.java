@@ -25,9 +25,9 @@ import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.IdentityChipAdapter;
 import com.monke.ui.ProfilePictureRWAdapter;
+import com.monke.ui.ProfilePictureViewHolder;
 import com.monke.ui.TextChangedListener;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,8 +131,11 @@ public class EditProfileFragment extends Fragment {
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                     .build());
         });
+        mPictureAdapter.setOnRemovePhotoListener(pos -> {
+            mViewModel.removePhoto(pos);
+        });
 
-        mBinding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mBinding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mBinding.recyclerView.setAdapter(mPictureAdapter);
     }
 

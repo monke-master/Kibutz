@@ -21,15 +21,15 @@ import javax.inject.Inject;
 
 public class EditProfileViewModel extends ViewModel {
     private final GetCurrentUserUseCase getCurrentUserUseCase;
-    private SaveProfileUseCase saveProfileUseCase;
+    private final SaveProfileUseCase saveProfileUseCase;
 
-    private MutableLiveData<User> _user = new MutableLiveData<>();
+    private final MutableLiveData<User> _user = new MutableLiveData<>();
     public LiveData<User> user = _user;
 
-    private MutableLiveData<List<Identity>> _identities = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<List<Identity>> _identities = new MutableLiveData<>(new ArrayList<>());
     public LiveData<List<Identity>> identities = _identities;
 
-    private MutableLiveData<List<String>> _photos = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<List<String>> _photos = new MutableLiveData<>(new ArrayList<>());
     public LiveData<List<String>> photos = _photos;
 
     public EditProfileUiState uiState = new EditProfileUiState();
@@ -46,6 +46,7 @@ public class EditProfileViewModel extends ViewModel {
 
         uiState.setBio(_user.getValue().getProfile().getBio());
         _identities.setValue(_user.getValue().getProfile().getIdentities());
+        _photos.setValue(new ArrayList<>(_user.getValue().getProfile().getPhotosUrl()));
     }
 
     public void addIdentities(List<Identity> identities) {
@@ -60,8 +61,14 @@ public class EditProfileViewModel extends ViewModel {
         _photos.setValue(list);
     }
 
+    public void removePhoto(int index) {
+        var list = new ArrayList<>(_photos.getValue());
+        list.remove(index);
+        _photos.setValue(list);
+    }
+
     public void save() {
-        saveProfileUseCase.execute(uiState.getBio(), _identities.getValue());
+        saveProfileUseCase.execute(uiState.getBio(), _identities.getValue(), _photos.getValue());
     }
 
     @Override

@@ -24,6 +24,6 @@ public class ProfilePictureViewHolder extends RecyclerView.ViewHolder {
     }
 
     public interface OnRemovePhotoListener {
-        void OnRemove(int pos);
+        void OnRemove(int index);
     }
 }

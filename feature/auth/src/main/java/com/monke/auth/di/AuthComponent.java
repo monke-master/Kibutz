@@ -8,6 +8,8 @@ import com.monke.di.AuthScope;
 import com.monke.identity.di.IdentityModule;
 import com.monke.user.di.UserModule;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 @Component(modules = {
@@ -15,7 +17,7 @@ import dagger.Component;
         IdentityModule.class
 }
 )
-@AuthScope
+@Singleton
 public interface AuthComponent {
 
     void inject(StartFragment fragment);

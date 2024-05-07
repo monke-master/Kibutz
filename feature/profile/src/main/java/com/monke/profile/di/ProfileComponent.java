@@ -6,6 +6,8 @@ import com.monke.profile.IdentitiesFragment;
 import com.monke.profile.ProfileFragment;
 import com.monke.user.di.UserModule;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 @Component(modules = {
@@ -13,13 +15,12 @@ import dagger.Component;
         IdentityModule.class
 
 })
+@Singleton
 public interface ProfileComponent {
 
     void inject(ProfileFragment fragment);
     void inject(EditProfileFragment fragment);
     void inject(IdentitiesFragment fragment);
-
-
 
     @Component.Builder
     interface Builder {

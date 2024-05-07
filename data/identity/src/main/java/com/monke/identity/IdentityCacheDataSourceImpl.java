@@ -17,6 +17,8 @@ public class IdentityCacheDataSourceImpl implements IdentityCacheDataSource {
         identities.add(Identities.FEMALE);
         identities.add(Identities.SMOKING);
         identities.add(Identities.NO_SMOKING);
+        identities.add(Identities.HAS_ANIMALS);
+        identities.add(Identities.NO_ANIMALS);
     }
 
     @Override

@@ -37,4 +37,20 @@ public class Identities {
             Constants.NO_SMOKING_ID,
             Identity.Type.NEGATIVE
     );
+
+    public static Identity HAS_ANIMALS = new Identity(
+            Constants.HAS_ANIMALS_ID,
+            "Есть животное",
+            "",
+            Constants.NO_ANIMALS_ID,
+            Identity.Type.POSITIVE
+    );
+
+    public static Identity NO_ANIMALS = new Identity(
+            Constants.NO_ANIMALS_ID,
+            "Без животных",
+            "",
+            Constants.HAS_ANIMALS_ID,
+            Identity.Type.NEGATIVE
+    );
 }

@@ -4,8 +4,9 @@ package com.monke.user;
 import com.monke.di.AuthScope;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-@AuthScope
+@Singleton
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
