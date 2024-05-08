@@ -57,7 +57,6 @@ public class EditProfileFragment extends Fragment {
         var component = ProfileComponentProvider.getInstance();
         component.inject(this);
         mViewModel = new ViewModelProvider(this, factory).get(EditProfileViewModel.class);
-        mViewModel.init();
     }
 
     @Override

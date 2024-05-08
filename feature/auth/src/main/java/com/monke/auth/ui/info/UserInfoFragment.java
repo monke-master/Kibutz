@@ -91,17 +91,9 @@ public class UserInfoFragment extends Fragment {
                 com.monke.ui.R.layout.item_dropdown,
                 items);
         editText.setAdapter(adapter);
-        editText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mViewModel.setGender(i == 0);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        editText.setOnItemClickListener((parent, view, position, id) ->
+                mViewModel.setGender(position == 0)
+        );
     }
 
     private void initDateOfBirthEditText() {

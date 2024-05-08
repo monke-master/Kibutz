@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.monke.identity.Identity;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.user.GetCurrentUserUseCase;
+import com.monke.user.GetUserIdentitiesByTypeUseCase;
 import com.monke.user.SaveProfileUseCase;
 import com.monke.user.User;
 
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 public class EditProfileViewModel extends ViewModel {
     private final GetCurrentUserUseCase getCurrentUserUseCase;
     private final SaveProfileUseCase saveProfileUseCase;
+    private final GetUserIdentitiesByTypeUseCase getUserIdentitiesByTypeUseCase;
 
     private final MutableLiveData<User> _user = new MutableLiveData<>();
     public LiveData<User> user = _user;
@@ -35,9 +37,11 @@ public class EditProfileViewModel extends ViewModel {
     public EditProfileUiState uiState = new EditProfileUiState();
 
     public EditProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
-                                SaveProfileUseCase saveProfileUseCase) {
+                                SaveProfileUseCase saveProfileUseCase,
+                                GetUserIdentitiesByTypeUseCase getUserIdentitiesByTypeUseCase) {
         this.getCurrentUserUseCase = getCurrentUserUseCase;
         this.saveProfileUseCase = saveProfileUseCase;
+        this.getUserIdentitiesByTypeUseCase = getUserIdentitiesByTypeUseCase;
         init();
     }
 
@@ -45,7 +49,9 @@ public class EditProfileViewModel extends ViewModel {
         _user.setValue(getCurrentUserUseCase.execute());
 
         uiState.setBio(_user.getValue().getProfile().getBio());
-        _identities.setValue(_user.getValue().getProfile().getIdentities());
+        _identities.setValue(getUserIdentitiesByTypeUseCase.execute(
+                user.getValue(),
+                List.of(Identity.Type.POSITIVE)));
         _photos.setValue(new ArrayList<>(_user.getValue().getProfile().getPhotosUrl()));
     }
 
@@ -82,18 +88,24 @@ public class EditProfileViewModel extends ViewModel {
 
         private final GetCurrentUserUseCase getCurrentUserUseCase;
         private final SaveProfileUseCase saveProfileUseCase;
+        private final GetUserIdentitiesByTypeUseCase getUserIdentitiesByTypeUseCase;
 
         @Inject
         public Factory(GetCurrentUserUseCase getCurrentUserUseCase,
-                       SaveProfileUseCase saveProfileUseCase) {
+                       SaveProfileUseCase saveProfileUseCase,
+                       GetUserIdentitiesByTypeUseCase getUserIdentitiesByTypeUseCase) {
             this.getCurrentUserUseCase = getCurrentUserUseCase;
             this.saveProfileUseCase = saveProfileUseCase;
+            this.getUserIdentitiesByTypeUseCase = getUserIdentitiesByTypeUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new EditProfileViewModel(getCurrentUserUseCase, saveProfileUseCase));
+            return (T) (new EditProfileViewModel(
+                    getCurrentUserUseCase,
+                    saveProfileUseCase,
+                    getUserIdentitiesByTypeUseCase));
         }
     }
 }
