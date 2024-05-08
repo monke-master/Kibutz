@@ -12,6 +12,6 @@
 
         <deepLink app:uri="@string/main_fragment_deeplink"/>
     </fragment>
-
+    <include app:graph="@navigation/nav_new_rental" />
 
 </navigation>

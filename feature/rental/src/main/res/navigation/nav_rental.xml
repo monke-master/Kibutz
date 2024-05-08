@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_rental"
+    app:startDestination="@id/rentalUserListFragment">
+
+
+    <fragment
+        android:id="@+id/rentalUserListFragment"
+        android:name="com.monke.rental.RentalUserListFragment"
+        android:label="fragment_user_rental_list"
+        tools:layout="@layout/fragment_user_rental_list" >
+        <action
+            android:id="@+id/action_rentalUserListFragment_to_nav_new_rental"
+            app:destination="@id/nav_new_rental" />
+    </fragment>
+    <include app:graph="@navigation/nav_new_rental" />
+</navigation>

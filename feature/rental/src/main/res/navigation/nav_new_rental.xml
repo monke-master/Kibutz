@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_new_rental"
+    app:startDestination="@id/rentalTypeFragment">
+
+    <deepLink app:uri="@string/new_rental_deeplink"/>
+
+    <fragment
+        android:id="@+id/rentalTypeFragment"
+        android:name="com.monke.rental.newrental.RentalTypeFragment"
+        android:label="fragment_rental_type"
+        tools:layout="@layout/fragment_rental_type" >
+        <action
+            android:id="@+id/action_rentalTypeFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.monke.rental.newrental.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_roomsFragment"
+            app:destination="@id/roomsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomsFragment"
+        android:name="com.monke.rental.newrental.RoomsFragment"
+        android:label="RoomsFragment"
+        tools:layout="@layout/fragment_rooms">
+        <action
+            android:id="@+id/action_roomsFragment_to_areaFragment"
+            app:destination="@id/areaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/areaFragment"
+        android:name="com.monke.rental.newrental.AreaFragment"
+        android:label="AreaFragment"
+        tools:layout="@layout/fragment_area">
+        <action
+            android:id="@+id/action_areaFragment_to_floorFragment"
+            app:destination="@id/floorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/floorFragment"
+        android:name="com.monke.rental.newrental.FloorFragment"
+        android:label="fragment_floor"
+        tools:layout="@layout/fragment_floor" >
+        <action
+            android:id="@+id/action_floorFragment_to_flatmatesFragment"
+            app:destination="@id/flatmatesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/flatmatesFragment"
+        android:name="com.monke.rental.newrental.FlatmatesFragment"
+        android:label="fragment_flatmates"
+        tools:layout="@layout/fragment_flatmates" >
+        <action
+            android:id="@+id/action_flatmatesFragment_to_photosFragment"
+            app:destination="@id/photosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.monke.rental.newrental.PhotosFragment"
+        android:label="fragment_photos"
+        tools:layout="@layout/fragment_photos" >
+        <action
+            android:id="@+id/action_photosFragment_to_priceFragment"
+            app:destination="@id/priceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/priceFragment"
+        android:name="com.monke.rental.newrental.PriceFragment"
+        android:label="fragment_price"
+        tools:layout="@layout/fragment_price" >
+        <action
+            android:id="@+id/action_priceFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.monke.rental.newrental.DescriptionFragment"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" >
+        <action
+            android:id="@+id/action_descriptionFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.monke.rental.newrental.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts" />
+</navigation>

@@ -15,7 +15,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/rentalListFragment"
+        android:id="@+id/nav_rental"
         android:title="@string/rentals"
         android:icon="@drawable/ic_rent"
         app:showAsAction="ifRoom" />
