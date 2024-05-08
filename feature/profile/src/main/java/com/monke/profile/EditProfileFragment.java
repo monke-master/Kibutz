@@ -124,7 +124,7 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void initPhotosRecyclerView() {
-        mPictureAdapter = new ProfilePictureRWAdapter(mViewModel.photos.getValue());
+        mPictureAdapter = new ProfilePictureRWAdapter();
         mPictureAdapter.setAddButtonClickedListener(() -> {
             pickMedia.launch(new PickVisualMediaRequest.Builder()
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)

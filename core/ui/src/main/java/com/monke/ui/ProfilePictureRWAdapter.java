@@ -14,17 +14,13 @@ import java.util.List;
 
 public class ProfilePictureRWAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<String> photoUris;
+    private List<String> photoUris = new ArrayList<>();
 
     private static int PHOTO_VIEW_TYPE = 0;
     private static int ADD_PHOTO_VIEW_TYPE = 1;
 
     private AddPhotoButtonViewHolder.OnAddButtonClickedListener addButtonClickedListener;
     private ProfilePictureViewHolder.OnRemovePhotoListener onRemovePhotoListener;
-
-    public ProfilePictureRWAdapter(List<String> photoUris) {
-        this.photoUris = photoUris;
-    }
 
     public void setAddButtonClickedListener(AddPhotoButtonViewHolder.OnAddButtonClickedListener addButtonClickedListener) {
         this.addButtonClickedListener = addButtonClickedListener;
