@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 @AppScope
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
-    private User user = null;
+    private User user = Mocks.mockUser;
 
     @Inject
     public UserCacheDataSourceImpl() {

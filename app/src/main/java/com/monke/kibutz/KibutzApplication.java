@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.monke.auth.di.AuthComponentProvider;
 import com.monke.profile.di.ProfileComponentProvider;
+import com.monke.rental.di.RentalComponentProvider;
 import com.monke.utils.StringProvider;
 import com.yandex.mapkit.MapKitFactory;
 
@@ -19,5 +20,6 @@ public class KibutzApplication extends Application {
         applicationComponent = DaggerApplicationComponent.builder().build();
         AuthComponentProvider.setDependencies(applicationComponent);
         ProfileComponentProvider.setDependencies(applicationComponent);
+        RentalComponentProvider.setDependencies(applicationComponent);
     }
 }

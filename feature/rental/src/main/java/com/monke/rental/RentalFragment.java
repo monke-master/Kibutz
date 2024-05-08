@@ -2,6 +2,7 @@ package com.monke.rental;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,25 +13,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.monke.rental.databinding.FragmentRentalBinding;
+import com.monke.rental.di.RentalComponentProvider;
+
+import javax.inject.Inject;
+
 public class RentalFragment extends Fragment {
 
     private RentalViewModel mViewModel;
+    private FragmentRentalBinding mBinding;
 
-    public static RentalFragment newInstance() {
-        return new RentalFragment();
+    @Inject
+    public RentalViewModel.Factory factory;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        RentalComponentProvider.getInstance().inject(this);
+        mViewModel = new ViewModelProvider(this, factory).get(RentalViewModel.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_rental, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(RentalViewModel.class);
-        // TODO: Use the ViewModel
+        mBinding = FragmentRentalBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
 }
