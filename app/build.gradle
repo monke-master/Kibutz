@@ -42,6 +42,9 @@ dependencies {
     implementation project(':feature:rental')
     implementation project(':feature:main')
     implementation project(':feature:profile')
+    implementation project(':data:user')
+    implementation project(':domain:user')
+    implementation project(':core:di')
 
     implementation libs.appcompat
     implementation libs.material

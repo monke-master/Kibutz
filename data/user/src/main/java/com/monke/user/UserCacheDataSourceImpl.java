@@ -3,15 +3,16 @@ package com.monke.user;
 import android.util.Log;
 
 
+import com.monke.di.AppScope;
 import com.monke.di.AuthScope;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Singleton
+@AppScope
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
-    private User user = Mocks.mockUser;
+    private User user = null;
 
     @Inject
     public UserCacheDataSourceImpl() {

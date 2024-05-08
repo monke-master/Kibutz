@@ -52,4 +52,6 @@ dependencies {
 
     implementation libs.dagger2
     annotationProcessor libs.dagger.compiler
+
+    implementation libs.glide
 }

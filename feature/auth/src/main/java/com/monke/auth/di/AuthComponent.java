@@ -12,12 +12,13 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-@Component(modules = {
-        UserModule.class,
-        IdentityModule.class
-}
+@Component(
+        modules = {
+                IdentityModule.class
+        },
+        dependencies = AuthComponentDeps.class
 )
-@Singleton
+@AuthScope
 public interface AuthComponent {
 
     void inject(StartFragment fragment);
@@ -32,6 +33,6 @@ public interface AuthComponent {
     interface Builder {
         AuthComponent build();
 
-
+        Builder setDependencies(AuthComponentDeps deps);
     }
 }

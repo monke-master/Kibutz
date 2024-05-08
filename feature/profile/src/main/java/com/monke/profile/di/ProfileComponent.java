@@ -10,11 +10,12 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-@Component(modules = {
-        UserModule.class,
-        IdentityModule.class
-
-})
+@Component(
+        modules = {
+                IdentityModule.class
+        },
+        dependencies = ProfileComponentDeps.class
+)
 @Singleton
 public interface ProfileComponent {
 
@@ -25,7 +26,6 @@ public interface ProfileComponent {
     @Component.Builder
     interface Builder {
         ProfileComponent build();
-
-
+        Builder setDependencies(ProfileComponentDeps deps);
     }
 }

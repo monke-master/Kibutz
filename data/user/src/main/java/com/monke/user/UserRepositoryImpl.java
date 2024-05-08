@@ -1,12 +1,13 @@
 package com.monke.user;
 
 
-import com.monke.di.AuthScope;
+import android.util.Log;
+
+import com.monke.di.AppScope;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+@AppScope
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
@@ -14,6 +15,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Inject
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource) {
         this.cacheDataSource = cacheDataSource;
+        Log.d("UserRepositoryImpl", "constructor");
     }
 
     @Override

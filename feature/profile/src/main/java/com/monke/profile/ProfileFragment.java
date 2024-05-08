@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.bumptech.glide.Glide;
 import com.monke.profile.databinding.FragmentProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 
@@ -52,6 +53,9 @@ public class ProfileFragment extends Fragment {
     private void fillUserInfo() {
         mViewModel.user.observe(getViewLifecycleOwner(), user -> {
             mBinding.txtName.setText(user.getName());
+            if (!user.getProfile().getPhotosUrl().isEmpty()) {
+                Glide.with(getContext()).load(user.getProfile().getPhotosUrl().get(0)).circleCrop().into(mBinding.image);
+            }
         });
     }
 
