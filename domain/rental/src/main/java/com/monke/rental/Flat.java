@@ -20,6 +20,10 @@ public class Flat extends Realty{
         this.kitchenArea = kitchenArea;
     }
 
+    public Flat(String id) {
+        super(id);
+    }
+
     public int getRoomsCount() {
         return roomsCount;
     }

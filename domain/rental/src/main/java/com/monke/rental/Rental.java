@@ -18,6 +18,10 @@ public class Rental {
     private List<String> flatmatesIds;
     private long creationDate;
 
+    public Rental(String id, Realty realty) {
+        this.id = id;
+        this.realty = realty;
+    }
 
     public Rental(String id, String authorId, List<String> photos, long price, Realty realty,
                   String description, List<Identity> identityFilters, int flatmatesCount,

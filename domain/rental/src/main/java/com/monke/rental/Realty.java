@@ -9,6 +9,9 @@ public class Realty {
     private long area;
     private int sleeps;
 
+    public Realty(String id) {
+        this.id = id;
+    }
 
     public Realty(String id, String address, long area, int sleeps) {
         this.id = id;

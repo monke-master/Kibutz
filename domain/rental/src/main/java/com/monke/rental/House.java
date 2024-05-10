@@ -6,6 +6,10 @@ public class House extends Realty{
 
     private int plotArea;
 
+    public House(String id) {
+        super(id);
+    }
+
     public House(String id, String address, long area, int sleeps, int plotArea) {
         super(id, address, area, sleeps);
         this.plotArea = plotArea;

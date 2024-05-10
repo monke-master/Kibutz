@@ -26,10 +26,14 @@ android {
 }
 
 dependencies {
+    implementation project(':domain:rental')
 
     implementation libs.appcompat
     implementation libs.material
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
 }

@@ -9,4 +9,7 @@ java {
 
 dependencies {
     implementation project(':domain:identity')
+
+    implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
 }
