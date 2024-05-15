@@ -43,13 +43,13 @@ public class IdentityChipAdapter {
     }
 
     public void bind(List<Identity> identities, boolean isCheckable) {
-        for(Identity identity: identities) {
+        for (Identity identity: identities) {
             bindChip(identity,parent.getChildCount() - 1, isCheckable );
         }
     }
 
     public void bindFromLast(List<Identity> identities, boolean isCheckable) {
-        for(Identity identity: identities) {
+        for (Identity identity: identities) {
             bindChip(identity, parent.getChildCount() - 1, isCheckable);
         }
     }

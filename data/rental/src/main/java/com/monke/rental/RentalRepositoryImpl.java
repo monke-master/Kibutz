@@ -1,7 +1,10 @@
 package com.monke.rental;
 
+import com.monke.di.RentalScope;
+
 import javax.inject.Inject;
 
+@RentalScope
 public class RentalRepositoryImpl implements RentalRepository {
 
     private final RentalCacheDataSource cacheSource;

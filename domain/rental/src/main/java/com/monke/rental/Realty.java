@@ -8,16 +8,18 @@ public class Realty {
     private String address;
     private long area;
     private int sleeps;
+    private int roomsCount;
 
     public Realty(String id) {
         this.id = id;
     }
 
-    public Realty(String id, String address, long area, int sleeps) {
+    public Realty(String id, String address, long area, int sleeps, int roomsCount) {
         this.id = id;
         this.address = address;
         this.area = area;
         this.sleeps = sleeps;
+        this.roomsCount = roomsCount;
     }
 
     public String getId() {
@@ -50,6 +52,14 @@ public class Realty {
 
     public void setSleeps(int sleeps) {
         this.sleeps = sleeps;
+    }
+
+    public int getRoomsCount() {
+        return roomsCount;
+    }
+
+    public void setRoomsCount(int roomsCount) {
+        this.roomsCount = roomsCount;
     }
 
     @Override

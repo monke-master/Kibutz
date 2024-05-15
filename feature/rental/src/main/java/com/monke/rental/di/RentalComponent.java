@@ -1,9 +1,11 @@
 package com.monke.rental.di;
 
+import com.monke.di.RentalScope;
 import com.monke.rental.RentalFragment;
 import com.monke.rental.RentalModule;
 import com.monke.rental.RentalUserListFragment;
 import com.monke.rental.newrental.RentalTypeFragment;
+import com.monke.rental.newrental.RoomsFragment;
 
 import dagger.Component;
 
@@ -13,11 +15,13 @@ import dagger.Component;
         },
         dependencies = RentalComponentDeps.class
 )
+@RentalScope
 public interface RentalComponent {
 
     void inject(RentalFragment fragment);
     void inject(RentalUserListFragment fragment);
     void inject(RentalTypeFragment fragment);
+    void inject(RoomsFragment fragment);
 
     @Component.Builder
     interface Builder {

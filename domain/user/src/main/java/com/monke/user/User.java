@@ -22,6 +22,7 @@ public class User {
                 List<Rental> responses, Profile profile) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.responses = responses;
         this.profile = profile;

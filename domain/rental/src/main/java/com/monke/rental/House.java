@@ -10,8 +10,8 @@ public class House extends Realty{
         super(id);
     }
 
-    public House(String id, String address, long area, int sleeps, int plotArea) {
-        super(id, address, area, sleeps);
+    public House(String id, String address, long area, int sleeps, int roomsCount, int plotArea) {
+        super(id, address, area, sleeps, roomsCount);
         this.plotArea = plotArea;
     }
 

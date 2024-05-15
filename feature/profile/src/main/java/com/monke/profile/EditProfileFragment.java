@@ -25,7 +25,6 @@ import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.IdentityChipAdapter;
 import com.monke.ui.ProfilePictureRWAdapter;
-import com.monke.ui.ProfilePictureViewHolder;
 import com.monke.ui.TextChangedListener;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class EditProfileFragment extends Fragment {
 
     private EditProfileViewModel mViewModel;
     private FragmentEditProfileBinding mBinding;
-    private IdentityChipAdapter mChipAdapter;
+    private IdentityChipAdapter mIdentityChipAdapter;
     private ProfilePictureRWAdapter mPictureAdapter;
 
     private ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -70,7 +69,7 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mChipAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
+        mIdentityChipAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
         fillUserInfo();
         initEditTextBio();
         initAddIdentityChip();
@@ -119,7 +118,7 @@ public class EditProfileFragment extends Fragment {
 
     private void observeIdentities() {
         mViewModel.identities.observe(getViewLifecycleOwner(), identities -> {
-            mChipAdapter.bindFromLast(identities, false);
+            mIdentityChipAdapter.bindFromLast(identities, false);
         });
     }
 

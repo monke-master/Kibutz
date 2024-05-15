@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Flat extends Realty{
 
-    private int roomsCount;
     private int floor;
     private int floorCount;
     private int livingArea;
@@ -12,8 +11,7 @@ public class Flat extends Realty{
 
     public Flat(String id, String address, long area, int sleeps, int roomsCount,
                 int floor, int floorCount, int livingArea, int kitchenArea) {
-        super(id, address, area, sleeps);
-        this.roomsCount = roomsCount;
+        super(id, address, area, sleeps, roomsCount);
         this.floor = floor;
         this.floorCount = floorCount;
         this.livingArea = livingArea;
@@ -22,14 +20,6 @@ public class Flat extends Realty{
 
     public Flat(String id) {
         super(id);
-    }
-
-    public int getRoomsCount() {
-        return roomsCount;
-    }
-
-    public void setRoomsCount(int roomsCount) {
-        this.roomsCount = roomsCount;
     }
 
     public int getFloor() {
@@ -70,8 +60,7 @@ public class Flat extends Realty{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Flat flat = (Flat) o;
-        return roomsCount == flat.roomsCount &&
-               floor == flat.floor &&
+        return floor == flat.floor &&
                floorCount == flat.floorCount &&
                livingArea == flat.livingArea &&
                kitchenArea == flat.kitchenArea;
@@ -79,6 +68,6 @@ public class Flat extends Realty{
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), roomsCount, floor, floorCount, livingArea, kitchenArea);
+        return Objects.hash(super.hashCode(), floor, floorCount, livingArea, kitchenArea);
     }
 }

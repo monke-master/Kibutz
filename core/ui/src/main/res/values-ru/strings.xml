@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Kibutz</string>
     <string name="kibutz_slogan">Если недвижимость, то Кибуц!</string>
@@ -76,15 +77,8 @@
     <string name="male">Мужчина</string>
     <string name="female">Женщина</string>
     <string name="studio">Студия</string>
-
-    <string-array name="genders">
-        <item>Мужской</item>
-        <item>Женский</item>
-    </string-array>
-
     <plurals name="rooms">
-        <item quantity="zero">Студия</item>
-        <item quantity="one">1 комната</item>
+        <item quantity="one">%s комната</item>
         <item quantity="few">%s комнаты</item>
         <item quantity="many">%s комнат</item>
     </plurals>
