@@ -14,10 +14,10 @@ public class FilterIdentitiesByTypeUseCase {
 
     public List<Identity> execute(List<Identity> identities,
                                   List<Identity.Type> types,
-                                  List<Identity> unavailableIdentities) {
+                                  List<String> unavailableIdentities) {
         ArrayList<Identity> result = new ArrayList<>();
         for (Identity identity: identities) {
-            if (types.contains(identity.getType()) && !unavailableIdentities.contains(identity)) {
+            if (types.contains(identity.getType()) && !unavailableIdentities.contains(identity.getId())) {
                 result.add(identity);
             }
         }

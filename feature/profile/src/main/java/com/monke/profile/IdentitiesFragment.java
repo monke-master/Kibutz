@@ -1,5 +1,10 @@
 package com.monke.profile;
 
+import static com.example.navigation.PickIdentitiesContract.IDENTITIES_KEY;
+import static com.example.navigation.PickIdentitiesContract.IDENTITIES_TYPES_KEY;
+import static com.example.navigation.PickIdentitiesContract.RESULT_KEY;
+import static com.example.navigation.PickIdentitiesContract.UNAVAILABLE_IDS_KEY;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -32,10 +37,6 @@ public class IdentitiesFragment extends Fragment {
 
     @Inject
     public IdentitiesViewModel.Factory factory;
-    public static String RESULT_KEY = "CHIPS_RESULT";
-    public static String IDENTITIES_KEY = "IDENTITIES";
-    public static String UNAVAILABLE_IDS_KEY = "UNAVAILABLE";
-    public static String IDENTITIES_TYPES_KEY = "IDENTITIES_TYPES";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -85,7 +86,7 @@ public class IdentitiesFragment extends Fragment {
                 .map(IdentityModel::new)
                 .collect(Collectors.toList());
         bundle.putParcelableArrayList(IDENTITIES_KEY, new ArrayList<>(identities));
-        getParentFragmentManager().setFragmentResult(IdentitiesFragment.RESULT_KEY, bundle);
+        getParentFragmentManager().setFragmentResult(RESULT_KEY, bundle);
         NavHostFragment
                 .findNavController(this)
                 .navigateUp();
@@ -94,15 +95,14 @@ public class IdentitiesFragment extends Fragment {
     private void getArgs() {
         Bundle bundle = getArguments();
         if (bundle == null) return;
-        List<Identity> unavailableIds = bundle
-                .getParcelableArrayList(UNAVAILABLE_IDS_KEY)
-                .stream()
-                .map(i -> ((IdentityModel)i).getIdentity())
-                .collect(Collectors.toList());
-        mViewModel.setUnavailableIdentities(unavailableIds);
 
-        List<Identity.Type> types = bundle
-                .getStringArrayList(IDENTITIES_TYPES_KEY)
+        String[] unavailableIds = bundle.getStringArray(UNAVAILABLE_IDS_KEY);
+        if (unavailableIds != null) {
+            mViewModel.setUnavailableIdentities(List.of(unavailableIds));
+        }
+
+        List<Identity.Type> types =
+                List.of(bundle.getStringArray(IDENTITIES_TYPES_KEY))
                 .stream()
                 .map(Identity.Type::valueOf)
                 .collect(Collectors.toList());

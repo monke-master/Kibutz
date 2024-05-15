@@ -27,5 +27,18 @@
         android:id="@+id/identitiesFragment"
         android:name="com.monke.profile.IdentitiesFragment"
         android:label="fragment_identities"
-        tools:layout="@layout/fragment_identities" />
+        tools:layout="@layout/fragment_identities">
+
+        <deepLink app:uri="kibutz://com.monke.identity/pick_identities/?unavailableIdentities={unavailableIdentities}&amp;identitiesTypes={identitiesTypes}"/>
+        <argument
+            android:name="unavailableIdentities"
+            app:argType="string[]"
+            app:nullable="true"/>
+        <argument
+            android:name="identitiesTypes"
+            app:argType="string[]" />
+
+    </fragment>
+
+
 </navigation>

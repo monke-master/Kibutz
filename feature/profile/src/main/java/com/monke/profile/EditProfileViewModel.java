@@ -79,11 +79,11 @@ public class EditProfileViewModel extends ViewModel {
         saveProfileUseCase.execute(uiState.getBio(), _identities.getValue(), _photos.getValue());
     }
 
-    public ArrayList<IdentityModel> getIdentitiesModels() {
+    public ArrayList<String> getIdentitiesIds() {
         var list = _identities
                 .getValue()
                 .stream()
-                .map(IdentityModel::new)
+                .map(Identity::getId)
                 .collect(Collectors.toList());
         return new ArrayList<>(list);
     }

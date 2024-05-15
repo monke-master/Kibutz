@@ -25,7 +25,7 @@ public class IdentitiesViewModel extends ViewModel {
     public LiveData<List<Identity>> identities = _identities;
 
     private ArrayList<Identity> selectedIdentities = new ArrayList<>();
-    private List<Identity> unavailableIdentities = Collections.emptyList();
+    private List<String> unavailableIdentities = Collections.emptyList();
     private List<Identity.Type> requiredTypes;
 
     public IdentitiesViewModel(FilterIdentitiesByTypeUseCase filterUseCase,
@@ -51,7 +51,7 @@ public class IdentitiesViewModel extends ViewModel {
         return selectedIdentities;
     }
 
-    public void setUnavailableIdentities(List<Identity> identities) {
+    public void setUnavailableIdentities(List<String> identities) {
         this.unavailableIdentities = identities;
     }
 

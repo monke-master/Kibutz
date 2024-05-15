@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.monke.profile'
+    namespace 'com.example.navigation'
     compileSdk 34
 
     defaultConfig {
-        minSdk 26
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -20,39 +20,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
-    buildFeatures {
-        viewBinding true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
 
-    implementation project(':core:ui')
-    implementation project(':core:navigation')
-    implementation project(':domain:user')
     implementation project(':domain:identity')
-    implementation project(':data:user')
-    implementation project(':data:identity')
 
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.legacy.support.v4
-    implementation libs.lifecycle.livedata
-    implementation libs.lifecycle.viewmodel
     implementation libs.navigation.fragment
-    implementation libs.navigation.ui
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-
-    implementation libs.fragment
-
-    implementation libs.dagger2
-    annotationProcessor libs.dagger.compiler
-
-    implementation libs.glide
 }

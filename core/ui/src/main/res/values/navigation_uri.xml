@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="main_fragment_deeplink">kibutz://com.monke.app/main_fragment</string>
-    <string name="new_rental_deeplink">kibutz://com.monke.rental/new_rental</string>
+    <string name="main_fragment_deeplink" translatable="false">kibutz://com.monke.app/main_fragment</string>
+    <string name="new_rental_deeplink" translatable="false">kibutz://com.monke.rental/new_rental</string>
+    <string name="pick_identities_deeplink" translatable="false">kibutz://com.monke.identity/pick_identities</string>
 </resources>
