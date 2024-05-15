@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.identity.Identity;
+import com.monke.identity.IdentityModel;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.user.GetCurrentUserUseCase;
 import com.monke.user.GetUserIdentitiesByTypeUseCase;
@@ -17,6 +18,7 @@ import com.monke.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -75,6 +77,15 @@ public class EditProfileViewModel extends ViewModel {
 
     public void save() {
         saveProfileUseCase.execute(uiState.getBio(), _identities.getValue(), _photos.getValue());
+    }
+
+    public ArrayList<IdentityModel> getIdentitiesModels() {
+        var list = _identities
+                .getValue()
+                .stream()
+                .map(IdentityModel::new)
+                .collect(Collectors.toList());
+        return new ArrayList<>(list);
     }
 
     @Override

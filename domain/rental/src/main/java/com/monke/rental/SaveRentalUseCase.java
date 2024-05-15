@@ -1,5 +1,9 @@
 package com.monke.rental;
 
+import com.monke.identity.Identity;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class SaveRentalUseCase {
@@ -45,6 +49,20 @@ public class SaveRentalUseCase {
         Rental rental = rentalRepository.getCreatingRental();
         Flat realty = (Flat) rental.getRealty();
         realty.setFloor(floor);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
+    public SaveRentalUseCase saveFlatmatesCount(int flatmatesCount) {
+        Rental rental = rentalRepository.getCreatingRental();
+        rental.setFlatmatesCount(flatmatesCount);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
+    public SaveRentalUseCase saveIdentitiesFilters(List<Identity> filters) {
+        Rental rental = rentalRepository.getCreatingRental();
+        rental.setIdentityFilters(filters);
         rentalRepository.saveCreatingRental(rental);
         return this;
     }

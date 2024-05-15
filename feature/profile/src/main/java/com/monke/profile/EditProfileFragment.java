@@ -27,6 +27,8 @@ import com.monke.ui.IdentityChipAdapter;
 import com.monke.ui.ProfilePictureRWAdapter;
 import com.monke.ui.TextChangedListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,9 +112,18 @@ public class EditProfileFragment extends Fragment {
 
     private void initAddIdentityChip() {
         mBinding.chipAdd.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList(
+                    IdentitiesFragment.IDENTITIES_TYPES_KEY,
+                    new ArrayList<>(List.of(Identity.Type.POSITIVE.name()))
+            );
+            bundle.putParcelableArrayList(
+                    IdentitiesFragment.UNAVAILABLE_IDS_KEY,
+                    mViewModel.getIdentitiesModels()
+            );
             NavHostFragment
                     .findNavController(this)
-                    .navigate(R.id.action_editProfileFragment_to_identitiesFragment);
+                    .navigate(R.id.action_editProfileFragment_to_identitiesFragment, bundle);
         });
     }
 

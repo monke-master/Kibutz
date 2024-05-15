@@ -76,6 +76,7 @@
     <string name="male">Мужчина</string>
     <string name="female">Женщина</string>
     <string name="studio">Студия</string>
+    <string name="flatmates_count">Количество соседей</string>
 
     <string-array name="genders">
         <item>Мужской</item>

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentIdentitiesBinding;
 import com.monke.profile.di.ProfileComponentProvider;
@@ -33,12 +34,15 @@ public class IdentitiesFragment extends Fragment {
     public IdentitiesViewModel.Factory factory;
     public static String RESULT_KEY = "CHIPS_RESULT";
     public static String IDENTITIES_KEY = "IDENTITIES";
+    public static String UNAVAILABLE_IDS_KEY = "UNAVAILABLE";
+    public static String IDENTITIES_TYPES_KEY = "IDENTITIES_TYPES";
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ProfileComponentProvider.getInstance().inject(this);
         mViewModel = new ViewModelProvider(this, factory).get(IdentitiesViewModel.class);
+        getArgs();
         mViewModel.init();
     }
 
@@ -85,5 +89,23 @@ public class IdentitiesFragment extends Fragment {
         NavHostFragment
                 .findNavController(this)
                 .navigateUp();
+    }
+
+    private void getArgs() {
+        Bundle bundle = getArguments();
+        if (bundle == null) return;
+        List<Identity> unavailableIds = bundle
+                .getParcelableArrayList(UNAVAILABLE_IDS_KEY)
+                .stream()
+                .map(i -> ((IdentityModel)i).getIdentity())
+                .collect(Collectors.toList());
+        mViewModel.setUnavailableIdentities(unavailableIds);
+
+        List<Identity.Type> types = bundle
+                .getStringArrayList(IDENTITIES_TYPES_KEY)
+                .stream()
+                .map(Identity.Type::valueOf)
+                .collect(Collectors.toList());
+        mViewModel.setRequiredTypes(types);
     }
 }
