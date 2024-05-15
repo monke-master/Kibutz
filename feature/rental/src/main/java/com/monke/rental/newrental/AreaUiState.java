@@ -1,7 +1,5 @@
 package com.monke.rental.newrental;
 
-import com.monke.rental.Flat;
-
 public class AreaUiState {
     private Float area = null;
     private Float livingArea = null;

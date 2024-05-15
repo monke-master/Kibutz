@@ -9,17 +9,19 @@ public class Realty {
     private float area;
     private int sleeps;
     private int roomsCount;
+    private int floorsCount;
 
     public Realty(String id) {
         this.id = id;
     }
 
-    public Realty(String id, String address, long area, int sleeps, int roomsCount) {
+    public Realty(String id, String address, long area, int sleeps, int roomsCount, int floorsCount) {
         this.id = id;
         this.address = address;
         this.area = area;
         this.sleeps = sleeps;
         this.roomsCount = roomsCount;
+        this.floorsCount = floorsCount;
     }
 
     public String getId() {
@@ -62,6 +64,14 @@ public class Realty {
         this.roomsCount = roomsCount;
     }
 
+    public int getFloorsCount() {
+        return floorsCount;
+    }
+
+    public void setFloorsCount(int floorsCount) {
+        this.floorsCount = floorsCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,6 +93,7 @@ public class Realty {
         return "Realty{" +
                 "id='" + id + '\'' +
                 ", address='" + address + '\'' +
+                ", floorsCount='" + floorsCount + '\'' +
                 ", area=" + area +
                 ", sleeps=" + sleeps +
                 ", roomsCount=" + roomsCount +

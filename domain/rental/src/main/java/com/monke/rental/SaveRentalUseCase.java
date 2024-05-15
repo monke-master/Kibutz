@@ -32,4 +32,20 @@ public class SaveRentalUseCase {
         rentalRepository.saveCreatingRental(rental);
         return this;
     }
+
+    public SaveRentalUseCase saveFloorCount(int floorsCount) {
+        Rental rental = rentalRepository.getCreatingRental();
+        Realty realty = rental.getRealty();
+        realty.setFloorsCount(floorsCount);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
+    public SaveRentalUseCase saveFlatFloor(int floor) {
+        Rental rental = rentalRepository.getCreatingRental();
+        Flat realty = (Flat) rental.getRealty();
+        realty.setFloor(floor);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
 }

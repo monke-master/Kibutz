@@ -61,7 +61,9 @@ public class AreaFragment extends Fragment {
         mBinding.editTxtArea.getEditText().addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
-                mViewModel.getAreaUiState().setArea(Float.parseFloat(s.toString()));
+                if (!s.toString().isEmpty()) {
+                    mViewModel.getAreaUiState().setArea(Float.parseFloat(s.toString()));
+                }
             }
         });
     }
@@ -72,7 +74,9 @@ public class AreaFragment extends Fragment {
         mBinding.editTxtLivingArea.getEditText().addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
-                mViewModel.getAreaUiState().setLivingArea(Float.parseFloat(s.toString()));
+                if (!s.toString().isEmpty()) {
+                    mViewModel.getAreaUiState().setLivingArea(Float.parseFloat(s.toString()));
+                }
             }
         });
     }
@@ -83,7 +87,9 @@ public class AreaFragment extends Fragment {
         mBinding.editTxtKitchen.getEditText().addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
-                mViewModel.getAreaUiState().setKitchenArea(Float.parseFloat(s.toString()));
+                if (!s.toString().isEmpty()) {
+                    mViewModel.getAreaUiState().setKitchenArea(Float.parseFloat(s.toString()));
+                }
             }
         });
     }
