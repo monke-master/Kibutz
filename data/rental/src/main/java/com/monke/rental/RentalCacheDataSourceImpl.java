@@ -19,7 +19,7 @@ public class RentalCacheDataSourceImpl implements RentalCacheDataSource {
     @Override
     public void saveCreatingRental(Rental rental) {
         creatingRental = rental;
-        Log.d("RentalCacheDataSourceImpl", creatingRental.getRealty().getRoomsCount() + "");
+        Log.d("RentalCacheDataSourceImpl", creatingRental.toString());
     }
 
     @Override

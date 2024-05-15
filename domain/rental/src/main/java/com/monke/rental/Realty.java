@@ -6,7 +6,7 @@ public class Realty {
 
     private String id;
     private String address;
-    private long area;
+    private float area;
     private int sleeps;
     private int roomsCount;
 
@@ -38,11 +38,11 @@ public class Realty {
         this.address = address;
     }
 
-    public long getArea() {
+    public float getArea() {
         return area;
     }
 
-    public void setArea(long area) {
+    public void setArea(float area) {
         this.area = area;
     }
 
@@ -76,5 +76,16 @@ public class Realty {
     @Override
     public int hashCode() {
         return Objects.hash(id, address, area, sleeps);
+    }
+
+    @Override
+    public String toString() {
+        return "Realty{" +
+                "id='" + id + '\'' +
+                ", address='" + address + '\'' +
+                ", area=" + area +
+                ", sleeps=" + sleeps +
+                ", roomsCount=" + roomsCount +
+                '}';
     }
 }

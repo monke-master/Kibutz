@@ -8,12 +8,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.monke.rental.Constants;
+import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentRoomsBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.TextChipAdapter;
@@ -53,6 +55,7 @@ public class RoomsFragment extends Fragment {
         var adapter = new TextChipAdapter(mBinding.chipsRoom, getLayoutInflater());
         adapter.setOnChipSelectedListener(index -> {
             mViewModel.saveRoomsCount(index);
+            NavHostFragment.findNavController(this).navigate(R.id.action_roomsFragment_to_areaFragment);
         });
         adapter.bind(
                 com.monke.ui.R.string.studio,

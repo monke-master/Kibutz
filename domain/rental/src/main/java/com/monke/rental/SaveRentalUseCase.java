@@ -19,4 +19,17 @@ public class SaveRentalUseCase {
         rentalRepository.saveCreatingRental(rental);
         return this;
     }
+
+    public SaveRentalUseCase saveFlatArea(float area, float livingArea, float kitchenArea) {
+        Rental rental = rentalRepository.getCreatingRental();
+
+        Flat realty = (Flat)rental.getRealty();
+        realty.setArea(area);
+        realty.setLivingArea(livingArea);
+        realty.setKitchenArea(kitchenArea);
+
+        rental.setRealty(realty);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
 }

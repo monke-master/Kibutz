@@ -6,8 +6,8 @@ public class Flat extends Realty{
 
     private int floor;
     private int floorCount;
-    private int livingArea;
-    private int kitchenArea;
+    private float livingArea;
+    private float kitchenArea;
 
     public Flat(String id, String address, long area, int sleeps, int roomsCount,
                 int floor, int floorCount, int livingArea, int kitchenArea) {
@@ -38,19 +38,19 @@ public class Flat extends Realty{
         this.floorCount = floorCount;
     }
 
-    public int getLivingArea() {
+    public float getLivingArea() {
         return livingArea;
     }
 
-    public void setLivingArea(int livingArea) {
+    public void setLivingArea(float livingArea) {
         this.livingArea = livingArea;
     }
 
-    public int getKitchenArea() {
+    public float getKitchenArea() {
         return kitchenArea;
     }
 
-    public void setKitchenArea(int kitchenArea) {
+    public void setKitchenArea(float kitchenArea) {
         this.kitchenArea = kitchenArea;
     }
 
@@ -69,5 +69,15 @@ public class Flat extends Realty{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), floor, floorCount, livingArea, kitchenArea);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Flat{" +
+                "floor=" + floor +
+                ", floorCount=" + floorCount +
+                ", livingArea=" + livingArea +
+                ", kitchenArea=" + kitchenArea +
+                '}';
     }
 }

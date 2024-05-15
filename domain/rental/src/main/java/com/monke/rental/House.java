@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class House extends Realty{
 
-    private int plotArea;
+    private float plotArea;
 
     public House(String id) {
         super(id);
@@ -15,11 +15,11 @@ public class House extends Realty{
         this.plotArea = plotArea;
     }
 
-    public int getPlotArea() {
+    public float getPlotArea() {
         return plotArea;
     }
 
-    public void setPlotArea(int plotArea) {
+    public void setPlotArea(float plotArea) {
         this.plotArea = plotArea;
     }
 
@@ -35,5 +35,12 @@ public class House extends Realty{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), plotArea);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "House{" +
+                "plotArea=" + plotArea +
+                '}';
     }
 }

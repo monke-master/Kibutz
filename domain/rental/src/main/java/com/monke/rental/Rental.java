@@ -138,4 +138,20 @@ public class Rental {
         return Objects.hash(id, authorId, photos, price, realty, description, identityFilters,
                 flatmatesCount, flatmatesIds, creationDate);
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id='" + id + '\'' +
+                ", authorId='" + authorId + '\'' +
+                ", photos=" + photos +
+                ", price=" + price +
+                ", realty=" + realty +
+                ", description='" + description + '\'' +
+                ", identityFilters=" + identityFilters +
+                ", flatmatesCount=" + flatmatesCount +
+                ", flatmatesIds=" + flatmatesIds +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }
