@@ -11,7 +11,7 @@
         android:layout_height="@dimen/profile_image_height"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/ic_pick_photo" />
 
     <ImageView
         android:id="@+id/btn_remove"

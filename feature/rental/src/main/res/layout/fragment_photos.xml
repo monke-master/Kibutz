@@ -20,7 +20,7 @@
         app:title="@string/new_rental"/>
 
     <TextView
-        android:id="@+id/txt_roommates"
+        android:id="@+id/txt_header"
         style="@style/Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +28,20 @@
         android:text="@string/photos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_header"
+        app:spanCount="2"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_photo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"

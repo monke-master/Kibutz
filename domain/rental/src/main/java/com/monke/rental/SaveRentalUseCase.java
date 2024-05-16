@@ -66,4 +66,11 @@ public class SaveRentalUseCase {
         rentalRepository.saveCreatingRental(rental);
         return this;
     }
+
+    public SaveRentalUseCase savePhotos(List<String> photosUri) {
+        Rental rental = rentalRepository.getCreatingRental();
+        rental.setPhotos(photosUri);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
 }

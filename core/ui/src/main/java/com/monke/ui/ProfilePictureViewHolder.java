@@ -24,6 +24,7 @@ public class ProfilePictureViewHolder extends RecyclerView.ViewHolder {
         Glide
              .with(itemView.getContext())
              .load(uri)
+             .centerCrop()
              .into(mBinding.image);
         mBinding.btnRemove.setOnClickListener(v -> onRemovePhotoListener.OnRemove(pos));
     }
