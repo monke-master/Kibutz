@@ -4,12 +4,10 @@ import android.net.Uri;
 
 import androidx.navigation.NavDeepLinkRequest;
 
-import com.monke.identity.Identity;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PickIdentitiesContract {
+public class PickIdentitiesNavigationContract {
     public static String RESULT_KEY = "CHIPS_RESULT";
     public static String IDENTITIES_KEY = "IDENTITIES";
     public static String UNAVAILABLE_IDS_KEY = "unavailableIdentities";

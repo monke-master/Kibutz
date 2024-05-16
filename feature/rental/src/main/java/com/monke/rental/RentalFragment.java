@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.example.navigation.RentalFragmentContract;
+import com.example.navigation.RentalNavigationContract;
+import com.example.navigation.UserNavgationContract;
 import com.monke.rental.databinding.FragmentRentalBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.rental.RealtyUiHelpers;
@@ -51,6 +53,7 @@ public class RentalFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initToolbar();
         initFlatmateAdapter();
         initDetailsAdapter();
         observeRental();
@@ -58,9 +61,16 @@ public class RentalFragment extends Fragment {
     }
 
     private void getArgs() {
-        String rentalId = getArguments().getString(RentalFragmentContract.RENTAL_ID_KEY);
+        String rentalId = getArguments().getString(RentalNavigationContract.RENTAL_ID_KEY);
         mViewModel.setRentalId(rentalId);
     }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v -> {
+            NavHostFragment.findNavController(this).navigateUp();
+        });
+    }
+
 
     private void initFlatmateAdapter() {
         flatmateRWAdapter = new FlatmateRWAdapter();
@@ -68,7 +78,9 @@ public class RentalFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(flatmateRWAdapter);
         flatmateRWAdapter.setOnItemClickedListener(user -> {
-
+            NavHostFragment
+                    .findNavController(this)
+                    .navigate(UserNavgationContract.createDeepLinkRequest(user.getId()));
         });
     }
 

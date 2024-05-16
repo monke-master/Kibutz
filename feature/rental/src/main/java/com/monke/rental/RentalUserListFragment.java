@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.navigation.RentalFragmentContract;
+import com.example.navigation.RentalNavigationContract;
 import com.monke.rental.databinding.FragmentUserRentalListBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.rental.RentalRWAdapter;
@@ -57,7 +57,7 @@ public class RentalUserListFragment extends Fragment {
         adapter = new RentalRWAdapter();
         adapter.setOnItemClickListener(rental -> {
             Bundle bundle = new Bundle();
-            bundle.putString(RentalFragmentContract.RENTAL_ID_KEY, rental.getId());
+            bundle.putString(RentalNavigationContract.RENTAL_ID_KEY, rental.getId());
             NavHostFragment
                     .findNavController(this)
                     .navigate(R.id.action_rentalUserListFragment_to_rentalFragment, bundle);

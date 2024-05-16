@@ -19,7 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.navigation.PickIdentitiesContract;
+import com.example.navigation.PickIdentitiesNavigationContract;
 import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentEditProfileBinding;
@@ -84,10 +84,10 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void setFragmentResultListener() {
-        getParentFragmentManager().setFragmentResultListener(PickIdentitiesContract.RESULT_KEY,
+        getParentFragmentManager().setFragmentResultListener(PickIdentitiesNavigationContract.RESULT_KEY,
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     List<Identity> identities =
-                            result.getParcelableArrayList(PickIdentitiesContract.IDENTITIES_KEY)
+                            result.getParcelableArrayList(PickIdentitiesNavigationContract.IDENTITIES_KEY)
                                     .stream()
                                     .map(i -> ((IdentityModel)i).getIdentity())
                                     .collect(Collectors.toList());
@@ -114,12 +114,12 @@ public class EditProfileFragment extends Fragment {
     private void initAddIdentityChip() {
         mBinding.chipAdd.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putStringArrayList(
-                    PickIdentitiesContract.IDENTITIES_TYPES_KEY,
-                    new ArrayList<>(List.of(Identity.Type.POSITIVE.name()))
+            bundle.putStringArray(
+                    PickIdentitiesNavigationContract.IDENTITIES_TYPES_KEY,
+                    new String[]{ Identity.Type.POSITIVE.name() }
             );
             bundle.putStringArray(
-                    PickIdentitiesContract.UNAVAILABLE_IDS_KEY,
+                    PickIdentitiesNavigationContract.UNAVAILABLE_IDS_KEY,
                     mViewModel.getIdentitiesIds().toArray(new String[0])
             );
             NavHostFragment

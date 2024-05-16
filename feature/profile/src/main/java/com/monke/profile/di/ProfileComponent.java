@@ -4,6 +4,7 @@ import com.monke.identity.di.IdentityModule;
 import com.monke.profile.EditProfileFragment;
 import com.monke.profile.IdentitiesFragment;
 import com.monke.profile.ProfileFragment;
+import com.monke.profile.UserFragment;
 import com.monke.user.di.UserModule;
 
 import javax.inject.Singleton;
@@ -22,6 +23,7 @@ public interface ProfileComponent {
     void inject(ProfileFragment fragment);
     void inject(EditProfileFragment fragment);
     void inject(IdentitiesFragment fragment);
+    void inject(UserFragment fragment);
 
     @Component.Builder
     interface Builder {

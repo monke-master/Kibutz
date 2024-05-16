@@ -32,6 +32,7 @@ dependencies {
     implementation project(':domain:rental')
 
     implementation libs.dagger2
+    implementation project(':data:identity')
     annotationProcessor libs.dagger.compiler
 
     implementation libs.appcompat

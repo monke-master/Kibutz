@@ -16,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.navigation.PickIdentitiesContract;
+import com.example.navigation.PickIdentitiesNavigationContract;
 import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.rental.R;
@@ -81,7 +81,7 @@ public class FlatmatesFragment extends Fragment {
 
     private void initAddIdentityChip() {
         mBinding.chipAdd.setOnClickListener(v -> {
-            NavDeepLinkRequest request = PickIdentitiesContract.createDeepLinkRequest(
+            NavDeepLinkRequest request = PickIdentitiesNavigationContract.createDeepLinkRequest(
                     mViewModel.getFiltersIds(),
                     List.of(Identity.Type.NEGATIVE.name(), Identity.Type.GENDER.name())
             );
@@ -91,10 +91,10 @@ public class FlatmatesFragment extends Fragment {
     }
 
     private void setFragmentResultListener() {
-        getParentFragmentManager().setFragmentResultListener(PickIdentitiesContract.RESULT_KEY,
+        getParentFragmentManager().setFragmentResultListener(PickIdentitiesNavigationContract.RESULT_KEY,
                 getViewLifecycleOwner(), (requestKey, result) -> {
                     List<Identity> identities =
-                            result.getParcelableArrayList(PickIdentitiesContract.IDENTITIES_KEY)
+                            result.getParcelableArrayList(PickIdentitiesNavigationContract.IDENTITIES_KEY)
                                     .stream()
                                     .map(i -> ((IdentityModel)i).getIdentity())
                                     .collect(Collectors.toList());

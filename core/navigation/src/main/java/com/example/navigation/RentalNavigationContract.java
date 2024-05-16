@@ -1,5 +1,5 @@
 package com.example.navigation;
 
-public class RentalFragmentContract {
+public class RentalNavigationContract {
     public static String RENTAL_ID_KEY = "rentalId";
 }

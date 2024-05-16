@@ -1,9 +1,9 @@
 package com.monke.profile;
 
-import static com.example.navigation.PickIdentitiesContract.IDENTITIES_KEY;
-import static com.example.navigation.PickIdentitiesContract.IDENTITIES_TYPES_KEY;
-import static com.example.navigation.PickIdentitiesContract.RESULT_KEY;
-import static com.example.navigation.PickIdentitiesContract.UNAVAILABLE_IDS_KEY;
+import static com.example.navigation.PickIdentitiesNavigationContract.IDENTITIES_KEY;
+import static com.example.navigation.PickIdentitiesNavigationContract.IDENTITIES_TYPES_KEY;
+import static com.example.navigation.PickIdentitiesNavigationContract.RESULT_KEY;
+import static com.example.navigation.PickIdentitiesNavigationContract.UNAVAILABLE_IDS_KEY;
 
 import android.content.Context;
 import android.os.Bundle;

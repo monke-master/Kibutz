@@ -16,4 +16,16 @@
         android:label="SearchFragment" />
     <include app:graph="@navigation/nav_rental" />
     <include app:graph="@navigation/nav_profile" />
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.monke.profile.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user">
+
+        <deepLink app:uri="kibutz://com.monke.identity/pick_identities/userId={userId}"/>
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 </navigation>
