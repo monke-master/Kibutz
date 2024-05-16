@@ -34,6 +34,7 @@ public class PhotosFragment extends Fragment {
 
     @Inject
     public PhotosViewModel.Factory factory;
+
     private PhotosViewModel mViewModel;
     private FragmentPhotosBinding mBinding;
     private PhotoRWAdapter adapter;

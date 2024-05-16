@@ -8,6 +8,7 @@ import com.monke.rental.newrental.AreaFragment;
 import com.monke.rental.newrental.FlatmatesFragment;
 import com.monke.rental.newrental.FloorFragment;
 import com.monke.rental.newrental.PhotosFragment;
+import com.monke.rental.newrental.PriceFragment;
 import com.monke.rental.newrental.RentalTypeFragment;
 import com.monke.rental.newrental.RoomsFragment;
 
@@ -30,6 +31,7 @@ public interface RentalComponent {
     void inject(FloorFragment fragment);
     void inject(FlatmatesFragment fragment);
     void inject(PhotosFragment fragment);
+    void inject(PriceFragment fragment);
 
     @Component.Builder
     interface Builder {

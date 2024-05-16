@@ -73,4 +73,11 @@ public class SaveRentalUseCase {
         rentalRepository.saveCreatingRental(rental);
         return this;
     }
+
+    public SaveRentalUseCase savePrice(Long price) {
+        Rental rental = rentalRepository.getCreatingRental();
+        rental.setPrice(price);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
 }

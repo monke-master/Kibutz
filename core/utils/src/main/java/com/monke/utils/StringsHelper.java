@@ -11,4 +11,9 @@ public class StringsHelper {
         if (x == null) return "";
         return String.valueOf(x);
     }
+
+    public static String getLongOrEmpty(Long l) {
+        if (l == null) return "";
+        return String.valueOf(l);
+    }
 }
