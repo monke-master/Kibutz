@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.chips;
 
 import android.content.res.Resources;
 import android.view.LayoutInflater;

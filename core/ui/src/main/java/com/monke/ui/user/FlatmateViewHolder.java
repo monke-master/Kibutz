@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.user;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

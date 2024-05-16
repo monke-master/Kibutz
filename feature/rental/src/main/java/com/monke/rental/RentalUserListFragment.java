@@ -1,7 +1,6 @@
 package com.monke.rental;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDeepLinkRequest;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,9 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navigation.RentalFragmentContract;
 import com.monke.rental.databinding.FragmentUserRentalListBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.RentalRWAdapter;
-import com.monke.ui.RentalViewHolder;
-import com.monke.user.User;
+import com.monke.ui.rental.RentalRWAdapter;
 
 import javax.inject.Inject;
 

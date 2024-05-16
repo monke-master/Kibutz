@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.rental;
 
 import androidx.recyclerview.widget.DiffUtil;
 

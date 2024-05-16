@@ -18,7 +18,7 @@ import com.monke.rental.Constants;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentRoomsBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.TextChipAdapter;
+import com.monke.ui.chips.TextChipAdapter;
 
 import javax.inject.Inject;
 

@@ -18,15 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentPhotosBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.AddPhotoButtonViewHolder;
 import com.monke.ui.DimensionsHelper;
-import com.monke.ui.PhotoRWAdapter;
-import com.monke.ui.ProfilePictureViewHolder;
+import com.monke.ui.photo.PhotoRWAdapter;
 
 import javax.inject.Inject;
 

@@ -22,7 +22,7 @@ import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentIdentitiesBinding;
 import com.monke.profile.di.ProfileComponentProvider;
-import com.monke.ui.IdentityChipAdapter;
+import com.monke.ui.chips.IdentityChipAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

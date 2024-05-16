@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.rental;
 
 import android.content.Context;
 
@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.monke.rental.Flat;
 import com.monke.rental.Realty;
 import com.monke.rental.Rental;
+import com.monke.ui.R;
 import com.monke.ui.databinding.ItemRentalBinding;
 
 public class RentalViewHolder extends RecyclerView.ViewHolder {

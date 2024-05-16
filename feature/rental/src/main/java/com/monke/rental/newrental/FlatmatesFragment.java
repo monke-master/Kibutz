@@ -22,11 +22,10 @@ import com.monke.identity.IdentityModel;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentFlatmatesBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.IdentityChipAdapter;
+import com.monke.ui.chips.IdentityChipAdapter;
 import com.monke.ui.TextChangedListener;
 import com.monke.utils.StringsHelper;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

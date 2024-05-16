@@ -25,8 +25,8 @@ import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.DimensionsHelper;
-import com.monke.ui.IdentityChipAdapter;
-import com.monke.ui.PhotoRWAdapter;
+import com.monke.ui.chips.IdentityChipAdapter;
+import com.monke.ui.photo.PhotoRWAdapter;
 import com.monke.ui.TextChangedListener;
 
 import java.util.ArrayList;

@@ -16,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.example.navigation.RentalFragmentContract;
 import com.monke.rental.databinding.FragmentRentalBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.FlatmateRWAdapter;
+import com.monke.ui.rental.RealtyUiHelpers;
+import com.monke.ui.user.FlatmateRWAdapter;
+import com.monke.ui.rental.RealtyDetailRWAdapter;
 
 import javax.inject.Inject;
 
@@ -25,6 +27,7 @@ public class RentalFragment extends Fragment {
     private RentalViewModel mViewModel;
     private FragmentRentalBinding mBinding;
     private FlatmateRWAdapter flatmateRWAdapter;
+    private RealtyDetailRWAdapter realtyDetailRWAdapter;
 
     @Inject
     public RentalViewModel.Factory factory;
@@ -49,6 +52,7 @@ public class RentalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initFlatmateAdapter();
+        initDetailsAdapter();
         observeRental();
         observeFlatmates();
     }
@@ -60,12 +64,19 @@ public class RentalFragment extends Fragment {
 
     private void initFlatmateAdapter() {
         flatmateRWAdapter = new FlatmateRWAdapter();
-        var recyclerView =  mBinding.flatmates.listFlatmates;
+        var recyclerView = mBinding.flatmates.listFlatmates;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(flatmateRWAdapter);
         flatmateRWAdapter.setOnItemClickedListener(user -> {
 
         });
+    }
+
+    private void initDetailsAdapter() {
+        realtyDetailRWAdapter = new RealtyDetailRWAdapter();
+        var recyclerView = mBinding.details.listDetails;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(realtyDetailRWAdapter);
     }
 
     private void observeRental() {
@@ -98,6 +109,8 @@ public class RentalFragment extends Fragment {
         mBinding.info.txtFloor.setText(
                 getString(com.monke.ui.R.string.floors_info, flat.getFloor(), flat.getFloorsCount())
         );
+
+        realtyDetailRWAdapter.setDetailList(RealtyUiHelpers.getFlatRealtyDetails(getContext(), flat));
     }
 
     private void observeFlatmates() {

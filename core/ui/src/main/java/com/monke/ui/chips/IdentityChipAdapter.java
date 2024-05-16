@@ -1,10 +1,11 @@
-package com.monke.ui;
+package com.monke.ui.chips;
 
 import android.view.LayoutInflater;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.monke.identity.Identity;
+import com.monke.ui.R;
 
 import java.util.List;
 

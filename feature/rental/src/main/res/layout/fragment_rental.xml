@@ -92,6 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_description" />
 
             <include
+                android:id="@+id/details"
                 layout="@layout/layout_rental_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

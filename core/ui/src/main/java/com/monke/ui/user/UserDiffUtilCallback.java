@@ -1,16 +1,18 @@
-package com.monke.ui;
+package com.monke.ui.user;
 
 import androidx.recyclerview.widget.DiffUtil;
+
+import com.monke.user.User;
 
 import java.util.List;
 import java.util.Objects;
 
-public class PhotoDiffUtilCallback extends DiffUtil.Callback {
+public class UserDiffUtilCallback extends DiffUtil.Callback {
 
-    private final List<String> oldList;
-    private final List<String> newList;
+    private final List<User> oldList;
+    private final List<User> newList;
 
-    public PhotoDiffUtilCallback(List<String> oldList, List<String> newList) {
+    public UserDiffUtilCallback(List<User> oldList, List<User> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }

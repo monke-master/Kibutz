@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.photo;
 
 import android.view.View;
 
@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.monke.ui.R;
 import com.monke.ui.databinding.ItemPhotoBinding;
 
 public class AddPhotoButtonViewHolder extends RecyclerView.ViewHolder {

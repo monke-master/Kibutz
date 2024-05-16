@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_details"
         tools:listitem="@layout/item_details"
         tools:itemCount="3"
         android:layout_width="match_parent"

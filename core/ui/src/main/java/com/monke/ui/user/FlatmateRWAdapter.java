@@ -1,4 +1,4 @@
-package com.monke.ui;
+package com.monke.ui.user;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
