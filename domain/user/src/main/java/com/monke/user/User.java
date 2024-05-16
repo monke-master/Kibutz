@@ -1,6 +1,7 @@
 package com.monke.user;
 
 import com.monke.rental.Rental;
+import com.monke.rental.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class User {
     private String name;
     private String email;
     private long dateOfBirth;
-    private List<Rental> responses = new ArrayList<>();
+    private List<Response> responses = new ArrayList<Response>();
     private Profile profile;
     private String password;
     private List<Rental> rentals = new ArrayList<>();
@@ -21,7 +22,7 @@ public class User {
     }
 
     public User(String id, String name, String email, long dateOfBirth,
-                List<Rental> responses, Profile profile, List<Rental> rentals) {
+                List<Response> responses, Profile profile, List<Rental> rentals) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -63,11 +64,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<Rental> getResponses() {
+    public List<Response> getResponses() {
         return responses;
     }
 
-    public void setResponses(List<Rental> responses) {
+    public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
 

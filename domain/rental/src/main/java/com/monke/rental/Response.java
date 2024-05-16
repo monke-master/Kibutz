@@ -5,16 +5,18 @@ import java.util.Objects;
 public class Response {
     private String responseId;
     private String userId;
-    private String dateOfResponse;
+    private String rentalId;
+    private long dateOfResponse;
     private Status status;
 
-    public Response(String responseId, String userId, String dateOfResponse, Status status) {
+    public Response(String responseId, String userId, String rentalId,
+                    long dateOfResponse, Status status) {
         this.responseId = responseId;
         this.userId = userId;
+        this.rentalId = rentalId;
         this.dateOfResponse = dateOfResponse;
         this.status = status;
     }
-
 
     public String getResponseId() {
         return responseId;
@@ -32,11 +34,11 @@ public class Response {
         this.userId = userId;
     }
 
-    public String getDateOfResponse() {
+    public long getDateOfResponse() {
         return dateOfResponse;
     }
 
-    public void setDateOfResponse(String dateOfResponse) {
+    public void setDateOfResponse(long dateOfResponse) {
         this.dateOfResponse = dateOfResponse;
     }
 
@@ -52,17 +54,25 @@ public class Response {
         POSITIVE, NEGATIVE, HANGING
     }
 
+    public String getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Response response = (Response) o;
-        return Objects.equals(responseId, response.responseId) && Objects.equals(userId, response.userId) && Objects.equals(dateOfResponse, response.dateOfResponse) && status == response.status;
+        return dateOfResponse == response.dateOfResponse && Objects.equals(responseId, response.responseId) && Objects.equals(userId, response.userId) && Objects.equals(rentalId, response.rentalId) && status == response.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(responseId, userId, dateOfResponse, status);
+        return Objects.hash(responseId, userId, rentalId, dateOfResponse, status);
     }
 
     @Override
@@ -70,7 +80,8 @@ public class Response {
         return "Response{" +
                 "responseId='" + responseId + '\'' +
                 ", userId='" + userId + '\'' +
-                ", dateOfResponse='" + dateOfResponse + '\'' +
+                ", rentalId='" + rentalId + '\'' +
+                ", dateOfResponse=" + dateOfResponse +
                 ", status=" + status +
                 '}';
     }

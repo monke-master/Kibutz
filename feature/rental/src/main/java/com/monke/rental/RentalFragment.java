@@ -58,6 +58,7 @@ public class RentalFragment extends Fragment {
         initDetailsAdapter();
         observeRental();
         observeFlatmates();
+        initRespondBtn();
     }
 
     private void getArgs() {
@@ -128,6 +129,12 @@ public class RentalFragment extends Fragment {
     private void observeFlatmates() {
         mViewModel.flatmates.observe(getViewLifecycleOwner(), users -> {
             flatmateRWAdapter.setUsersList(users);
+        });
+    }
+
+    private void initRespondBtn() {
+        mBinding.btnRespond.setOnClickListener(v -> {
+            mViewModel.respondToRental();
         });
     }
 }

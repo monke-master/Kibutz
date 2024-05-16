@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.user.GetRentalFlatmatesUseCase;
 import com.monke.user.GetUserRentalByIdUseCase;
+import com.monke.user.RespondToRentalUseCase;
 import com.monke.user.User;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class RentalViewModel extends ViewModel {
 
     private GetUserRentalByIdUseCase getUserRentalByIdUseCase;
     private GetRentalFlatmatesUseCase getRentalFlatmatesUseCase;
+    private RespondToRentalUseCase respondToRentalUseCase;
 
     private MutableLiveData<Rental> _rental = new MutableLiveData<>();
     public LiveData<Rental> rental = _rental;
@@ -27,9 +29,11 @@ public class RentalViewModel extends ViewModel {
     public LiveData<List<User>> flatmates = _flatmates;
 
     public RentalViewModel(GetUserRentalByIdUseCase getUserRentalByIdUseCase,
-                           GetRentalFlatmatesUseCase getRentalFlatmatesUseCase) {
+                           GetRentalFlatmatesUseCase getRentalFlatmatesUseCase,
+                           RespondToRentalUseCase respondToRentalUseCase) {
         this.getUserRentalByIdUseCase = getUserRentalByIdUseCase;
         this.getRentalFlatmatesUseCase = getRentalFlatmatesUseCase;
+        this.respondToRentalUseCase = respondToRentalUseCase;
     }
 
     public void setRentalId(String rentalId) {
@@ -41,22 +45,32 @@ public class RentalViewModel extends ViewModel {
         _flatmates.setValue(getRentalFlatmatesUseCase.execute(_rental.getValue()));
     }
 
+    public void respondToRental() {
+        respondToRentalUseCase.execute(_rental.getValue());
+    }
+
     public static class Factory implements ViewModelProvider.Factory {
 
         private final GetUserRentalByIdUseCase getUserRentalByIdUseCase;
         private final GetRentalFlatmatesUseCase getRentalFlatmatesUseCase;
+        private RespondToRentalUseCase respondToRentalUseCase;
 
         @Inject
         public Factory(GetUserRentalByIdUseCase getUserRentalByIdUseCase,
-                       GetRentalFlatmatesUseCase getRentalFlatmatesUseCase) {
+                       GetRentalFlatmatesUseCase getRentalFlatmatesUseCase,
+                       RespondToRentalUseCase respondToRentalUseCase) {
             this.getUserRentalByIdUseCase = getUserRentalByIdUseCase;
             this.getRentalFlatmatesUseCase = getRentalFlatmatesUseCase;
+            this.respondToRentalUseCase = respondToRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new RentalViewModel(getUserRentalByIdUseCase, getRentalFlatmatesUseCase));
+            return (T) (new RentalViewModel(
+                    getUserRentalByIdUseCase,
+                    getRentalFlatmatesUseCase,
+                    respondToRentalUseCase));
         }
     }
 }

@@ -39,7 +39,8 @@ public class Mocks {
             5,
             Collections.emptyList(),
             100505050,
-            mockContacts
+            mockContacts,
+            Collections.emptyList()
     );
 
     static Profile mockProfile = new Profile(

@@ -2,6 +2,7 @@ package com.monke.rental;
 
 import com.monke.identity.Identity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +19,7 @@ public class Rental {
     private List<String> flatmatesIds;
     private long creationDate;
     private Contacts contacts;
-    private List<Response> responses;
+    private List<Response> responses = new ArrayList<>();
 
     public Rental(String id, Realty realty) {
         this.id = id;
