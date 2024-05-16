@@ -18,6 +18,7 @@ public class Rental {
     private List<String> flatmatesIds;
     private long creationDate;
     private Contacts contacts;
+    private List<Response> responses;
 
     public Rental(String id, Realty realty) {
         this.id = id;
@@ -26,7 +27,8 @@ public class Rental {
 
     public Rental(String id, String authorId, List<String> photos, long price, Realty realty,
                   String description, List<Identity> identityFilters, int flatmatesCount,
-                  List<String> flatmatesIds, long creationDate, Contacts contacts) {
+                  List<String> flatmatesIds, long creationDate, Contacts contacts,
+                  List<Response> responses) {
         this.id = id;
         this.authorId = authorId;
         this.photos = photos;
@@ -128,25 +130,25 @@ public class Rental {
         this.contacts = contacts;
     }
 
+    public List<Response> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
-        return price == rental.price &&
-               flatmatesCount == rental.flatmatesCount &&
-               creationDate == rental.creationDate &&
-               Objects.equals(id, rental.id) && Objects.equals(authorId, rental.authorId) &&
-               Objects.equals(photos, rental.photos) && Objects.equals(realty, rental.realty) &&
-               Objects.equals(description, rental.description) &&
-               Objects.equals(identityFilters, rental.identityFilters) &&
-               Objects.equals(flatmatesIds, rental.flatmatesIds);
+        return price == rental.price && flatmatesCount == rental.flatmatesCount && creationDate == rental.creationDate && Objects.equals(id, rental.id) && Objects.equals(authorId, rental.authorId) && Objects.equals(photos, rental.photos) && Objects.equals(realty, rental.realty) && Objects.equals(description, rental.description) && Objects.equals(identityFilters, rental.identityFilters) && Objects.equals(flatmatesIds, rental.flatmatesIds) && Objects.equals(contacts, rental.contacts) && Objects.equals(responses, rental.responses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authorId, photos, price, realty, description, identityFilters,
-                flatmatesCount, flatmatesIds, creationDate);
+        return Objects.hash(id, authorId, photos, price, realty, description, identityFilters, flatmatesCount, flatmatesIds, creationDate, contacts, responses);
     }
 
     @Override
@@ -163,6 +165,7 @@ public class Rental {
                 ", flatmatesIds=" + flatmatesIds +
                 ", creationDate=" + creationDate +
                 ", contacts=" + contacts +
+                ", responses=" + responses +
                 '}';
     }
 }
