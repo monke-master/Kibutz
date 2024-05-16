@@ -3,13 +3,11 @@ package com.monke.rental.newrental;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDeepLinkBuilder;
 import androidx.navigation.NavDeepLinkRequest;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -20,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.navigation.PickIdentitiesContract;
 import com.monke.identity.Identity;
+import com.monke.identity.IdentityModel;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentFlatmatesBinding;
 import com.monke.rental.di.RentalComponentProvider;
@@ -27,14 +26,15 @@ import com.monke.ui.IdentityChipAdapter;
 import com.monke.ui.TextChangedListener;
 import com.monke.utils.StringsHelper;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 public class FlatmatesFragment extends Fragment {
 
+    private IdentityChipAdapter mChipAdapter;
     private FlatmatesViewModel mViewModel;
     private FragmentFlatmatesBinding mBinding;
 
@@ -58,9 +58,13 @@ public class FlatmatesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mChipAdapter = new IdentityChipAdapter(mBinding.chipsReqs, getLayoutInflater());
 
         initEditTextFlatmatesCount();
         initAddIdentityChip();
+        setFragmentResultListener();
+        observeIdentities();
+        initNextBtn();
     }
 
     private void initEditTextFlatmatesCount() {
@@ -79,16 +83,38 @@ public class FlatmatesFragment extends Fragment {
     private void initAddIdentityChip() {
         mBinding.chipAdd.setOnClickListener(v -> {
             NavDeepLinkRequest request = PickIdentitiesContract.createDeepLinkRequest(
-                    Collections.emptyList(), List.of(Identity.Type.NEGATIVE.name(), Identity.Type.GENDER.name())
+                    mViewModel.getFiltersIds(),
+                    List.of(Identity.Type.NEGATIVE.name(), Identity.Type.GENDER.name())
             );
 
             NavHostFragment.findNavController(this).navigate(request);
         });
     }
 
-    private void initFiltersChipGroup() {
-//        IdentityChipAdapter adapter = new IdentityChipAdapter(mBinding.chipsReqs, getLayoutInflater());
-//        adapter.bind(mViewModel.getUiState().getIdentityFilters(), );
+    private void setFragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener(PickIdentitiesContract.RESULT_KEY,
+                getViewLifecycleOwner(), (requestKey, result) -> {
+                    List<Identity> identities =
+                            result.getParcelableArrayList(PickIdentitiesContract.IDENTITIES_KEY)
+                                    .stream()
+                                    .map(i -> ((IdentityModel)i).getIdentity())
+                                    .collect(Collectors.toList());
+                    mViewModel.addIdentityFilters(identities);
+                });
     }
 
+    private void observeIdentities() {
+        mViewModel.filters.observe(getViewLifecycleOwner(), filters -> {
+            mChipAdapter.bindFromLast(filters, false);
+        });
+    }
+
+    private void initNextBtn() {
+        mBinding.btnNext.setOnClickListener(v -> {
+            mViewModel.saveData();
+            NavHostFragment
+                    .findNavController(this)
+                    .navigate(R.id.action_flatmatesFragment_to_photosFragment);
+        });
+    }
 }

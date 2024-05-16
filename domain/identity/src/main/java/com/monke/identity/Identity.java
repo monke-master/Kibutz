@@ -78,4 +78,15 @@ public class Identity {
     public enum Type {
         GENDER, POSITIVE, NEGATIVE
     }
+
+    @Override
+    public String toString() {
+        return "Identity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", oppositeId='" + oppositeId + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
