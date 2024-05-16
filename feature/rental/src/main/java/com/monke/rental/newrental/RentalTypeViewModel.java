@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.rental.CreateRentalUseCase;
-import com.monke.rental.RentalViewModel;
-import com.monke.user.SaveEmailUseCase;
 
 import javax.inject.Inject;
 

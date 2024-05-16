@@ -2,9 +2,11 @@ package com.monke.user;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.Optional;
+
 public interface UserRepository {
 
-    User getUserById(String id);
+    Optional<User> getUserById(String id);
 
     void saveUser(User user);
 

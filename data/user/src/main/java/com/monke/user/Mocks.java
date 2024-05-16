@@ -43,7 +43,7 @@ public class Mocks {
 
     static Profile mockProfile = new Profile(
             UUID.randomUUID().toString(),
-            Collections.emptyList(),
+            List.of("https://sun1-91.userapi.com/s/v1/if1/nlwrIHMavQQQCrtrznR0aqYprdCm6W09-YP8GPiio9QVE1-iziHN6XtYGGeMrHNVHbtR-Bn7.jpg?size=862x862&quality=96&crop=166,0,862,862&ava=1"),
             "I am Berkoff Man",
             Collections.emptyList()
             );

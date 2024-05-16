@@ -7,6 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import com.monke.di.AppScope;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 @AppScope
@@ -14,15 +18,18 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
 
+    private ArrayList<User> users;
+
     @Inject
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource) {
         this.cacheDataSource = cacheDataSource;
         Log.d("UserRepositoryImpl", "constructor");
+        users = new ArrayList<>(List.of(Mocks.mockUser));
     }
 
     @Override
-    public User getUserById(String id) {
-        return null;
+    public Optional<User> getUserById(String id) {
+        return users.stream().filter(u -> u.getId().equals(id)).findFirst();
     }
 
     @Override

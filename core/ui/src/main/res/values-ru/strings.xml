@@ -78,7 +78,7 @@
     <string name="female">Женщина</string>
     <string name="studio">Студия</string>
     <string name="flatmates_count">Количество соседей</string>
-    <string name="rooms_flat">%d комн. кв</string>
+    <string name="rooms_info">%d комн. кв</string>
     <string name="floors_info">%d/%d этаж</string>
     <string name="area_info">%f м<sup>2</sup></string>
     <string name="price_info">%d ₽/мес</string>

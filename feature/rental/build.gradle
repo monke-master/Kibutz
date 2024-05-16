@@ -58,4 +58,5 @@ dependencies {
     annotationProcessor libs.dagger.compiler
 
     implementation libs.yandex.map.kit
+    implementation libs.glide
 }

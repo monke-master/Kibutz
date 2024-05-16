@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navigation.RentalFragmentContract;
 import com.monke.rental.databinding.FragmentUserRentalListBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.RentalRWAdapter;
@@ -60,7 +61,11 @@ public class RentalUserListFragment extends Fragment {
     private void initRentalRW() {
         adapter = new RentalRWAdapter();
         adapter.setOnItemClickListener(rental -> {
-
+            Bundle bundle = new Bundle();
+            bundle.putString(RentalFragmentContract.RENTAL_ID_KEY, rental.getId());
+            NavHostFragment
+                    .findNavController(this)
+                    .navigate(R.id.action_rentalUserListFragment_to_rentalFragment, bundle);
         });
 
         RecyclerView recyclerView = mBinding.listRental;
