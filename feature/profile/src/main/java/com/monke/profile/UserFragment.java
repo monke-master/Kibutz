@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.navigation.UserNavgationContract;
+import com.example.navigation.UserNavigationContract;
 import com.monke.profile.databinding.FragmentUserBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.chips.IdentityChipAdapter;
@@ -81,7 +81,7 @@ public class UserFragment extends Fragment {
     }
 
     private void getArgs() {
-        String userId = getArguments().getString(UserNavgationContract.USER_ID_KEY);
+        String userId = getArguments().getString(UserNavigationContract.USER_ID_KEY);
         mViewModel.init(userId);
     }
 }

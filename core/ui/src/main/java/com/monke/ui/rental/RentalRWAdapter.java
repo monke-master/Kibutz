@@ -17,9 +17,14 @@ public class RentalRWAdapter extends RecyclerView.Adapter<RentalViewHolder> {
 
     private List<Rental> rentalList = new ArrayList<>();
     private RentalViewHolder.OnItemClickListener onItemClickListener;
+    private boolean showRespondBtn = true;
 
     public void setOnItemClickListener(RentalViewHolder.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setShowRespondBtn(boolean showRespondBtn) {
+        this.showRespondBtn = showRespondBtn;
     }
 
     @NonNull
@@ -31,7 +36,7 @@ public class RentalRWAdapter extends RecyclerView.Adapter<RentalViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RentalViewHolder holder, int position) {
-        holder.bind(rentalList.get(position), onItemClickListener);
+        holder.bind(rentalList.get(position),showRespondBtn, onItemClickListener);
     }
 
     @Override

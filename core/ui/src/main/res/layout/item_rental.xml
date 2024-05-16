@@ -77,7 +77,7 @@
         tools:text="улица Берксистский проспект, 68" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_respond"
         style="@style/DefaultButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

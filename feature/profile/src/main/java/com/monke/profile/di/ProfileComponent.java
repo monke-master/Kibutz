@@ -5,6 +5,7 @@ import com.monke.profile.EditProfileFragment;
 import com.monke.profile.IdentitiesFragment;
 import com.monke.profile.ProfileFragment;
 import com.monke.profile.UserFragment;
+import com.monke.rental.RentalModule;
 import com.monke.user.di.UserModule;
 
 import javax.inject.Singleton;
@@ -13,7 +14,8 @@ import dagger.Component;
 
 @Component(
         modules = {
-                IdentityModule.class
+                IdentityModule.class,
+                RentalModule.class
         },
         dependencies = ProfileComponentDeps.class
 )

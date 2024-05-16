@@ -4,7 +4,7 @@ import android.net.Uri;
 
 import androidx.navigation.NavDeepLinkRequest;
 
-public class UserNavgationContract {
+public class UserNavigationContract {
 
     public static String USER_ID_KEY = "userId";
 

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.navigation.RentalNavigationContract;
-import com.example.navigation.UserNavgationContract;
+import com.example.navigation.UserNavigationContract;
 import com.monke.rental.databinding.FragmentRentalBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.rental.RealtyUiHelpers;
@@ -81,7 +81,7 @@ public class RentalFragment extends Fragment {
         flatmateRWAdapter.setOnItemClickedListener(user -> {
             NavHostFragment
                     .findNavController(this)
-                    .navigate(UserNavgationContract.createDeepLinkRequest(user.getId()));
+                    .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()));
         });
     }
 

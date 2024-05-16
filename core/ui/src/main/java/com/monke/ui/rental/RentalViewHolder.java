@@ -1,6 +1,7 @@
 package com.monke.ui.rental;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnItemClickListener {
         void onItemClick(Rental rental);
+        default void onRespondBtnClick(Rental rental) {};
     }
 
     public RentalViewHolder(@NonNull ItemRentalBinding binding) {
@@ -25,7 +27,9 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
         this.mBinding = binding;
     }
 
-    public void bind(Rental rental, OnItemClickListener onItemClickListener) {
+    public void bind(Rental rental,
+                     boolean showRespondBtn,
+                     OnItemClickListener onItemClickListener) {
         context = itemView.getContext();
         mBinding.getRoot().setOnClickListener(v -> onItemClickListener.onItemClick(rental));
 
@@ -48,6 +52,12 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
             .load(rental.getPhotos().get(0))
             .centerCrop()
             .into(mBinding.image);
+
+        if (!showRespondBtn) {
+            mBinding.btnRespond.setVisibility(View.GONE);
+        } else {
+            mBinding.btnRespond.setOnClickListener(v -> onItemClickListener.onRespondBtnClick(rental));
+        }
 
         bindFlatInfo((Flat) realty);
     }

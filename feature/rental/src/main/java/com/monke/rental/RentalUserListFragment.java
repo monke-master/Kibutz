@@ -55,6 +55,7 @@ public class RentalUserListFragment extends Fragment {
 
     private void initRentalRW() {
         adapter = new RentalRWAdapter();
+        adapter.setShowRespondBtn(false);
         adapter.setOnItemClickListener(rental -> {
             Bundle bundle = new Bundle();
             bundle.putString(RentalNavigationContract.RENTAL_ID_KEY, rental.getId());
