@@ -7,12 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.monke.ui.databinding.ItemProfilePhotoBinding;
+import com.monke.ui.databinding.ItemPhotoBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfilePictureRWAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PhotoRWAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<String> photoUris = new ArrayList<>();
 
@@ -21,6 +21,12 @@ public class ProfilePictureRWAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private AddPhotoButtonViewHolder.OnAddButtonClickedListener addButtonClickedListener;
     private ProfilePictureViewHolder.OnRemovePhotoListener onRemovePhotoListener;
+    private int photoWidth, photoHeight;
+
+    public PhotoRWAdapter(int photoWidth, int photoHeight) {
+        this.photoWidth = photoWidth;
+        this.photoHeight = photoHeight;
+    }
 
     public void setAddButtonClickedListener(AddPhotoButtonViewHolder.OnAddButtonClickedListener addButtonClickedListener) {
         this.addButtonClickedListener = addButtonClickedListener;
@@ -33,12 +39,12 @@ public class ProfilePictureRWAdapter extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemProfilePhotoBinding binding = ItemProfilePhotoBinding
+        ItemPhotoBinding binding = ItemPhotoBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
         if (viewType == PHOTO_VIEW_TYPE) {
-            return new ProfilePictureViewHolder(binding);
+            return new ProfilePictureViewHolder(binding, photoHeight, photoWidth);
         }
-        return new AddPhotoButtonViewHolder(binding);
+        return new AddPhotoButtonViewHolder(binding, photoHeight, photoWidth);
     }
 
     @Override

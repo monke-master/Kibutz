@@ -6,18 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.monke.ui.databinding.ItemProfilePhotoBinding;
+import com.monke.ui.databinding.ItemPhotoBinding;
 
 public class AddPhotoButtonViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemProfilePhotoBinding mBinding;
+    private ItemPhotoBinding mBinding;
+    private int photoWidth, photoHeight;
 
-    public AddPhotoButtonViewHolder(@NonNull ItemProfilePhotoBinding binding) {
+    public AddPhotoButtonViewHolder(@NonNull ItemPhotoBinding binding, int photoHeight, int photoWidth) {
         super(binding.getRoot());
         this.mBinding = binding;
+        this.photoHeight = photoHeight;
+        this.photoWidth = photoWidth;
     }
 
     public void bind(OnAddButtonClickedListener listener) {
+        mBinding.image.getLayoutParams().height = photoHeight;
+        mBinding.image.getLayoutParams().width = photoWidth;
         mBinding.image.setImageDrawable(
                 AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_pick_photo));
         mBinding.btnRemove.setVisibility(View.GONE);

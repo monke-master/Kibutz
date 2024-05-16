@@ -24,8 +24,9 @@ import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
+import com.monke.ui.DimensionsHelper;
 import com.monke.ui.IdentityChipAdapter;
-import com.monke.ui.ProfilePictureRWAdapter;
+import com.monke.ui.PhotoRWAdapter;
 import com.monke.ui.TextChangedListener;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class EditProfileFragment extends Fragment {
     private EditProfileViewModel mViewModel;
     private FragmentEditProfileBinding mBinding;
     private IdentityChipAdapter mIdentityChipAdapter;
-    private ProfilePictureRWAdapter mPictureAdapter;
+    private PhotoRWAdapter mPictureAdapter;
 
     private ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -134,7 +135,9 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void initPhotosRecyclerView() {
-        mPictureAdapter = new ProfilePictureRWAdapter();
+        mPictureAdapter = new PhotoRWAdapter(
+                DimensionsHelper.getDp(com.monke.ui.R.dimen.profile_image_width),
+                DimensionsHelper.getDp(com.monke.ui.R.dimen.profile_image_height));
         mPictureAdapter.setAddButtonClickedListener(() -> {
             pickMedia.launch(new PickVisualMediaRequest.Builder()
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)

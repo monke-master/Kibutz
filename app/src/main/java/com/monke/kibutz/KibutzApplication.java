@@ -5,6 +5,7 @@ import android.app.Application;
 import com.monke.auth.di.AuthComponentProvider;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.rental.di.RentalComponentProvider;
+import com.monke.ui.DimensionsHelper;
 import com.monke.utils.StringProvider;
 import com.yandex.mapkit.MapKitFactory;
 
@@ -21,5 +22,6 @@ public class KibutzApplication extends Application {
         AuthComponentProvider.setDependencies(applicationComponent);
         ProfileComponentProvider.setDependencies(applicationComponent);
         RentalComponentProvider.setDependencies(applicationComponent);
+        DimensionsHelper.init(this);
     }
 }
