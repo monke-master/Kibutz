@@ -80,4 +80,19 @@ public class SaveRentalUseCase {
         rentalRepository.saveCreatingRental(rental);
         return this;
     }
+
+    public SaveRentalUseCase saveDescription(String description) {
+        Rental rental = rentalRepository.getCreatingRental();
+        rental.setDescription(description);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
+    public SaveRentalUseCase saveContacts(String email, String phone, String telegram) {
+        Rental rental = rentalRepository.getCreatingRental();
+        Contacts contacts = new Contacts(phone, telegram, email);
+        rental.setContacts(contacts);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
 }

@@ -17,6 +17,7 @@ public class Rental {
     private int flatmatesCount;
     private List<String> flatmatesIds;
     private long creationDate;
+    private Contacts contacts;
 
     public Rental(String id, Realty realty) {
         this.id = id;
@@ -25,7 +26,7 @@ public class Rental {
 
     public Rental(String id, String authorId, List<String> photos, long price, Realty realty,
                   String description, List<Identity> identityFilters, int flatmatesCount,
-                  List<String> flatmatesIds, long creationDate) {
+                  List<String> flatmatesIds, long creationDate, Contacts contacts) {
         this.id = id;
         this.authorId = authorId;
         this.photos = photos;
@@ -36,6 +37,7 @@ public class Rental {
         this.flatmatesCount = flatmatesCount;
         this.flatmatesIds = flatmatesIds;
         this.creationDate = creationDate;
+        this.contacts = contacts;
     }
 
     public String getId() {
@@ -118,6 +120,14 @@ public class Rental {
         this.creationDate = creationDate;
     }
 
+    public Contacts getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Contacts contacts) {
+        this.contacts = contacts;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -152,6 +162,7 @@ public class Rental {
                 ", flatmatesCount=" + flatmatesCount +
                 ", flatmatesIds=" + flatmatesIds +
                 ", creationDate=" + creationDate +
+                ", contacts=" + contacts +
                 '}';
     }
 }

@@ -5,6 +5,8 @@ import com.monke.rental.RentalFragment;
 import com.monke.rental.RentalModule;
 import com.monke.rental.RentalUserListFragment;
 import com.monke.rental.newrental.AreaFragment;
+import com.monke.rental.newrental.ContactsFragment;
+import com.monke.rental.newrental.DescriptionFragment;
 import com.monke.rental.newrental.FlatmatesFragment;
 import com.monke.rental.newrental.FloorFragment;
 import com.monke.rental.newrental.PhotosFragment;
@@ -32,6 +34,8 @@ public interface RentalComponent {
     void inject(FlatmatesFragment fragment);
     void inject(PhotosFragment fragment);
     void inject(PriceFragment fragment);
+    void inject(DescriptionFragment fragment);
+    void inject(ContactsFragment fragment);
 
     @Component.Builder
     interface Builder {
