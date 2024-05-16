@@ -77,6 +77,10 @@
     <string name="female">Женщина</string>
     <string name="studio">Студия</string>
     <string name="flatmates_count">Количество соседей</string>
+    <string name="rooms_flat">%d комн. кв</string>
+    <string name="floors_info">%d/%d этаж</string>
+    <string name="area_info">%f м<sup>2</sup></string>
+    <string name="price_info">%d ₽/мес</string>
 
     <string-array name="genders">
         <item>Мужской</item>
@@ -88,5 +92,13 @@
         <item quantity="one">1 комната</item>
         <item quantity="few">%s комнаты</item>
         <item quantity="many">%s комнат</item>
+        <item quantity="other">%s комнат</item>
+    </plurals>
+
+    <plurals name="flatmates">
+        <item quantity="one">%s сосед</item>
+        <item quantity="few">%s соседа</item>
+        <item quantity="many">%s соседей</item>
+        <item quantity="other">%s соседей</item>
     </plurals>
 </resources>

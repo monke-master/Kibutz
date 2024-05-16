@@ -28,7 +28,7 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void init() {
-        _user.setValue(getCurrentUserUseCase.execute());
+        user = getCurrentUserUseCase.execute();
     }
 
     @Override

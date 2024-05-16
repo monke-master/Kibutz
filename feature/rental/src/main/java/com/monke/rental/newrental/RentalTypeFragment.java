@@ -50,13 +50,13 @@ public class RentalTypeFragment extends Fragment {
         mBinding.btnFlat.setOnClickListener(v -> {
             mViewModel.setRentalType(true);
             NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_rentalTypeFragment_to_descriptionFragment);
+                    .navigate(R.id.action_rentalTypeFragment_to_addressFragment);
         });
 
         mBinding.btnHouse.setOnClickListener(v -> {
             mViewModel.setRentalType(false);
             NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_rentalTypeFragment_to_descriptionFragment);
+                    .navigate(R.id.action_rentalTypeFragment_to_addressFragment);
         });
     }
 }

@@ -12,7 +12,7 @@ public class SavePasswordUseCase {
     }
 
     public void execute(String password) {
-        User user = userRepository.getCurrentUser();
+        User user = userRepository.getCreatingUser();
         user.setPassword(password);
     }
 }

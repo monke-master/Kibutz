@@ -48,7 +48,7 @@ public class EditProfileViewModel extends ViewModel {
     }
 
     public void init() {
-        _user.setValue(getCurrentUserUseCase.execute());
+        _user.setValue(getCurrentUserUseCase.execute().getValue());
 
         uiState.setBio(_user.getValue().getProfile().getBio());
         _identities.setValue(getUserIdentitiesByTypeUseCase.execute(

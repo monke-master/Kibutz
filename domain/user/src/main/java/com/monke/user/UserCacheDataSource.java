@@ -1,8 +1,14 @@
 package com.monke.user;
 
+import androidx.lifecycle.LiveData;
+
 public interface UserCacheDataSource {
 
-    void saveUser(User user);
+    void saveCreatingUser(User user);
 
-    User getUser();
+    User getCreatingUser();
+
+    void saveCurrentUser(User user);
+
+    LiveData<User> getCurrentUser();
 }

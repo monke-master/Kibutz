@@ -16,7 +16,7 @@ public class SaveProfileUseCase {
     }
 
     public void execute(String bio, List<Identity> identities, List<String> photos) {
-        User user = userRepository.getCurrentUser();
+        User user = userRepository.getCreatingUser();
         Profile profile = user.getProfile();
         profile.setIdentities(identities);
         profile.setBio(bio);

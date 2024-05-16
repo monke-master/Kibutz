@@ -3,16 +3,18 @@ package com.monke.user;
 import android.util.Log;
 
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.monke.di.AppScope;
-import com.monke.di.AuthScope;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @AppScope
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
-    private User user = Mocks.mockUser;
+    private MutableLiveData<User> currentUser = new MutableLiveData<>(Mocks.mockUser);
+    private User creatingUser = null;
 
     @Inject
     public UserCacheDataSourceImpl() {
@@ -20,12 +22,22 @@ public class UserCacheDataSourceImpl implements UserCacheDataSource {
     }
 
     @Override
-    public void saveUser(User user) {
-        this.user = user;
+    public void saveCreatingUser(User user) {
+        this.creatingUser = user;
     }
 
     @Override
-    public User getUser() {
-        return user;
+    public User getCreatingUser() {
+        return creatingUser;
+    }
+
+    @Override
+    public LiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    @Override
+    public void saveCurrentUser(User user) {
+        currentUser.setValue(user);
     }
 }

@@ -3,6 +3,8 @@ package com.monke.user;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.monke.di.AppScope;
 
 import javax.inject.Inject;
@@ -25,11 +27,26 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void saveUser(User user) {
-        cacheDataSource.saveUser(user);
+        cacheDataSource.saveCreatingUser(user);
     }
 
     @Override
-    public User getCurrentUser() {
-        return cacheDataSource.getUser();
+    public User getCreatingUser() {
+        return cacheDataSource.getCreatingUser();
+    }
+
+    @Override
+    public void setCurrentUser(User user) {
+        cacheDataSource.saveCurrentUser(user);
+    }
+
+    @Override
+    public LiveData<User> getCurrentUser() {
+        return cacheDataSource.getCurrentUser();
+    }
+
+    @Override
+    public void signUp() {
+        cacheDataSource.saveCurrentUser(cacheDataSource.getCreatingUser());
     }
 }

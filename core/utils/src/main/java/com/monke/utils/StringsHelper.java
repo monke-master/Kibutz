@@ -1,5 +1,7 @@
 package com.monke.utils;
 
+import android.content.Context;
+
 public class StringsHelper {
 
     public static String getIntOrEmpty(Integer integer) {

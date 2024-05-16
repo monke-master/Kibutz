@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -86,7 +87,7 @@ public class ContactsFragment extends Fragment {
     private void initNextBtn() {
         mBinding.btnNext.setOnClickListener(v -> {
             mViewModel.saveData();
-
+            NavHostFragment.findNavController(this).navigate(R.id.action_contactsFragment_to_rentalUserListFragment);
         });
     }
 }

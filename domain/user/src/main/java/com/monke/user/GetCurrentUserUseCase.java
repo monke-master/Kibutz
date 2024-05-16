@@ -1,5 +1,7 @@
 package com.monke.user;
 
+import androidx.lifecycle.LiveData;
+
 import javax.inject.Inject;
 
 public class GetCurrentUserUseCase {
@@ -11,7 +13,7 @@ public class GetCurrentUserUseCase {
         this.userRepository = userRepository;
     }
 
-    public User execute() {
+    public LiveData<User> execute() {
         return userRepository.getCurrentUser();
     }
 }

@@ -15,9 +15,6 @@
         <action
             android:id="@+id/action_rentalTypeFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
-        <action
-            android:id="@+id/action_rentalTypeFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -95,5 +92,10 @@
         android:id="@+id/contactsFragment"
         android:name="com.monke.rental.newrental.ContactsFragment"
         android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts">
+
+        <action
+            android:id="@+id/action_contactsFragment_to_rentalUserListFragment"
+            app:destination="@id/rentalUserListFragment" />
+    </fragment>
 </navigation>

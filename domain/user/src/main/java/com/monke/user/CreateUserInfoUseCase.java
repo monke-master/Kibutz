@@ -21,7 +21,7 @@ public class CreateUserInfoUseCase {
     }
 
     public void execute(String name, long dateOfBirth, boolean isMale) {
-        User user = userRepository.getCurrentUser();
+        User user = userRepository.getCreatingUser();
         user.setName(name);
         user.setDateOfBirth(dateOfBirth);
         Profile profile = new Profile(

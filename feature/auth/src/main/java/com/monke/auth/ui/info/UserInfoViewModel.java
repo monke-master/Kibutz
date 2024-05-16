@@ -8,12 +8,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.data.UiStatusState;
 import com.monke.user.CreateUserInfoUseCase;
+import com.monke.user.SignUpUseCase;
 
 import javax.inject.Inject;
 
 public class UserInfoViewModel extends ViewModel {
 
     private final CreateUserInfoUseCase createUserInfoUseCase;
+    private final SignUpUseCase signUpUseCase;
 
     private final MutableLiveData<UiStatusState> _uiStatusState =
             new MutableLiveData<>(new UiStatusState.Default());
@@ -23,8 +25,10 @@ public class UserInfoViewModel extends ViewModel {
             new MutableLiveData<>(new UserInfoUiState());
     private final LiveData<UserInfoUiState> uiState = _uiState;
 
-    public UserInfoViewModel(CreateUserInfoUseCase createUserInfoUseCase) {
+    public UserInfoViewModel(CreateUserInfoUseCase createUserInfoUseCase,
+                             SignUpUseCase signUpUseCase) {
         this.createUserInfoUseCase = createUserInfoUseCase;
+        this.signUpUseCase = signUpUseCase;
     }
 
     public LiveData<UserInfoUiState> getUiState() {
@@ -62,16 +66,19 @@ public class UserInfoViewModel extends ViewModel {
     public static class Factory implements ViewModelProvider.Factory {
 
         private final CreateUserInfoUseCase createUserInfoUseCase;
+        private final SignUpUseCase signUpUseCase;
 
         @Inject
-        public Factory(CreateUserInfoUseCase createUserInfoUseCase) {
+        public Factory(CreateUserInfoUseCase createUserInfoUseCase,
+                       SignUpUseCase signUpUseCase) {
             this.createUserInfoUseCase = createUserInfoUseCase;
+            this.signUpUseCase = signUpUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new UserInfoViewModel(createUserInfoUseCase));
+            return (T) (new UserInfoViewModel(createUserInfoUseCase, signUpUseCase));
         }
     }
 }

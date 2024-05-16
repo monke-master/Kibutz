@@ -2,6 +2,7 @@ package com.monke.user;
 
 import com.monke.rental.Rental;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,10 +11,10 @@ public class User {
     private String name;
     private String email;
     private long dateOfBirth;
-    private List<Rental> responses;
+    private List<Rental> responses = new ArrayList<>();
     private Profile profile;
     private String password;
-    private List<Rental> rentals;
+    private List<Rental> rentals = new ArrayList<>();
 
     public User(String email) {
         this.email = email;
