@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.identity.Identity;
-import com.monke.rental.SaveRentalUseCase;
+import com.monke.rental.CreateRentalUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ import javax.inject.Inject;
 
 public class FlatmatesViewModel extends ViewModel {
 
-    private SaveRentalUseCase saveRentalUseCase;
+    private CreateRentalUseCase createRentalUseCase;
     private FlatmatesUiState uiState;
     private MutableLiveData<List<Identity>> _filters = new MutableLiveData<>(new ArrayList<>());
     public LiveData<List<Identity>> filters = _filters;
 
-    public FlatmatesViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public FlatmatesViewModel(CreateRentalUseCase createRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
         uiState = new FlatmatesUiState();
     }
 
@@ -38,7 +38,7 @@ public class FlatmatesViewModel extends ViewModel {
     }
 
     public void saveData() {
-        saveRentalUseCase
+        createRentalUseCase
                 .saveFlatmatesCount(uiState.getFlatmatesCount())
                 .saveIdentitiesFilters(_filters.getValue());
     }
@@ -53,17 +53,17 @@ public class FlatmatesViewModel extends ViewModel {
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new FlatmatesViewModel(saveRentalUseCase));
+            return (T) (new FlatmatesViewModel(createRentalUseCase));
         }
     }
 }

@@ -4,17 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.monke.rental.SaveRentalUseCase;
+import com.monke.rental.CreateRentalUseCase;
+import com.monke.user.PublishRentalUseCase;
 
 import javax.inject.Inject;
 
 public class ContactsViewModel extends ViewModel {
 
     private ContactsUiState contactsUiState = new ContactsUiState();
-    private SaveRentalUseCase saveRentalUseCase;
+    private CreateRentalUseCase createRentalUseCase;
+    private PublishRentalUseCase publishRentalUseCase;
 
-    public ContactsViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public ContactsViewModel(CreateRentalUseCase createRentalUseCase,
+                             PublishRentalUseCase publishRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
+        this.publishRentalUseCase = publishRentalUseCase;
     }
 
     public ContactsUiState getContactsUiState() {
@@ -22,26 +26,31 @@ public class ContactsViewModel extends ViewModel {
     }
 
     public void saveData() {
-        saveRentalUseCase.saveContacts(
+        createRentalUseCase.saveContacts(
                 contactsUiState.getEmail(),
                 contactsUiState.getPhone(),
                 contactsUiState.getTelegram()
         );
+        publishRentalUseCase.execute();
     }
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
+        private final PublishRentalUseCase publishRentalUseCase;
+
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase,
+                       PublishRentalUseCase publishRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
+            this.publishRentalUseCase = publishRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new ContactsViewModel(saveRentalUseCase));
+            return (T) (new ContactsViewModel(createRentalUseCase, publishRentalUseCase));
         }
     }
 }

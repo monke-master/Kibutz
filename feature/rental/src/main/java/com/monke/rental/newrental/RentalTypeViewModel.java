@@ -20,7 +20,7 @@ public class RentalTypeViewModel extends ViewModel {
 
 
     public void setRentalType(boolean isFlat) {
-        createRentalUseCase.execute(isFlat);
+        createRentalUseCase.create(isFlat);
     }
 
     public static class Factory implements ViewModelProvider.Factory {

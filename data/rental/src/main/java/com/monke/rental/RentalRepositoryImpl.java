@@ -25,7 +25,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     }
 
     @Override
-    public void publishRental() {
+    public void publishRental(Rental rental) {
 
     }
 }

@@ -4,17 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.monke.rental.SaveRentalUseCase;
+import com.monke.rental.CreateRentalUseCase;
 
 import javax.inject.Inject;
 
 public class AreaViewModel extends ViewModel {
 
-    private final SaveRentalUseCase saveRentalUseCase;
+    private final CreateRentalUseCase createRentalUseCase;
     private AreaUiState areaUiState = new AreaUiState();
 
-    public AreaViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public AreaViewModel(CreateRentalUseCase createRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
     }
 
     public AreaUiState getAreaUiState() {
@@ -22,7 +22,7 @@ public class AreaViewModel extends ViewModel {
     }
 
     public void saveData() {
-        saveRentalUseCase.saveFlatArea(
+        createRentalUseCase.saveFlatArea(
                 areaUiState.getArea(),
                 areaUiState.getLivingArea(),
                 areaUiState.getKitchenArea());
@@ -30,17 +30,17 @@ public class AreaViewModel extends ViewModel {
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new AreaViewModel(saveRentalUseCase));
+            return (T) (new AreaViewModel(createRentalUseCase));
         }
     }
 }

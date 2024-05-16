@@ -5,35 +5,34 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monke.rental.CreateRentalUseCase;
-import com.monke.rental.SaveRentalUseCase;
 
 import javax.inject.Inject;
 
 public class RoomsViewModel extends ViewModel {
 
-    private final SaveRentalUseCase saveRentalUseCase;
+    private final CreateRentalUseCase createRentalUseCase;
 
-    public RoomsViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public RoomsViewModel(CreateRentalUseCase createRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
     }
 
     public void saveRoomsCount(int count) {
-        saveRentalUseCase.saveRoomsCount(count);
+        createRentalUseCase.saveRoomsCount(count);
     }
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new RoomsViewModel(saveRentalUseCase));
+            return (T) (new RoomsViewModel(createRentalUseCase));
         }
     }
 }

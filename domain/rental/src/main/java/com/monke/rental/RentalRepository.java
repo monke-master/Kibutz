@@ -6,5 +6,5 @@ public interface RentalRepository {
 
     Rental getCreatingRental();
 
-    void publishRental();
+    void publishRental(Rental rental);
 }

@@ -4,17 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.monke.rental.SaveRentalUseCase;
+import com.monke.rental.CreateRentalUseCase;
 
 import javax.inject.Inject;
 
 public class FloorViewModel extends ViewModel {
 
-    private final SaveRentalUseCase saveRentalUseCase;
+    private final CreateRentalUseCase createRentalUseCase;
     private FloorUiState floorUiState;
 
-    public FloorViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public FloorViewModel(CreateRentalUseCase createRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
         floorUiState = new FloorUiState();
     }
 
@@ -23,24 +23,24 @@ public class FloorViewModel extends ViewModel {
     }
 
     public void saveData() {
-        saveRentalUseCase
+        createRentalUseCase
                 .saveFloorCount(floorUiState.getFloorCount())
                 .saveFlatFloor(floorUiState.getFloor());
     }
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new FloorViewModel(saveRentalUseCase));
+            return (T) (new FloorViewModel(createRentalUseCase));
         }
     }
 }

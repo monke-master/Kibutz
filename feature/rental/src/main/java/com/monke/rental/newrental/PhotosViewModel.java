@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.monke.rental.SaveRentalUseCase;
+import com.monke.rental.CreateRentalUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +15,13 @@ import javax.inject.Inject;
 
 public class PhotosViewModel extends ViewModel {
 
-    private final SaveRentalUseCase saveRentalUseCase;
+    private final CreateRentalUseCase createRentalUseCase;
 
     private final MutableLiveData<List<String>> _photos = new MutableLiveData<>(new ArrayList<>());
     public LiveData<List<String>> photos = _photos;
 
-    public PhotosViewModel(SaveRentalUseCase saveRentalUseCase) {
-        this.saveRentalUseCase = saveRentalUseCase;
+    public PhotosViewModel(CreateRentalUseCase createRentalUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
     }
 
     public void addPhoto(String uri) {
@@ -37,22 +37,22 @@ public class PhotosViewModel extends ViewModel {
     }
 
     public void saveData() {
-        saveRentalUseCase.savePhotos(_photos.getValue());
+        createRentalUseCase.savePhotos(_photos.getValue());
     }
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final SaveRentalUseCase saveRentalUseCase;
+        private final CreateRentalUseCase createRentalUseCase;
 
         @Inject
-        public Factory(SaveRentalUseCase saveRentalUseCase) {
-            this.saveRentalUseCase = saveRentalUseCase;
+        public Factory(CreateRentalUseCase createRentalUseCase) {
+            this.createRentalUseCase = createRentalUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new PhotosViewModel(saveRentalUseCase));
+            return (T) (new PhotosViewModel(createRentalUseCase));
         }
     }
 }

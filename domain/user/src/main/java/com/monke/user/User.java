@@ -13,19 +13,21 @@ public class User {
     private List<Rental> responses;
     private Profile profile;
     private String password;
+    private List<Rental> rentals;
 
     public User(String email) {
         this.email = email;
     }
 
     public User(String id, String name, String email, long dateOfBirth,
-                List<Rental> responses, Profile profile) {
+                List<Rental> responses, Profile profile, List<Rental> rentals) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.responses = responses;
         this.profile = profile;
+        this.rentals = rentals;
     }
 
     public String getEmail() {
@@ -82,6 +84,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
     }
 
     @Override
