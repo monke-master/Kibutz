@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 public class PasswordFragment extends Fragment {
 
-    private FragmentPasswordBinding binding;
+    private FragmentPasswordBinding mBinding;
     private PasswordViewModel mViewModel;
 
     @Inject
@@ -41,23 +41,29 @@ public class PasswordFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentPasswordBinding.inflate(getLayoutInflater(), container, false);
-        return binding.getRoot();
+        mBinding = FragmentPasswordBinding.inflate(getLayoutInflater(), container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initToolbar();
         initPasswordEditText();
         initRepeatPasswordEditText();
         initNextButton();
         subscribeToUiState();
     }
 
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp());
+    }
+
     private void initPasswordEditText() {
-        binding.editTxtPassword.setText(mViewModel.getUiState().getPassword());
-        binding.editTxtPassword.addTextChangedListener(new TextChangedListener() {
+        mBinding.editTxtPassword.setText(mViewModel.getUiState().getPassword());
+        mBinding.editTxtPassword.addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
                 mViewModel.getUiState().setPassword(s.toString());
@@ -66,8 +72,8 @@ public class PasswordFragment extends Fragment {
     }
 
     private void initRepeatPasswordEditText() {
-        binding.editTxtPassword.setText(mViewModel.getUiState().getRepeatedPassword());
-        binding.editTxtRepeatPassword.addTextChangedListener(new TextChangedListener() {
+        mBinding.editTxtPassword.setText(mViewModel.getUiState().getRepeatedPassword());
+        mBinding.editTxtRepeatPassword.addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
                 mViewModel.getUiState().setRepeatedPassword(s.toString());
@@ -76,7 +82,7 @@ public class PasswordFragment extends Fragment {
     }
 
     private void initNextButton() {
-        binding.btnNext.setOnClickListener(v -> {
+        mBinding.btnNext.setOnClickListener(v -> {
             mViewModel.savePassword();
         });
     }

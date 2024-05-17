@@ -48,8 +48,14 @@ public class EmailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initToolbar();
         initEmailEditText();
         initNextBtn();
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp());
     }
 
     private void initEmailEditText() {
