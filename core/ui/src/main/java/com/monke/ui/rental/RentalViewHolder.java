@@ -41,8 +41,8 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
 
         String flatmatesInfo = context.getResources().getQuantityString(
                 R.plurals.flatmates,
-                rental.getFlatmatesCount(),
-                rental.getFlatmatesCount());
+                rental.getMaxFlatmatesCount(),
+                rental.getMaxFlatmatesCount());
         mBinding.txtFlatmates.setText(flatmatesInfo);
 
         mBinding.txtAddress.setText(realty.getAddress());

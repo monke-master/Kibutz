@@ -1,5 +1,6 @@
 package com.monke.ui.rental;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -7,16 +8,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.monke.rental.Response;
 import com.monke.ui.databinding.ItemResponseBinding;
 import com.monke.ui.user.UserDiffUtilCallback;
 import com.monke.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResponseRWAdapter extends RecyclerView.Adapter<ResponseViewHolder> {
 
-    private List<User> usersList = new ArrayList<>();
+    private List<Pair<Response, User>> responses = new ArrayList<>();
     private ResponseViewHolder.ResponseInteractor responseInteractor;
 
     public void setResponseInteractor(ResponseViewHolder.ResponseInteractor responseInteractor) {
@@ -33,19 +36,24 @@ public class ResponseRWAdapter extends RecyclerView.Adapter<ResponseViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ResponseViewHolder holder, int position) {
-        holder.bind(usersList.get(position), responseInteractor);
+        holder.bind(responses.get(position), responseInteractor);
     }
 
     @Override
     public int getItemCount() {
-        return usersList.size();
+        return responses.size();
     }
 
-    public void setUsersList(List<User> usersList) {
+    public void setResponses(List<Pair<Response, User>> responses) {
         DiffUtil.DiffResult diffResult = DiffUtil
-                .calculateDiff(new UserDiffUtilCallback(this.usersList, usersList));
-        this.usersList.clear();
-        this.usersList.addAll(usersList);
+                .calculateDiff(
+                        new ResponseDiffUtilCallback(
+                                this.responses.stream().map(p -> p.first).collect(Collectors.toList()),
+                                responses.stream().map(p -> p.first).collect(Collectors.toList())
+                        )
+                );
+        this.responses.clear();
+        this.responses.addAll(responses);
         diffResult.dispatchUpdatesTo(this);
     }
 

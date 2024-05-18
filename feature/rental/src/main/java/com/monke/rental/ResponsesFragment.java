@@ -23,6 +23,8 @@ import com.monke.ui.rental.ResponseRWAdapter;
 import com.monke.ui.rental.ResponseViewHolder;
 import com.monke.user.User;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 public class ResponsesFragment extends Fragment {
@@ -55,7 +57,7 @@ public class ResponsesFragment extends Fragment {
 
         initToolbar();
         initRecyclerView();
-        observeUsers();
+        observeResponses();
     }
 
     private void getArgs() {
@@ -69,37 +71,39 @@ public class ResponsesFragment extends Fragment {
         );
     }
 
+
+
     private void initRecyclerView() {
         RecyclerView recyclerView = mBinding.listResponses;
         mResponseRWAdapter = new ResponseRWAdapter();
         mResponseRWAdapter.setResponseInteractor(new ResponseViewHolder.ResponseInteractor() {
             @Override
-            public void onCancel(User user) {
-
+            public void onDislike(Response response) {
+                mViewModel.changeResponseStatus(response, Response.Status.DISLIKED);
             }
 
             @Override
-            public void onLike(User user) {
-
+            public void onLike(Response response) {
+                mViewModel.changeResponseStatus(response, Response.Status.LIKED);
             }
 
             @Override
-            public void onAddFlatmate(User user) {
-
+            public void onAddFlatmate(Response response) {
+                mViewModel.changeResponseStatus(response, Response.Status.FLATMATE);
             }
 
             @Override
-            public void onRemoveFlatmate(User user) {
-
+            public void onRemoveFlatmate(Response response) {
+                mViewModel.changeResponseStatus(response, Response.Status.LIKED);
             }
         });
         recyclerView.setAdapter(mResponseRWAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
     }
 
-    private void observeUsers() {
-        mViewModel.users.observe(getViewLifecycleOwner(), users -> {
-            mResponseRWAdapter.setUsersList(users);
+    private void observeResponses() {
+        mViewModel.responses.observe(getViewLifecycleOwner(), responses -> {
+            mResponseRWAdapter.setResponses(responses);
         });
     }
 }

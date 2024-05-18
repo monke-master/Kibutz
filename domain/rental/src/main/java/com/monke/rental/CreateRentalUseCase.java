@@ -68,7 +68,7 @@ public class CreateRentalUseCase {
 
     public CreateRentalUseCase saveFlatmatesCount(int flatmatesCount) {
         Rental rental = rentalRepository.getCreatingRental();
-        rental.setFlatmatesCount(flatmatesCount);
+        rental.setMaxFlatmatesCount(flatmatesCount);
         rentalRepository.saveCreatingRental(rental);
         return this;
     }

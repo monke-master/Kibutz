@@ -18,6 +18,14 @@ public class Response {
         this.status = status;
     }
 
+    public Response(Response response) {
+        this.responseId = response.responseId;
+        this.userId = response.userId;
+        this.rentalId = response.rentalId;
+        this.dateOfResponse = response.dateOfResponse;
+        this.status = response.status;
+    }
+
     public String getResponseId() {
         return responseId;
     }
@@ -51,7 +59,7 @@ public class Response {
     }
 
     public enum Status {
-        POSITIVE, NEGATIVE, HANGING
+        LIKED, DISLIKED, HANGING, FLATMATE
     }
 
     public String getRentalId() {
