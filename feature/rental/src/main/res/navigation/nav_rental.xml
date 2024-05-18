@@ -14,20 +14,7 @@
         <action
             android:id="@+id/action_rentalUserListFragment_to_nav_new_rental"
             app:destination="@id/nav_new_rental" />
-        <action
-            android:id="@+id/action_rentalUserListFragment_to_rentalFragment"
-            app:destination="@id/rentalFragment" />
     </fragment>
     <include app:graph="@navigation/nav_new_rental" />
-    <fragment
-        android:id="@+id/rentalFragment"
-        android:name="com.monke.rental.RentalFragment"
-        android:label="fragment_rental"
-        tools:layout="@layout/fragment_rental">
 
-        <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}"/>
-        <argument
-            android:name="rentalId"
-            app:argType="string" />
-    </fragment>
 </navigation>

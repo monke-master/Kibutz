@@ -57,11 +57,9 @@ public class RentalUserListFragment extends Fragment {
         adapter = new RentalRWAdapter();
         adapter.setShowRespondBtn(false);
         adapter.setOnItemClickListener(rental -> {
-            Bundle bundle = new Bundle();
-            bundle.putString(RentalNavigationContract.RENTAL_ID_KEY, rental.getId());
             NavHostFragment
                     .findNavController(this)
-                    .navigate(R.id.action_rentalUserListFragment_to_rentalFragment, bundle);
+                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
         });
 
         RecyclerView recyclerView = mBinding.listRental;
