@@ -28,6 +28,15 @@ public class CreateRentalUseCase {
         return this;
     }
 
+    public CreateRentalUseCase saveAddress(String address) {
+        Rental rental = rentalRepository.getCreatingRental();
+        Realty realty = rental.getRealty();
+        realty.setAddress(address);
+        rental.setRealty(realty);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
     public CreateRentalUseCase saveRoomsCount(int roomsCount) {
         Rental rental = rentalRepository.getCreatingRental();
         Realty realty = rental.getRealty();

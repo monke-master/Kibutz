@@ -1,7 +1,5 @@
 package com.monke.ui;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;

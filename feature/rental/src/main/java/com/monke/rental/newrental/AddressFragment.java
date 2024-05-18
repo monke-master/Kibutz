@@ -2,6 +2,7 @@ package com.monke.rental.newrental;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,36 +10,117 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.monke.rental.R;
+import com.monke.rental.databinding.FragmentAddressBinding;
+import com.monke.rental.di.RentalComponentProvider;
+import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.ScreenPoint;
+import com.yandex.mapkit.geometry.Point;
+import com.yandex.mapkit.map.CameraListener;
+import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.CameraUpdateReason;
+import com.yandex.mapkit.map.Map;
+import com.yandex.mapkit.map.MapWindow;
+import com.yandex.mapkit.map.PlacemarkMapObject;
+import com.yandex.runtime.image.ImageProvider;
+
+import javax.inject.Inject;
 
 public class AddressFragment extends Fragment {
 
-    private AddressViewModel mViewModel;
+    @Inject
+    public AddressViewModel.Factory factory;
 
-    public static AddressFragment newInstance() {
-        return new AddressFragment();
+    private AddressViewModel mViewModel;
+    private FragmentAddressBinding mBinding;
+    private Map map;
+    private MapWindow mapWindow;
+
+    private CameraListener cameraListener = new CameraListener() {
+        @Override
+        public void onCameraPositionChanged(@NonNull Map map,
+                                            @NonNull CameraPosition cameraPosition,
+                                            @NonNull CameraUpdateReason cameraUpdateReason,
+                                            boolean b) {
+            movePointer();
+        }
+    };
+
+    private PlacemarkMapObject pointer;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        RentalComponentProvider.getInstance().inject(this);
+        mViewModel = new ViewModelProvider(this, factory).get(AddressViewModel.class);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_address, container, false);
+        mBinding = FragmentAddressBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AddressViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavHostFragment.findNavController(this).navigate(R.id.action_addressFragment_to_roomsFragment);
+
+        initToolbar();
+//        NavHostFragment.findNavController(this).navigate(R.id.action_addressFragment_to_roomsFragment);
     }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp()
+        );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MapKitFactory.getInstance().onStart();
+        mBinding.mapview.onStart();
+
+        mapWindow = mBinding.mapview.getMapWindow();
+        map = mBinding.mapview.getMapWindow().getMap();
+        map.addCameraListener(cameraListener);
+        movePointer();
+
+        var centerX = mapWindow.width() / 2f;
+        var centerY = mapWindow.height() / 2f;
+        var centerPoint = new ScreenPoint(centerX, centerY);
+        var worldPoint = mapWindow.screenToWorld(centerPoint);
+        mViewModel.getAddress(worldPoint);
+    }
+
+    private void movePointer() {
+        var centerX = mapWindow.width() / 2f;
+        var centerY = mapWindow.height() / 2f;
+        var centerPoint = new ScreenPoint(centerX, centerY);
+        var worldPoint = mapWindow.screenToWorld(centerPoint);
+
+        if (pointer == null) {
+            pointer = map.getMapObjects().addPlacemark(
+                    worldPoint,
+                    ImageProvider.fromResource(getContext(), com.monke.ui.R.drawable.ic_map_pointer));
+        } else {
+            pointer.setGeometry(worldPoint);
+        }
+
+    }
+
+
 }
