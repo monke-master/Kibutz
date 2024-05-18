@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentAddressBinding;
 import com.monke.rental.di.RentalComponentProvider;
@@ -79,6 +80,10 @@ public class AddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+        bottomSheetDialog.setContentView(R.layout.layout_address_bottom_sheet);
+        bottomSheetDialog.setCancelable(false);
+        bottomSheetDialog.show();
 //        NavHostFragment.findNavController(this).navigate(R.id.action_addressFragment_to_roomsFragment);
     }
 
