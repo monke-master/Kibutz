@@ -14,7 +14,7 @@
         android:id="@+id/searchFragment"
         android:name="com.monke.search.SearchFragment"
         android:label="SearchFragment" />
-    <include app:graph="@navigation/nav_rental" />
+    <include app:graph="@navigation/nav_rental_feature" />
     <include app:graph="@navigation/nav_profile" />
 
     <fragment
@@ -40,4 +40,6 @@
             android:name="rentalId"
             app:argType="string" />
     </fragment>
+    <include app:graph="@navigation/nav_rental"/>
+
 </navigation>

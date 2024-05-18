@@ -41,6 +41,7 @@ public class Rental {
         this.flatmatesIds = flatmatesIds;
         this.creationDate = creationDate;
         this.contacts = contacts;
+        this.responses = responses;
     }
 
     public String getId() {

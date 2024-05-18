@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.navigation.RentalNavigationContract;
+import com.example.navigation.ResponsesNavigationContract;
 import com.example.navigation.UserNavigationContract;
 import com.monke.rental.databinding.FragmentRentalBinding;
 import com.monke.rental.di.RentalComponentProvider;
@@ -54,6 +55,7 @@ public class RentalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
+        initResponsesBtn();
         initFlatmateAdapter();
         initDetailsAdapter();
         observeRental();
@@ -69,6 +71,18 @@ public class RentalFragment extends Fragment {
     private void initToolbar() {
         mBinding.toolbar.setNavigationOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigateUp();
+        });
+    }
+
+    private void initResponsesBtn() {
+        mBinding.btnResponses.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(
+                    ResponsesNavigationContract.RENTAL_ID_KEY,
+                    mViewModel.rental.getValue().getId());
+            NavHostFragment
+                    .findNavController(this)
+                    .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
         });
     }
 

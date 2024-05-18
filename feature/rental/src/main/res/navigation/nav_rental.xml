@@ -3,18 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_rental"
-    app:startDestination="@id/rentalUserListFragment">
+    app:startDestination="@id/rentalFragment">
 
+    <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}"/>
+    <argument
+        android:name="rentalId"
+        app:argType="string" />
 
     <fragment
-        android:id="@+id/rentalUserListFragment"
-        android:name="com.monke.rental.RentalUserListFragment"
-        android:label="fragment_user_rental_list"
-        tools:layout="@layout/fragment_user_rental_list" >
+        android:id="@+id/rentalFragment"
+        android:name="com.monke.rental.RentalFragment"
+        android:label="fragment_rental"
+        tools:layout="@layout/fragment_rental" >
         <action
-            android:id="@+id/action_rentalUserListFragment_to_nav_new_rental"
-            app:destination="@id/nav_new_rental" />
+            android:id="@+id/action_rentalFragment_to_responsesFragment"
+            app:destination="@id/responsesFragment" />
     </fragment>
-    <include app:graph="@navigation/nav_new_rental" />
-
+    <fragment
+        android:id="@+id/responsesFragment"
+        android:name="com.monke.rental.ResponsesFragment"
+        android:label="fragment_responses"
+        tools:layout="@layout/fragment_responses" />
 </navigation>

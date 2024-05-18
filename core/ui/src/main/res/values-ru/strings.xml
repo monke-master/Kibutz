@@ -82,6 +82,7 @@
     <string name="floors_info">%d/%d этаж</string>
     <string name="area_info">%f м<sup>2</sup></string>
     <string name="price_info">%d ₽/мес</string>
+    <string name="responses">Отклики</string>
 
 
     <plurals name="rooms">
