@@ -13,6 +13,8 @@ activity = "1.8.0"
 rxjava = "3.0.2"
 fragment = "1.7.0"
 glide = "4.12.0"
+lifecycle-livedata-ktx = "2.8.0"
+lifecycle-viewmodel-ktx = "2.8.0"
 [libraries]
 appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
@@ -33,6 +35,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 rxjava = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava" }
 fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 glide = {module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle-livedata-ktx" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

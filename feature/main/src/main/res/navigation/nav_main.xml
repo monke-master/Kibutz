@@ -29,22 +29,6 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/rentalFragment"
-        android:name="com.monke.rental.RentalFragment"
-        android:label="fragment_rental"
-        tools:layout="@layout/fragment_rental">
-
-        <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}&amp;responseStatus={responseStatus}"/>
-        <argument
-            android:name="rentalId"
-            app:argType="string" />
-        <argument
-            android:name="responseStatus"
-            app:argType="string"
-            app:nullable="true" />
-
-    </fragment>
     <include app:graph="@navigation/nav_rental"/>
 
 </navigation>

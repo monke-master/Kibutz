@@ -86,6 +86,7 @@
     <string name="response_status_hanging">Ждем ответа владельца объявления. Как только он решит, что вы подходите друг другу, мы покажем его контакты</string>
     <string name="response_status_flatmate">Поздравляем! Вы теперь соседи.</string>
     <string name="contact">Связаться</string>
+    <string name="call">Позвонить</string>
 
     <string-array name="genders">
         <item>Мужской</item>

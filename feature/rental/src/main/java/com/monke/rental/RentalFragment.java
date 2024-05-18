@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.example.navigation.ContactsNavigationContract;
 import com.example.navigation.RentalNavigationContract;
 import com.example.navigation.ResponsesNavigationContract;
 import com.example.navigation.UserNavigationContract;
@@ -105,6 +106,15 @@ public class RentalFragment extends Fragment {
                 case FLATMATE -> responseStatus = getString(com.monke.ui.R.string.response_status_flatmate);
             }
             mBinding.responses.txtStatus.setText(responseStatus);
+            mBinding.responses.btnContact.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(
+                        ContactsNavigationContract.CONTACTS_KEY,
+                        new ContactsModel(mViewModel.rental.getValue().getContacts()));
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
+            });
         } else {
             mBinding.btnRespond.setVisibility(View.GONE);
         }
