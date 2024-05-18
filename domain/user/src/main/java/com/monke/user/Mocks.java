@@ -13,6 +13,7 @@ import java.util.UUID;
 public class Mocks {
 
     private static String userId = UUID.randomUUID().toString();
+    private static String userId2 = UUID.randomUUID().toString();
     private static String rentalId = UUID.randomUUID().toString();
 
     static Flat mockFlat = new Flat(
@@ -36,7 +37,7 @@ public class Mocks {
             userId,
             rentalId,
             Calendar.getInstance().getTimeInMillis(),
-            Response.Status.HANGING
+            Response.Status.LIKED
     );
 
     public  static Rental mockRental = new Rental(
@@ -61,14 +62,31 @@ public class Mocks {
             List.of()
     );
 
+    public static Profile mockProfile2 = new Profile(
+            UUID.randomUUID().toString(),
+            List.of("https://content.foto.my.mail.ru/mail/berkow/_myphoto/h-6.jpg"),
+            "I am Berkoff Man",
+            List.of()
+    );
+
     public static User mockUser = new User(
             userId,
             "Nikolay Berkovv",
             "berjoff@gmail.com",
             1020230020,
-            List.of(mockResponse),
+            Collections.emptyList(),
             mockProfile,
             List.of(mockRental)
+    );
+
+    public static User cockUser = new User(
+            userId2,
+            "Михаил Елизаров",
+            "berjoff@gmail.com",
+            1020230020,
+            List.of(mockResponse),
+            mockProfile2,
+            Collections.emptyList()
     );
 
 

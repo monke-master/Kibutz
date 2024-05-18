@@ -55,7 +55,7 @@ public class RentalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
-        initResponsesBtn();
+        initResponsesInfo();
         initFlatmateAdapter();
         initDetailsAdapter();
         observeRental();
@@ -66,6 +66,11 @@ public class RentalFragment extends Fragment {
     private void getArgs() {
         String rentalId = getArguments().getString(RentalNavigationContract.RENTAL_ID_KEY);
         mViewModel.setRentalId(rentalId);
+
+        String responseStatus = getArguments().getString(RentalNavigationContract.RESPONSE_STATUS_KEY);
+        if (responseStatus != null) {
+            mViewModel.setResponseStatus(Response.Status.valueOf(responseStatus));
+        }
     }
 
     private void initToolbar() {
@@ -74,18 +79,36 @@ public class RentalFragment extends Fragment {
         });
     }
 
-    private void initResponsesBtn() {
-        mBinding.btnResponses.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString(
-                    ResponsesNavigationContract.RENTAL_ID_KEY,
-                    mViewModel.rental.getValue().getId());
-            NavHostFragment
-                    .findNavController(this)
-                    .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
-        });
+    private void initResponsesInfo() {
+        if (mViewModel.userIfAuthor()) {
+            mBinding.responses.btnContact.setVisibility(View.GONE);
+            mBinding.responses.txtStatus.setVisibility(View.GONE);
+            mBinding.responses.btnResponses.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString(
+                        ResponsesNavigationContract.RENTAL_ID_KEY,
+                        mViewModel.rental.getValue().getId());
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
+            });
+        }
+        if (mViewModel.getResponseStatus() != null) {
+            mBinding.responses.btnResponses.setVisibility(View.GONE);
+            String responseStatus = "";
+            switch (mViewModel.getResponseStatus()) {
+                case HANGING -> {
+                    responseStatus = getString(com.monke.ui.R.string.response_status_hanging);
+                    mBinding.responses.btnContact.setVisibility(View.GONE);
+                }
+                case LIKED -> responseStatus = getString(com.monke.ui.R.string.response_status_like);
+                case FLATMATE -> responseStatus = getString(com.monke.ui.R.string.response_status_flatmate);
+            }
+            mBinding.responses.txtStatus.setText(responseStatus);
+        } else {
+            mBinding.btnRespond.setVisibility(View.GONE);
+        }
     }
-
 
     private void initFlatmateAdapter() {
         flatmateRWAdapter = new FlatmateRWAdapter();
@@ -108,6 +131,7 @@ public class RentalFragment extends Fragment {
 
     private void observeRental() {
         mViewModel.rental.observe(getViewLifecycleOwner(), rental -> {
+            initResponsesInfo();
             Glide
                 .with(getContext())
                 .load(rental.getPhotos().get(0))

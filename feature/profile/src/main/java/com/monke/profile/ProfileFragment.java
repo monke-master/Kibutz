@@ -20,6 +20,8 @@ import com.monke.profile.databinding.FragmentProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.rental.RentalRWAdapter;
 
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 public class ProfileFragment extends Fragment {
@@ -30,7 +32,6 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel mViewModel;
     private FragmentProfileBinding mBinding;
     private RentalRWAdapter rentalRWAdapter;
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -68,7 +69,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void observeRentalsList() {
-        mViewModel.responses.observe(getViewLifecycleOwner(), rentalRWAdapter::setRentalList);
+        mViewModel.rentals.observe(getViewLifecycleOwner(), rentalRWAdapter::setRentalList);
     }
 
     private void initEditProfileBtn() {
@@ -84,9 +85,10 @@ public class ProfileFragment extends Fragment {
         rentalRWAdapter = new RentalRWAdapter();
         rentalRWAdapter.setShowRespondBtn(false);
         rentalRWAdapter.setOnItemClickListener(rental -> {
+            var responseStatus = mViewModel.responses.get(rental.getId()).getStatus().name();
             NavHostFragment
                     .findNavController(this)
-                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
+                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId(), responseStatus));
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
