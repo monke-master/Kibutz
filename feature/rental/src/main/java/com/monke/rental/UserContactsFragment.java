@@ -39,7 +39,7 @@ public class UserContactsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        var contactsViewController = new ContactsViewController(mBinding.getRoot(), contacts);
+        var contactsViewController = new ContactsViewController(getActivity(), mBinding.getRoot(), contacts);
         contactsViewController.initViews();
     }
 

@@ -29,7 +29,7 @@ public class Mocks {
     );
 
     static Contacts mockContacts = new Contacts("588585",
-            "momkeMaster", "kibutz@yandex.ru");
+            "Monke_master", "igor.streshnev2019@gmail.com");
 
 
     public static Response mockResponse = new Response(
