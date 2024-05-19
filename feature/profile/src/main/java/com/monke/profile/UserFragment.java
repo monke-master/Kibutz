@@ -15,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.navigation.PhotoNavigationContract;
 import com.example.navigation.UserNavigationContract;
 import com.monke.profile.databinding.FragmentUserBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.chips.IdentityChipAdapter;
+import com.monke.ui.photo.PhotoPagerAdapter;
 
 import javax.inject.Inject;
 
@@ -67,11 +69,18 @@ public class UserFragment extends Fragment {
 
     private void observeUser() {
         mViewModel.user.observe(getViewLifecycleOwner(), user -> {
-            Glide
-                .with(getContext())
-                .load(user.getProfile().getPhotosUrl().get(0))
-                .circleCrop()
-                .into(mBinding.image);
+
+            PhotoPagerAdapter photoPagerAdapter = new PhotoPagerAdapter(
+                    user.getProfile().getPhotosUrl(),
+                    getContext(),
+                    com.monke.ui.R.layout.item_user_photo
+            );
+            photoPagerAdapter.setOnPhotoClickedListener(uri -> {
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(PhotoNavigationContract.createDeepLinkRequest(uri));
+            });
+            mBinding.image.setAdapter(photoPagerAdapter);
 
             mBinding.txtName.setText(user.getName());
             mBinding.txtAboutMe.setText(user.getProfile().getBio());

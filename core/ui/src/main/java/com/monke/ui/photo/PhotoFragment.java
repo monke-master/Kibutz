@@ -56,8 +56,8 @@ public class PhotoFragment extends Fragment {
     }
 
     private void getArgs() {
-        String encodedPhoto = getArguments().getString("photo");
-        byte[] photoBytes = Base64.decode(encodedPhoto, Base64.DEFAULT);
+        String encodedPhoto = getArguments().getString(PhotoNavigationContract.PHOTO_URI_KEY);
+        byte[] photoBytes = Base64.decode(encodedPhoto, Base64.URL_SAFE);
         photoUri = new String(photoBytes);
     }
 }

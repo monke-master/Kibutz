@@ -145,7 +145,11 @@ public class RentalFragment extends Fragment {
         mViewModel.rental.observe(getViewLifecycleOwner(), rental -> {
             initResponsesInfo();
 
-            PhotoPagerAdapter photoPagerAdapter = new PhotoPagerAdapter(rental.getPhotos(), getContext());
+            PhotoPagerAdapter photoPagerAdapter = new PhotoPagerAdapter(
+                    rental.getPhotos(),
+                    getContext(),
+                    com.monke.ui.R.layout.item_rental_photo
+            );
             photoPagerAdapter.setOnPhotoClickedListener(uri -> {
                 NavHostFragment
                         .findNavController(this)

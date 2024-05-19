@@ -128,14 +128,16 @@ public class Mocks {
 
     public static Profile mockProfile = new Profile(
             UUID.randomUUID().toString(),
-            List.of("https://sun1-91.userapi.com/s/v1/if1/nlwrIHMavQQQCrtrznR0aqYprdCm6W09-YP8GPiio9QVE1-iziHN6XtYGGeMrHNVHbtR-Bn7.jpg?size=862x862&quality=96&crop=166,0,862,862&ava=1"),
+            List.of("https://sun1-91.userapi.com/s/v1/if1/nlwrIHMavQQQCrtrznR0aqYprdCm6W09-YP8GPiio9QVE1-iziHN6XtYGGeMrHNVHbtR-Bn7.jpg?size=862x862&quality=96&crop=166,0,862,862&ava=1",
+                    "https://sun9-36.userapi.com/impf/c857536/v857536860/25a03/n3vTEiG_bwQ.jpg?size=385x561&quality=96&sign=870af1ba41b41d2010522c1ba13cff54&c_uniq_tag=Z6iPqdSTqRmY4AdTBzwAy1jD47Fz6I9e-6XfVp2pQmE&type=album"),
             "I am Berkoff Man",
             List.of(HAS_ANIMALS)
     );
 
     public static Profile mockProfile2 = new Profile(
             UUID.randomUUID().toString(),
-            List.of("https://content.foto.my.mail.ru/mail/berkow/_myphoto/h-6.jpg"),
+            List.of("https://content.foto.my.mail.ru/mail/berkow/_myphoto/h-6.jpg",
+                    "https://sun9-36.userapi.com/impf/c857536/v857536860/25a03/n3vTEiG_bwQ.jpg?size=385x561&quality=96&sign=870af1ba41b41d2010522c1ba13cff54&c_uniq_tag=Z6iPqdSTqRmY4AdTBzwAy1jD47Fz6I9e-6XfVp2pQmE&type=album"),
             "I am Berkoff Man",
             List.of()
     );

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.monke.ui.R;
 import com.monke.ui.databinding.ItemRentalPhotoBinding;
 
 import java.util.List;
@@ -22,12 +24,14 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
     private List<String> photoUris;
     private Context context;
+    private int layoutId;
     private OnPhotoClickedListener onPhotoClickedListener;
 
 
-    public PhotoPagerAdapter(List<String> photoUris, Context context) {
+    public PhotoPagerAdapter(List<String> photoUris, Context context, int layoutId) {
         this.photoUris = photoUris;
         this.context = context;
+        this.layoutId = layoutId;
     }
 
     public void setOnPhotoClickedListener(OnPhotoClickedListener onPhotoClickedListener) {
@@ -42,19 +46,19 @@ public class PhotoPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        var binding = ItemRentalPhotoBinding.inflate(
-                LayoutInflater.from(context), container, false);
+        var view = LayoutInflater.from(context).inflate(layoutId, container, false);
+
         Glide
             .with(context)
             .load(photoUris.get(position))
             .centerCrop()
-            .into(binding.image);
+            .into((ImageView) view.findViewById(R.id.image));
 
-        binding.getRoot().setOnClickListener(v ->
+        view.setOnClickListener(v ->
                 onPhotoClickedListener.onClicked(photoUris.get(position)));
 
-        container.addView(binding.getRoot());
-        return binding.getRoot();
+        container.addView(view);
+        return view;
     }
 
     @Override

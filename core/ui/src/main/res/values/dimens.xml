@@ -15,7 +15,7 @@
     <dimen name="profile_image_width">100dp</dimen>
 
     <dimen name="creating_rental_photo_size">150dp</dimen>
-    <dimen name="user_picture_size">200dp</dimen>
+    <dimen name="user_picture_size">400dp</dimen>
 
     <dimen name="flatmate_match_pic_height">200dp</dimen>
     <dimen name="flatmate_match_pic_width">150dp</dimen>

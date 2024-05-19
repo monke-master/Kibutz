@@ -26,7 +26,7 @@ public class PhotoNavigationContract {
 
     private static String getUriArg(String photoUri) {
         byte[] bytes = photoUri.getBytes(StandardCharsets.UTF_8);
-        String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+        String encodedString = Base64.encodeToString(bytes, Base64.URL_SAFE);
         return PHOTO_URI_KEY + "=" + encodedString;
     }
 }
