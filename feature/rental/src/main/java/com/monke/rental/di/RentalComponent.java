@@ -16,6 +16,7 @@ import com.monke.rental.newrental.PhotosFragment;
 import com.monke.rental.newrental.PriceFragment;
 import com.monke.rental.newrental.RentalTypeFragment;
 import com.monke.rental.newrental.RoomsFragment;
+import com.monke.rental.newrental.SearchAddressFragment;
 
 import dagger.Component;
 
@@ -33,6 +34,7 @@ public interface RentalComponent {
     void inject(RentalUserListFragment fragment);
     void inject(RentalTypeFragment fragment);
     void inject(AddressFragment fragment);
+    void inject(SearchAddressFragment fragment);
     void inject(RoomsFragment fragment);
     void inject(AreaFragment fragment);
     void inject(FloorFragment fragment);

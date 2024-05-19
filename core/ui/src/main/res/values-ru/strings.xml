@@ -88,6 +88,7 @@
     <string name="response_status_flatmate">Поздравляем! Вы теперь соседи.</string>
     <string name="contact">Связаться</string>
     <string name="call">Позвонить</string>
+    <string name="show_on_map">Указать на карте</string>
 
     <plurals name="rooms">
         <item quantity="one">%s комната</item>

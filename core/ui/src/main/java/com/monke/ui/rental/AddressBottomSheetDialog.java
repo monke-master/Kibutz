@@ -1,8 +1,9 @@
-package com.monke.ui;
+package com.monke.ui.rental;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,8 @@ public class AddressBottomSheetDialog extends BottomSheetDialogFragment {
         var interactor = (AddressDialogInteractor)getParentFragment();
 
         mBinding.btnNext.setOnClickListener(v -> interactor.onNextButtonClicked());
-        mBinding.editTxtDescription.setOnClickListener(v -> interactor.onAddressEditTextClicked());
+        mBinding.editTxtDescription.getEditText().setInputType(InputType.TYPE_NULL);
+        mBinding.editTxtDescription.getEditText().setOnClickListener(v -> interactor.onAddressEditTextClicked());
 
         mBinding.editTxtDescription.getEditText().setText(address);
     }

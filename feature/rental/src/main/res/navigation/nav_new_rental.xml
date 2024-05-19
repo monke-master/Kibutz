@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_addressFragment_to_roomsFragment"
             app:destination="@id/roomsFragment" />
+        <action
+            android:id="@+id/action_addressFragment_to_searchAddressFragment"
+            app:destination="@id/searchAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomsFragment"
@@ -97,5 +100,14 @@
         <action
             android:id="@+id/action_contactsFragment_to_rentalUserListFragment"
             app:destination="@id/rentalUserListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchAddressFragment"
+        android:name="com.monke.rental.newrental.SearchAddressFragment"
+        android:label="fragment_search_address"
+        tools:layout="@layout/fragment_search_address" >
+        <action
+            android:id="@+id/action_searchAddressFragment_to_roomsFragment"
+            app:destination="@id/roomsFragment" />
     </fragment>
 </navigation>

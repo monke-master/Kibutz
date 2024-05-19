@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentAddressBinding;
 import com.monke.rental.di.RentalComponentProvider;
-import com.monke.ui.AddressBottomSheetDialog;
+import com.monke.ui.rental.AddressBottomSheetDialog;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.ScreenPoint;
 import com.yandex.mapkit.map.CameraListener;
@@ -25,7 +24,6 @@ import com.yandex.mapkit.map.CameraUpdateReason;
 import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.map.MapWindow;
 import com.yandex.mapkit.map.PlacemarkMapObject;
-import com.yandex.runtime.image.ImageProvider;
 
 import javax.inject.Inject;
 
@@ -46,7 +44,7 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
                                             @NonNull CameraPosition cameraPosition,
                                             @NonNull CameraUpdateReason cameraUpdateReason,
                                             boolean b) {
-            movePointer();
+            getAddress();
         }
     };
 
@@ -95,26 +93,18 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
         mapWindow = mBinding.mapview.getMapWindow();
         map = mBinding.mapview.getMapWindow().getMap();
         map.addCameraListener(cameraListener);
-        movePointer();
+        getAddress();
 
         observeAddress();
-        showAddressBottomSheet("");
     }
 
 
-    private void movePointer() {
+    private void getAddress() {
         var centerX = mapWindow.width() / 2f;
-        var centerY = mapWindow.height() / 2f;
+        var centerY = mapWindow.height() / 2f + mBinding.imgPointer.getHeight() / 2;
         var centerPoint = new ScreenPoint(centerX, centerY);
         var worldPoint = mapWindow.screenToWorld(centerPoint);
 
-        if (pointer == null) {
-            pointer = map.getMapObjects().addPlacemark(
-                    worldPoint,
-                    ImageProvider.fromResource(getContext(), com.monke.ui.R.drawable.ic_map_pointer));
-        } else {
-            pointer.setGeometry(worldPoint);
-        }
         mViewModel.stopSearchingProcess();
         mViewModel.getAddress(worldPoint);
     }
@@ -144,6 +134,8 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
 
     @Override
     public void onAddressEditTextClicked() {
-
+        NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.action_addressFragment_to_searchAddressFragment);
     }
 }

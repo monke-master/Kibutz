@@ -1,51 +1,48 @@
 package com.example.map;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.monke.data.Result;
+import com.monke.rental.Address;
+import com.yandex.mapkit.geometry.Geometry;
 import com.yandex.mapkit.geometry.Point;
-import com.yandex.mapkit.search.Address;
 import com.yandex.mapkit.search.Response;
 import com.yandex.mapkit.search.SearchManager;
 import com.yandex.mapkit.search.SearchOptions;
 import com.yandex.mapkit.search.Session;
 import com.yandex.runtime.Error;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-public class GetAddressByCoordinatesUseCase {
-
+public class SearchAddressUseCase {
     private SearchManager searchManager;
 
     @Inject
-    public GetAddressByCoordinatesUseCase(SearchManager searchManager) {
+    public SearchAddressUseCase(SearchManager searchManager) {
         this.searchManager = searchManager;
     }
 
-    public LiveData<Result<String>> execute(Point point) {
-        MutableLiveData<Result<String>> result = new MutableLiveData<>();
+    public LiveData<Result<List<Address>>> execute(String query) {
+        MutableLiveData<Result<List<Address>>> result = new MutableLiveData<>();
         searchManager.submit(
-                point,
-                0,
+                query,
+                Geometry.fromPoint(new Point(55, 37)),
                 new SearchOptions(),
                 new Session.SearchListener() {
                     @Override
                     public void onSearchResponse(@NonNull Response response) {
-                        var list = response.getCollection().getChildren();
-                        if (list.isEmpty()) {
-                            result.setValue(new Result.Failure<>(new Exception()));
-                        } else {
-                            var address = list.get(0).getObj().getName();
-                            result.setValue(new Result.Success<>(address));
-                        }
+                        var list = response
+                                .getCollection()
+                                .getChildren()
+                                .stream()
+                                .map(item -> new Address(item.getObj().getName(), item.getObj().getDescriptionText()))
+                                .collect(Collectors.toList());
+                        result.setValue(new Result.Success<>(list));
                     }
 
                     @Override
