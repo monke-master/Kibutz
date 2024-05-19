@@ -157,6 +157,7 @@ public class RentalFragment extends Fragment {
             });
             mBinding.image.setAdapter(photoPagerAdapter);
             mBinding.txtPrice.setText(getString(com.monke.ui.R.string.price_info, rental.getPrice()));
+            mBinding.txtAddress.setText(rental.getRealty().getAddress());
             mBinding.txtDescription.setText(rental.getDescription());
             var info = mBinding.info;
             info.txtRoomCount.setText(
