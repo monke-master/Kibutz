@@ -23,9 +23,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+
+    implementation project(':core:ui')
+    implementation project(':core:navigation')
+    implementation project(':core:di')
+    implementation project(':domain:user')
+    implementation project(':domain:rental')
+    implementation project(':domain:identity')
+    implementation project(':data:user')
+    implementation project(':data:rental')
 
     implementation libs.appcompat
     implementation libs.material
@@ -36,5 +49,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    implementation project(':core:ui')
+    implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
+
 }

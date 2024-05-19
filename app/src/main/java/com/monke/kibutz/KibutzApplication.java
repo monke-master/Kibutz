@@ -3,6 +3,7 @@ package com.monke.kibutz;
 import android.app.Application;
 
 import com.monke.auth.di.AuthComponentProvider;
+import com.monke.main.di.HomeComponentProvider;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.DimensionsHelper;
@@ -23,6 +24,7 @@ public class KibutzApplication extends Application {
         AuthComponentProvider.setDependencies(applicationComponent);
         ProfileComponentProvider.setDependencies(applicationComponent);
         RentalComponentProvider.setDependencies(applicationComponent);
+        HomeComponentProvider.setDependencies(applicationComponent);
         DimensionsHelper.init(this);
     }
 }

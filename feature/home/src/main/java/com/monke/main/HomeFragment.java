@@ -2,6 +2,7 @@ package com.monke.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,24 +13,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.monke.main.databinding.FragmentHomeBinding;
+import com.monke.main.di.HomeComponentProvider;
+
+import javax.inject.Inject;
+
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel mViewModel;
+    @Inject
+    public HomeViewModel.Factory factory;
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    private HomeViewModel mViewModel;
+    private FragmentHomeBinding mBinding;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        HomeComponentProvider.getInstance().inject(this);
+        mViewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-    }
+
+
 
 }
