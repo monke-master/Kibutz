@@ -5,6 +5,7 @@ import com.monke.auth.ui.StartFragment;
 import com.monke.auth.ui.info.UserInfoFragment;
 import com.monke.auth.ui.password.PasswordFragment;
 import com.monke.di.AuthScope;
+import com.monke.firebase.FirebaseModule;
 import com.monke.identity.di.IdentityModule;
 import com.monke.user.di.UserModule;
 
@@ -14,7 +15,8 @@ import dagger.Component;
 
 @Component(
         modules = {
-                IdentityModule.class
+                IdentityModule.class,
+                FirebaseModule.class
         },
         dependencies = AuthComponentDeps.class
 )

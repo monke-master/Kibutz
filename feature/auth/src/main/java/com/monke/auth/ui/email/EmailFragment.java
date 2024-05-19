@@ -71,9 +71,18 @@ public class EmailFragment extends Fragment {
     private void initNextBtn() {
         mBinding.btnNext.setOnClickListener(v -> {
             mViewModel.verifyEmail();
-            NavHostFragment
-                    .findNavController(this)
-                    .navigate(R.id.action_emailFragment_to_passwordFragment);
+            observeConfirmationStatus();
+        });
+    }
+
+    private void observeConfirmationStatus() {
+        mViewModel.emailConfirmed.observe(getViewLifecycleOwner(), confirmed -> {
+            if (confirmed) {
+                mViewModel.saveData();
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(R.id.action_emailFragment_to_passwordFragment);
+            }
         });
     }
 }

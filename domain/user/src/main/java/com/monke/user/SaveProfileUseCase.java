@@ -22,6 +22,6 @@ public class SaveProfileUseCase {
         profile.setBio(bio);
         profile.setPhotosUrl(photos);
         user.setProfile(profile);
-        userRepository.saveUser(user);
+        userRepository.setCurrentUser(user);
     }
 }

@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.monke.user'
+    namespace 'com.monke.firebase'
     compileSdk 34
 
     defaultConfig {
-        minSdk 26
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -26,17 +26,7 @@ android {
 }
 
 dependencies {
-    implementation project(':domain:user')
-    implementation project(':domain:data')
-    implementation project(':core:di')
-    implementation project(':core:firebase')
-    implementation project(':core:utils')
-    implementation project(':domain:identity')
-    implementation project(':domain:rental')
 
-    implementation libs.dagger2
-    implementation project(':data:identity')
-    annotationProcessor libs.dagger.compiler
 
     implementation libs.appcompat
     implementation libs.material
@@ -44,6 +34,9 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
+    implementation platform(libs.firebase.bom)
     implementation libs.firebase.auth
 
+    implementation libs.dagger2
+    annotationProcessor libs.dagger.compiler
 }

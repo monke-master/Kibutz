@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "673342447457",
+    "project_id": "kibutz-ce26b",
+    "storage_bucket": "kibutz-ce26b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673342447457:android:8442aaca1c86d546d3af20",
+        "android_client_info": {
+          "package_name": "com.monke.kibutz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8xYiH0AkL5cGFjwR-o4dee4X9CzeAPGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

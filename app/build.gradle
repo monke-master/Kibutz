@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -45,6 +46,7 @@ dependencies {
     implementation project(':data:user')
     implementation project(':domain:user')
     implementation project(':core:di')
+    implementation project(':core:firebase')
 
     implementation libs.appcompat
     implementation libs.material
@@ -60,4 +62,7 @@ dependencies {
 
     implementation libs.dagger2
     annotationProcessor libs.dagger.compiler
+
+    implementation libs.firebase.auth
+    implementation platform(libs.firebase.bom)
 }

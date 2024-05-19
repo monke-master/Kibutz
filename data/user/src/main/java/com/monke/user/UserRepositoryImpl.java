@@ -5,10 +5,11 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.monke.data.Result;
 import com.monke.di.AppScope;
 
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -17,14 +18,16 @@ import javax.inject.Inject;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
+    private final UserRemoteDataSource remoteDataSource;
 
     private ArrayList<User> users;
 
     @Inject
-    public UserRepositoryImpl(UserCacheDataSource cacheDataSource) {
+    public UserRepositoryImpl(UserCacheDataSource cacheDataSource,
+                              UserRemoteDataSource userRemoteDataSource) {
         this.cacheDataSource = cacheDataSource;
         Log.d("UserRepositoryImpl", "constructor");
-        users = new ArrayList<>(List.of(Mocks.mockUser, Mocks.cockUser));
+        this.remoteDataSource = userRemoteDataSource;
     }
 
     @Override
@@ -55,5 +58,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void signUp() {
         cacheDataSource.saveCurrentUser(cacheDataSource.getCreatingUser());
+    }
+
+    @Override
+    public LiveData<Result<Boolean>> sendConfirmationLetter(String email) {
+        return remoteDataSource.sendConfirmationLetter(email);
     }
 }

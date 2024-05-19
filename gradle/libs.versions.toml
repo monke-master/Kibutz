@@ -1,5 +1,6 @@
 [versions]
 agp = "8.2.2"
+firebase-bom = "33.0.0"
 navigation-fragment = "2.7.7"
 navigation-ui = "2.7.7"
 legacy-support-v4 = "1.0.0"
@@ -20,6 +21,7 @@ appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
 ext-junit = { module = "androidx.test.ext:junit", version = "1.1.5" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 junit = { module = "junit:junit", version = "4.13.2" }
 material = { module = "com.google.android.material:material", version = "1.11.0" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation-fragment" }
@@ -35,6 +37,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 rxjava = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava" }
 fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 glide = {module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+firebase-auth = {module="com.google.firebase:firebase-auth"}
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle-livedata-ktx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 [plugins]

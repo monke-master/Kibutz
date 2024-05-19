@@ -2,6 +2,8 @@ package com.monke.user;
 
 import androidx.lifecycle.LiveData;
 
+import com.monke.data.Result;
+
 import java.util.Optional;
 
 public interface UserRepository {
@@ -17,4 +19,6 @@ public interface UserRepository {
     void setCurrentUser(User user);
 
     void signUp();
+
+    LiveData<Result<Boolean>> sendConfirmationLetter(String email);
 }
