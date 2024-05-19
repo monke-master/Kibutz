@@ -27,6 +27,7 @@ public class AddressViewModel extends ViewModel {
 
 
     private GetAddressByCoordinatesUseCase getAddressByCoordinatesUseCase;
+    private CreateRentalUseCase createRentalUseCase;
     private ExecutorService addressSearchingExecutor;
 
     private MutableLiveData<String> _address = new MutableLiveData<>();
@@ -36,6 +37,7 @@ public class AddressViewModel extends ViewModel {
 
     public AddressViewModel(CreateRentalUseCase createRentalUseCase,
                             GetAddressByCoordinatesUseCase getAddressByCoordinatesUseCase) {
+        this.createRentalUseCase = createRentalUseCase;
         this.getAddressByCoordinatesUseCase = getAddressByCoordinatesUseCase;
     }
 
@@ -58,6 +60,10 @@ public class AddressViewModel extends ViewModel {
         if (addressSearchingExecutor != null) {
             addressSearchingExecutor.shutdownNow();
         }
+    }
+
+    public void saveAddress() {
+        createRentalUseCase.saveAddress(address.getValue());
     }
 
     private void observeAddress(Point point) {

@@ -16,7 +16,7 @@ public class Rental {
     private String description;
     private List<Identity> identityFilters;
     private int maxFlatmatesCount;
-    private List<String> flatmatesIds;
+    private List<String> flatmatesIds = new ArrayList<>();
     private long creationDate;
     private Contacts contacts;
     private List<Response> responses = new ArrayList<>();

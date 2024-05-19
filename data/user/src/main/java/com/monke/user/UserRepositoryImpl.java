@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource) {
         this.cacheDataSource = cacheDataSource;
         Log.d("UserRepositoryImpl", "constructor");
-        users = new ArrayList<>(List.of(Mocks.mockUser));
+        users = new ArrayList<>(List.of(Mocks.mockUser, Mocks.cockUser));
     }
 
     @Override

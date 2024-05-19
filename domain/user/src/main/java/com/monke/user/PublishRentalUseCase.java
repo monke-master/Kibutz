@@ -5,6 +5,7 @@ import com.monke.rental.RentalRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class PublishRentalUseCase {
         Rental rental = rentalRepository.getCreatingRental();
         rental.setAuthorId(user.getId());
         rental.setCreationDate(Calendar.getInstance().getTimeInMillis());
-        rental.getRealty().setAddress("");
+        rental.setFlatmatesIds(List.of(user.getId()));
         rentalRepository.publishRental(rental);
 
         ArrayList<Rental> rentalList = new ArrayList<>(user.getRentals());

@@ -21,9 +21,6 @@ public class GetRentalFlatmatesUseCase {
 
     public List<User> execute(Rental rental) {
         ArrayList<User> users = new ArrayList<>();
-        User author = getUserByIdUseCase.execute(rental.getAuthorId()).orElse(null);
-        if (author == null) return users;
-        users.add(author);
 
         for (String id: rental.getFlatmatesIds()) {
             getUserByIdUseCase.execute(id).ifPresent(users::add);

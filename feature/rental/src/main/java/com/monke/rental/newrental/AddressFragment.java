@@ -1,29 +1,24 @@
 package com.monke.rental.newrental;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentAddressBinding;
 import com.monke.rental.di.RentalComponentProvider;
+import com.monke.ui.AddressBottomSheetDialog;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.ScreenPoint;
-import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.map.CameraUpdateReason;
@@ -34,7 +29,7 @@ import com.yandex.runtime.image.ImageProvider;
 
 import javax.inject.Inject;
 
-public class AddressFragment extends Fragment {
+public class AddressFragment extends Fragment implements AddressBottomSheetDialog.AddressDialogInteractor {
 
     @Inject
     public AddressViewModel.Factory factory;
@@ -43,6 +38,7 @@ public class AddressFragment extends Fragment {
     private FragmentAddressBinding mBinding;
     private Map map;
     private MapWindow mapWindow;
+    private AddressBottomSheetDialog mDialog;
 
     private CameraListener cameraListener = new CameraListener() {
         @Override
@@ -82,11 +78,6 @@ public class AddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
-//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
-//        bottomSheetDialog.setContentView(R.layout.layout_address_bottom_sheet);
-//        bottomSheetDialog.setCancelable(false);
-//        bottomSheetDialog.show();
-//        NavHostFragment.findNavController(this).navigate(R.id.action_addressFragment_to_roomsFragment);
     }
 
     private void initToolbar() {
@@ -107,7 +98,7 @@ public class AddressFragment extends Fragment {
         movePointer();
 
         observeAddress();
-
+        showAddressBottomSheet("");
     }
 
 
@@ -130,9 +121,29 @@ public class AddressFragment extends Fragment {
 
     private void observeAddress() {
         mViewModel.address.observe(getViewLifecycleOwner(), address -> {
-            Toast.makeText(getContext(), address, Toast.LENGTH_SHORT).show();
+            showAddressBottomSheet(address);
         });
     }
 
+    private void showAddressBottomSheet(String address) {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
 
+        mDialog = AddressBottomSheetDialog.newInstance(address);
+        mDialog.show(getChildFragmentManager(), AddressBottomSheetDialog.TAG);
+    }
+
+    @Override
+    public void onNextButtonClicked() {
+        mViewModel.saveAddress();
+        NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.action_addressFragment_to_roomsFragment);
+    }
+
+    @Override
+    public void onAddressEditTextClicked() {
+
+    }
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject;
 @AppScope
 public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
-    private MutableLiveData<User> currentUser = new MutableLiveData<>(Mocks.cockUser);
+    private MutableLiveData<User> currentUser = new MutableLiveData<>(Mocks.mockUser);
     private User creatingUser = null;
 
     @Inject

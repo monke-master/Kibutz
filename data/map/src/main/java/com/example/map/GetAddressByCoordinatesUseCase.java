@@ -40,8 +40,13 @@ public class GetAddressByCoordinatesUseCase {
                 new Session.SearchListener() {
                     @Override
                     public void onSearchResponse(@NonNull Response response) {
-                        var address = response.getCollection().getChildren().get(0).getObj().getName();
-                        result.setValue(new Result.Success<>(address));
+                        var list = response.getCollection().getChildren();
+                        if (list.isEmpty()) {
+                            result.setValue(new Result.Failure<>(new Exception()));
+                        } else {
+                            var address = list.get(0).getObj().getName();
+                            result.setValue(new Result.Success<>(address));
+                        }
                     }
 
                     @Override

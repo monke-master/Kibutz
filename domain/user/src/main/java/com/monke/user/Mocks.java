@@ -49,7 +49,7 @@ public class Mocks {
             "Das ist KIbutz!",
             Collections.emptyList(),
             5,
-            Collections.emptyList(),
+            List.of(userId),
             100505050,
             mockContacts,
             List.of(mockResponse)
