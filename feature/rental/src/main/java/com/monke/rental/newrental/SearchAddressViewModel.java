@@ -29,6 +29,8 @@ public class SearchAddressViewModel extends ViewModel {
     private ExecutorService executorService;
     private final long SEARCHING_DELAY = 1000l;
 
+    private String query;
+
     public SearchAddressViewModel(CreateRentalUseCase createRentalUseCase,
                                   SearchAddressUseCase searchAddressUseCase) {
         this.createRentalUseCase = createRentalUseCase;
@@ -36,6 +38,7 @@ public class SearchAddressViewModel extends ViewModel {
     }
 
     public void searchAddress(String query) {
+        setQuery(query);
         if (executorService != null) {
             executorService.shutdownNow();
         }
@@ -61,6 +64,14 @@ public class SearchAddressViewModel extends ViewModel {
                 _result.setValue(result.get());
             }
         });
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     public static class Factory implements ViewModelProvider.Factory {

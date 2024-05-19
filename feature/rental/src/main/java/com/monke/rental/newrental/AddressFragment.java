@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.navigation.SearchAddressNavigationContract;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentAddressBinding;
 import com.monke.rental.di.RentalComponentProvider;
@@ -134,8 +135,10 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
 
     @Override
     public void onAddressEditTextClicked() {
+        Bundle bundle = new Bundle();
+        bundle.putString(SearchAddressNavigationContract.ADDRESS_KEY, mViewModel.address.getValue());
         NavHostFragment
                 .findNavController(this)
-                .navigate(R.id.action_addressFragment_to_searchAddressFragment);
+                .navigate(R.id.action_addressFragment_to_searchAddressFragment, bundle);
     }
 }

@@ -51,9 +51,16 @@ public class SearchAddressFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initToolbar();
         initRecyclerView();
         initEditText();
         observeResult();
+        initMapBtn();
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp());
     }
 
     private void initRecyclerView() {
@@ -78,11 +85,18 @@ public class SearchAddressFragment extends Fragment {
     }
 
     private void initEditText() {
+        mBinding.editTxtQuery.getEditText().setText(mViewModel.getQuery());
         mBinding.editTxtQuery.getEditText().addTextChangedListener(new TextChangedListener() {
             @Override
             public void onTextChanged(Editable s) {
                 mViewModel.searchAddress(s.toString());
             }
+        });
+    }
+
+    private void initMapBtn() {
+        mBinding.btnMap.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this).navigateUp();
         });
     }
 
