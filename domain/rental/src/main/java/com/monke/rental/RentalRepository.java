@@ -1,6 +1,6 @@
 package com.monke.rental;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface RentalRepository {
 
@@ -13,4 +13,6 @@ public interface RentalRepository {
     void updateRental(Rental rental);
 
     Rental getRentalById(String id);
+
+    List<Rental> getRentals();
 }

@@ -64,6 +64,5 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
 
     private void bindFlatInfo(Flat flat) {
         mBinding.txtFloor.setText(context.getString(R.string.floors_info, flat.getFloor(), flat.getFloorsCount()));
-
     }
 }

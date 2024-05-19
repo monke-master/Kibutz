@@ -9,15 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.monke.rental.Rental;
 import com.monke.ui.databinding.ItemRentalBinding;
+import com.monke.ui.databinding.ItemRentalSmallBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RentalRWAdapter extends RecyclerView.Adapter<RentalViewHolder> {
+public class RentalRWAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    public enum Type {
+        DEFAULT, SMALL
+    }
+
+    private final int DEFAULT = 0;
+    private final int SMALL = 1;
 
     private List<Rental> rentalList = new ArrayList<>();
     private RentalViewHolder.OnItemClickListener onItemClickListener;
     private boolean showRespondBtn = true;
+    private Type type = Type.DEFAULT;
 
     public void setOnItemClickListener(RentalViewHolder.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -27,16 +36,40 @@ public class RentalRWAdapter extends RecyclerView.Adapter<RentalViewHolder> {
         this.showRespondBtn = showRespondBtn;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     @NonNull
     @Override
-    public RentalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        var binding = ItemRentalBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new RentalViewHolder(binding);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == DEFAULT) {
+            var binding = ItemRentalBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new RentalViewHolder(binding);
+        }
+        var binding = ItemRentalSmallBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new SmallRentalViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RentalViewHolder holder, int position) {
-        holder.bind(rentalList.get(position),showRespondBtn, onItemClickListener);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType() == DEFAULT) {
+            ((RentalViewHolder)holder).bind(rentalList.get(position), showRespondBtn, onItemClickListener);
+        }
+        ((SmallRentalViewHolder)holder).bind(rentalList.get(position), onItemClickListener);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        switch (type) {
+            case DEFAULT -> {
+                return DEFAULT;
+            }
+            case SMALL -> {
+                return SMALL;
+            }
+        }
+        return super.getItemViewType(position);
     }
 
     @Override

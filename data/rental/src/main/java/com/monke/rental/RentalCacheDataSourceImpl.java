@@ -2,11 +2,12 @@ package com.monke.rental;
 
 import android.util.Log;
 
+import com.monke.di.AppScope;
 import com.monke.di.RentalScope;
 
 import javax.inject.Inject;
 
-@RentalScope
+@AppScope
 public class RentalCacheDataSourceImpl implements RentalCacheDataSource {
 
     private Rental creatingRental = null;

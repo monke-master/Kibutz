@@ -1,6 +1,7 @@
 package com.monke.rental.di;
 
 import com.example.map.MapModule;
+import com.monke.di.AppScope;
 import com.monke.di.RentalScope;
 import com.monke.rental.RentalFragment;
 import com.monke.rental.RentalModule;
@@ -27,7 +28,7 @@ import dagger.Component;
         },
         dependencies = RentalComponentDeps.class
 )
-@RentalScope
+@AppScope
 public interface RentalComponent {
 
     void inject(RentalFragment fragment);

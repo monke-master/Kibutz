@@ -75,8 +75,8 @@
     <androidx.constraintlayout.widget.Group
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="btn_fill, txt_warning"
-        tools:visibility="gone" />
+        android:visibility="gone"
+        app:constraint_referenced_ids="btn_fill, txt_warning" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_rental"

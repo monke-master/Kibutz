@@ -2,6 +2,7 @@ package com.monke.rental;
 
 import android.util.Log;
 
+import com.monke.di.AppScope;
 import com.monke.di.RentalScope;
 import com.monke.user.Mocks;
 
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-@RentalScope
+@AppScope
 public class RentalRepositoryImpl implements RentalRepository {
 
     private final String TAG = "RentalRepositoryImpl";
@@ -23,6 +24,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     public RentalRepositoryImpl(RentalCacheDataSource cacheSource) {
         this.cacheSource = cacheSource;
         rentals.add(Mocks.mockRental);
+        rentals.add(Mocks.mockRental2);
     }
 
     @Override
@@ -48,5 +50,10 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public Rental getRentalById(String id) {
         return rentals.stream().filter(rental -> rental.getId().equals(id)).collect(Collectors.toList()).get(0);
+    }
+
+    @Override
+    public ArrayList<Rental> getRentals() {
+        return rentals;
     }
 }
