@@ -94,7 +94,12 @@ public class Mocks {
     public static Rental mockRental = new Rental(
             rentalId,
             userId,
-            List.of("https://avatars.dzeninfra.ru/get-zen_doc/1907561/pub_5ee2a8cdb0200314ab97f3bc_5ffb0e76d1a90641ca0bf85b/scale_1200"),
+            List.of("https://avatars.dzeninfra.ru/get-zen_doc/1907561/pub_5ee2a8cdb0200314ab97f3bc_5ffb0e76d1a90641ca0bf85b/scale_1200",
+                    "https://avatars.mds.yandex.net/get-altay/2425845/2a00000173ff1e175ff73936f1d545d549c0/XXL",
+                    "https://avatars.mds.yandex.net/get-altay/2094876/2a0000016c004f3b140cc297cb6c59645f42/XXL",
+                    "https://avatars.dzeninfra.ru/get-zen_doc/1907561/pub_5ee2a8cdb0200314ab97f3bc_5ffb0e76d1a90641ca0bf85b/scale_1200",
+                    "https://avatars.mds.yandex.net/get-altay/2425845/2a00000173ff1e175ff73936f1d545d549c0/XXL",
+                    "https://avatars.mds.yandex.net/get-altay/2094876/2a0000016c004f3b140cc297cb6c59645f42/XXL"),
             100500,
             mockFlat,
             "Das ist KIbutz!",

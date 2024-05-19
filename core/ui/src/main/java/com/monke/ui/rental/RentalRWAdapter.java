@@ -55,8 +55,9 @@ public class RentalRWAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == DEFAULT) {
             ((RentalViewHolder)holder).bind(rentalList.get(position), showRespondBtn, onItemClickListener);
+        } else {
+            ((SmallRentalViewHolder)holder).bind(rentalList.get(position), onItemClickListener);
         }
-        ((SmallRentalViewHolder)holder).bind(rentalList.get(position), onItemClickListener);
     }
 
     @Override

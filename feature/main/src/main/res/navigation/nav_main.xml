@@ -31,4 +31,17 @@
 
     <include app:graph="@navigation/nav_rental"/>
 
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.monke.ui.photo.PhotoFragment"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo">
+
+        <deepLink app:uri="kibutz://com.monke.ui.photo/photo/photo={photo}"/>
+
+        <argument
+            android:name="photo"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

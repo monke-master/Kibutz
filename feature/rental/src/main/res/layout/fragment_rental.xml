@@ -38,15 +38,14 @@
                 android:layout_marginHorizontal="16dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/image"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/rental_image_size"
-                android:layout_marginHorizontal="16dp"
+                android:layout_height="@dimen/rental_image_height"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/responses"
-                tools:src="@drawable/ic_kibutz_logo" />
+                tools:src="@drawable/ic_kibutz_logo"/>
 
             <TextView
                 android:id="@+id/txt_price"

@@ -19,4 +19,7 @@
 
     <dimen name="flatmate_match_pic_height">200dp</dimen>
     <dimen name="flatmate_match_pic_width">150dp</dimen>
+
+    <dimen name="rental_image_height">250dp</dimen>
+    <dimen name="rental_big_image_height">400dp</dimen>
 </resources>

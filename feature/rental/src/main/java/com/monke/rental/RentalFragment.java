@@ -15,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.navigation.ContactsNavigationContract;
+import com.example.navigation.PhotoNavigationContract;
 import com.example.navigation.RentalNavigationContract;
 import com.example.navigation.ResponsesNavigationContract;
 import com.example.navigation.UserNavigationContract;
 import com.monke.rental.databinding.FragmentRentalBinding;
 import com.monke.rental.di.RentalComponentProvider;
+import com.monke.ui.photo.PhotoPagerAdapter;
 import com.monke.ui.rental.RealtyUiHelpers;
 import com.monke.ui.user.FlatmateRWAdapter;
 import com.monke.ui.rental.RealtyDetailRWAdapter;
@@ -142,11 +144,14 @@ public class RentalFragment extends Fragment {
     private void observeRental() {
         mViewModel.rental.observe(getViewLifecycleOwner(), rental -> {
             initResponsesInfo();
-            Glide
-                .with(getContext())
-                .load(rental.getPhotos().get(0))
-                .centerCrop()
-                .into(mBinding.image);
+
+            PhotoPagerAdapter photoPagerAdapter = new PhotoPagerAdapter(rental.getPhotos(), getContext());
+            photoPagerAdapter.setOnPhotoClickedListener(uri -> {
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(PhotoNavigationContract.createDeepLinkRequest(uri));
+            });
+            mBinding.image.setAdapter(photoPagerAdapter);
             mBinding.txtPrice.setText(getString(com.monke.ui.R.string.price_info, rental.getPrice()));
             mBinding.txtDescription.setText(rental.getDescription());
             var info = mBinding.info;

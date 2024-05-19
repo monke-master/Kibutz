@@ -33,6 +33,7 @@ dependencies {
 
     implementation project(':domain:identity')
     implementation project(':domain:user')
+    implementation project(':core:navigation')
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
@@ -42,4 +43,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation libs.glide
+    implementation libs.navigation.fragment
 }
