@@ -2,6 +2,18 @@ package com.monke.data;
 
 public sealed abstract class Result<T> {
 
+    public boolean isSuccess() {
+        return this instanceof Result.Success<T>;
+    }
+
+    public boolean isFailure() {
+        return this instanceof Result.Failure<T>;
+    }
+
+    public T get() {
+        return ((Success<T>)this).getData();
+    }
+
     public static final class Failure<T> extends Result<T> {
         private final Exception exception;
 

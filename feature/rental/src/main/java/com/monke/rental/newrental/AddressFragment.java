@@ -1,5 +1,6 @@
 package com.monke.rental.newrental;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.monke.rental.R;
@@ -80,10 +82,10 @@ public class AddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
-        bottomSheetDialog.setContentView(R.layout.layout_address_bottom_sheet);
-        bottomSheetDialog.setCancelable(false);
-        bottomSheetDialog.show();
+//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+//        bottomSheetDialog.setContentView(R.layout.layout_address_bottom_sheet);
+//        bottomSheetDialog.setCancelable(false);
+//        bottomSheetDialog.show();
 //        NavHostFragment.findNavController(this).navigate(R.id.action_addressFragment_to_roomsFragment);
     }
 
@@ -104,12 +106,10 @@ public class AddressFragment extends Fragment {
         map.addCameraListener(cameraListener);
         movePointer();
 
-        var centerX = mapWindow.width() / 2f;
-        var centerY = mapWindow.height() / 2f;
-        var centerPoint = new ScreenPoint(centerX, centerY);
-        var worldPoint = mapWindow.screenToWorld(centerPoint);
-        mViewModel.getAddress(worldPoint);
+        observeAddress();
+
     }
+
 
     private void movePointer() {
         var centerX = mapWindow.width() / 2f;
@@ -124,7 +124,14 @@ public class AddressFragment extends Fragment {
         } else {
             pointer.setGeometry(worldPoint);
         }
+        mViewModel.stopSearchingProcess();
+        mViewModel.getAddress(worldPoint);
+    }
 
+    private void observeAddress() {
+        mViewModel.address.observe(getViewLifecycleOwner(), address -> {
+            Toast.makeText(getContext(), address, Toast.LENGTH_SHORT).show();
+        });
     }
 
 
