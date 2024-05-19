@@ -72,6 +72,8 @@ public class EmailFragment extends Fragment {
         mBinding.btnNext.setOnClickListener(v -> {
             mViewModel.verifyEmail();
             observeConfirmationStatus();
+            var dialog = new EmailConfirmationDialog();
+            dialog.show(getChildFragmentManager(), "EmailConfirmationDialog");
         });
     }
 

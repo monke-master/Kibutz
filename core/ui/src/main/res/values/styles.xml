@@ -87,4 +87,8 @@
         <item name="android:paddingVertical">@dimen/button_padding</item>
     </style>
 
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
 </resources>

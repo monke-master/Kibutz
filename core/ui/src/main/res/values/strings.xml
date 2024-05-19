@@ -88,6 +88,9 @@
     <string name="contact">Связаться</string>
     <string name="call">Позвонить</string>
     <string name="show_on_map">Указать на карте</string>
+    <string name="waiting_for_confirmation">Ожидание подтверждения</string>
+    <string name="cancel">Отмена</string>
+
 
     <string-array name="genders">
         <item>Мужской</item>
