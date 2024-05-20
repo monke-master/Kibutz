@@ -14,13 +14,10 @@ import javax.inject.Inject;
 public class GetRentalFlatmatesUseCase {
 
     private final UserRepository userRepository;
-    private final GetUserByIdUseCase getUserByIdUseCase;
 
     @Inject
-    public GetRentalFlatmatesUseCase(UserRepository userRepository,
-                                     GetUserByIdUseCase getUserByIdUseCase) {
+    public GetRentalFlatmatesUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.getUserByIdUseCase = getUserByIdUseCase;
     }
 
     public LiveData<Result<List<User>>> execute(Rental rental) {

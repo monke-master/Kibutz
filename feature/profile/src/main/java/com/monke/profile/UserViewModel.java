@@ -24,7 +24,11 @@ public class UserViewModel extends ViewModel {
     }
 
     public void init(String userId) {
-        getUserByIdUseCase.execute(userId).ifPresent(_user::setValue);
+        getUserByIdUseCase.execute(userId).observeForever(userResult -> {
+            if (userResult.isSuccess()) {
+                _user.setValue(userResult.get());
+            }
+        });
     }
 
     public static class Factory implements ViewModelProvider.Factory {
