@@ -13,6 +13,7 @@ import com.monke.rental.GetRentalByIdUseCase;
 import com.monke.rental.Rental;
 import com.monke.rental.Response;
 import com.monke.user.GetCurrentUserUseCase;
+import com.monke.user.GetUserRentalByIdUseCase;
 import com.monke.user.User;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import javax.inject.Inject;
 public class ProfileViewModel extends ViewModel {
 
     private GetCurrentUserUseCase getCurrentUserUseCase;
-    private GetRentalByIdUseCase getRentalByIdUseCase;
+    private GetUserRentalByIdUseCase getRentalByIdUseCase;
 
     private MutableLiveData<User> _user = new MutableLiveData<>();
     public LiveData<User> user = _user;
@@ -36,7 +37,7 @@ public class ProfileViewModel extends ViewModel {
 
     @Inject
     public ProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
-                            GetRentalByIdUseCase getRentalByIdUseCase) {
+                            GetUserRentalByIdUseCase getRentalByIdUseCase) {
         this.getCurrentUserUseCase = getCurrentUserUseCase;
         this.getRentalByIdUseCase = getRentalByIdUseCase;
     }
@@ -63,11 +64,11 @@ public class ProfileViewModel extends ViewModel {
     public static class Factory implements ViewModelProvider.Factory {
 
        private final GetCurrentUserUseCase getCurrentUserUseCase;
-       private final GetRentalByIdUseCase getRentalByIdUseCase;
+       private final GetUserRentalByIdUseCase getRentalByIdUseCase;
 
         @Inject
         public Factory(GetCurrentUserUseCase getCurrentUserUseCase,
-                       GetRentalByIdUseCase getRentalByIdUseCase) {
+                       GetUserRentalByIdUseCase getRentalByIdUseCase) {
             this.getCurrentUserUseCase = getCurrentUserUseCase;
             this.getRentalByIdUseCase = getRentalByIdUseCase;
         }

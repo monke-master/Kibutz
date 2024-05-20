@@ -14,6 +14,7 @@ import dagger.Component;
 @Component(
         modules = {
                 IdentityModule.class,
+                RemoteModule.class,
                 RemoteModule.class
         },
         dependencies = AuthComponentDeps.class

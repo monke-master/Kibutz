@@ -40,9 +40,7 @@ public class PublishRentalUseCase {
             rentalList.add(rental);
             user.setRentals(rentalList);
 
-            userRepository.setCurrentUser(user);
-
-            result.setValue(new Result.Success<>());
+            userRepository.setCurrentUser(user).observeForever(result::setValue);
         });
 
         return result;

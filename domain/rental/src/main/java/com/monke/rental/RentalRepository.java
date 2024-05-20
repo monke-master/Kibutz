@@ -2,6 +2,7 @@ package com.monke.rental;
 
 import androidx.lifecycle.LiveData;
 
+import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 
 import java.util.List;
@@ -16,7 +17,13 @@ public interface RentalRepository {
 
     void updateRental(Rental rental);
 
-    Rental getRentalById(String id);
+    LiveData<Result<Rental>> getRentalById(String id);
 
     List<Rental> getRentals();
+
+    LiveData<Result<List<Rental>>> getUserRentals(List<String> rentalIds);
+
+    void getRentalById(String id, OnCompleteListener<Result<Rental>> listener);
+
+
 }

@@ -19,11 +19,11 @@ public class RemoveResponseUseCase {
     }
 
     public void execute(Response response) {
-        Rental rental = rentalRepository.getRentalById(response.getRentalId());
-        List<Response> rentalResponses = new ArrayList<>(rental.getResponses());
-        rentalResponses.remove(response);
-        rental.setResponses(rentalResponses);
-
-        rentalRepository.updateRental(rental);
+//        Rental rental = rentalRepository.getRentalById(response.getRentalId());
+//        List<Response> rentalResponses = new ArrayList<>(rental.getResponses());
+//        rentalResponses.remove(response);
+//        rental.setResponses(rentalResponses);
+//
+//        rentalRepository.updateRental(rental);
     }
  }

@@ -58,7 +58,6 @@ public class RentalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initToolbar();
-        initResponsesInfo();
         initFlatmateAdapter();
         initDetailsAdapter();
         observeRental();

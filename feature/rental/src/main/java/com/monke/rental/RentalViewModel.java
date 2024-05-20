@@ -46,8 +46,18 @@ public class RentalViewModel extends ViewModel {
     }
 
     private void init(String rentalId) {
-        _rental.setValue(getRentalByIdUseCase.execute(rentalId));
-        _flatmates.setValue(getRentalFlatmatesUseCase.execute(_rental.getValue()));
+        getRentalByIdUseCase.execute(rentalId).observeForever(rentalResult -> {
+            if (rentalResult.isSuccess()) {
+                _rental.setValue(rentalResult.get());
+                getRentalFlatmatesUseCase.execute(_rental.getValue()).observeForever(flatmatesRes -> {
+                    if (flatmatesRes.isSuccess()) {
+                        _flatmates.setValue(flatmatesRes.get());
+                    }
+                });
+
+            }
+        });
+
     }
 
     public void respondToRental() {

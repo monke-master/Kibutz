@@ -8,7 +8,9 @@ import java.util.Optional;
 
 public interface UserRepository {
 
-    Optional<User> getUserById(String id);
+    Optional<User> getLocalUserById(String id);
+
+    LiveData<Result<User>> getUserById(String id);
 
     void setCreatingUser(User user);
 
@@ -16,12 +18,14 @@ public interface UserRepository {
 
     LiveData<User> getCurrentUser();
 
-    void setCurrentUser(User user);
+    LiveData<Result<?>> setCurrentUser(User user);
 
     LiveData<Result<Boolean>> sendConfirmationLetter(String email);
 
     LiveData<Result<?>> signUp();
 
     LiveData<Result<?>> signIn(String email, String password);
+
+    void updateLocalUserData(User user);
 
 }

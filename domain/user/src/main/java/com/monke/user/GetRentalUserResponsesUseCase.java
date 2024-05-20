@@ -22,7 +22,7 @@ public class GetRentalUserResponsesUseCase {
     public List<Pair<Response, User>> execute(Rental rental) {
         ArrayList<Pair<Response, User>> result = new ArrayList<>();
         for (Response response: rental.getResponses()) {
-            userRepository.getUserById(response.getUserId()).ifPresent(user ->
+            userRepository.getLocalUserById(response.getUserId()).ifPresent(user ->
                     result.add(new Pair<>(response, user)));
         }
         return result;

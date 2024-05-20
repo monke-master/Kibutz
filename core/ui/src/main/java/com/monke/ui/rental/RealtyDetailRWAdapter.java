@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.monke.ui.databinding.ItemDetailsBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RealtyDetailRWAdapter extends RecyclerView.Adapter<RealtyDetailRWAdapter.RealtyDetailViewHolder> {
 
-    private List<RealtyDetail> detailList;
+    private List<RealtyDetail> detailList = new ArrayList<>();
 
     public void setDetailList(List<RealtyDetail> detailList) {
         this.detailList = detailList;

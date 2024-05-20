@@ -14,6 +14,6 @@ public class GetUserByIdUseCase {
     }
 
     public Optional<User> execute(String id) {
-        return userRepository.getUserById(id);
+        return userRepository.getLocalUserById(id);
     }
 }

@@ -18,11 +18,6 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
     @Inject
     public RentalRemoteDataSourceImpl(FirebaseFirestore firestore) {
         this.firestore = firestore;
-        publishRental(new RentalRemote(Mocks.mockRental), result -> {
-            getRentalById(Mocks.mockRental.getId(), result1 -> {
-                Log.d("RentalRemoteDataSourceImpl",  result1.get().toDomain().toString());
-            });
-        });
     }
 
     @Override

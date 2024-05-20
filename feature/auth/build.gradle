@@ -32,8 +32,10 @@ dependencies {
 
     implementation project(':domain:user')
     implementation project(':domain:identity')
+    implementation project(':domain:rental')
     implementation project(':data:user')
     implementation project(':data:identity')
+    implementation project(':data:rental')
     implementation project(':core:ui')
     implementation project(':core:remote')
     implementation project(':domain:data')

@@ -126,4 +126,16 @@ public class User {
                 ", rentals=" + rentals +
                 '}';
     }
+
+    public User clone() {
+        return new User(
+                id,
+                name,
+                email,
+                dateOfBirth,
+                new ArrayList<>(responses),
+                profile.clone(),
+                new ArrayList<>(rentals)
+        );
+    }
 }

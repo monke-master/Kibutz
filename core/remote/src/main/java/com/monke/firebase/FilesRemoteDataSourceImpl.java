@@ -38,7 +38,14 @@ public class FilesRemoteDataSourceImpl implements FilesRemoteDataSource {
     @Override
     public void getFileDownloadUrl(String path, OnCompleteListener<Result<String>> onCompleteListener) {
         ThreadUtils.runOnBackground(() -> {
-
+            var ref = storage.getReference(path);
+            ref.getDownloadUrl().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    onCompleteListener.onComplete(new Result.Success<>(task.getResult().toString()));
+                } else {
+                    onCompleteListener.onComplete(new Result.Failure<>(task.getException()));
+                }
+            });
         });
     }
 

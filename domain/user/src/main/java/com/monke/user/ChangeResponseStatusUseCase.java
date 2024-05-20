@@ -1,6 +1,5 @@
 package com.monke.user;
 
-import com.monke.rental.Rental;
 import com.monke.rental.RentalRepository;
 import com.monke.rental.Response;
 
@@ -22,13 +21,13 @@ public class ChangeResponseStatusUseCase {
     }
 
     public Response execute(Response response, Response.Status newStatus) {
-        User user = userRepository.getUserById(response.getUserId()).get();
+        User user = userRepository.getLocalUserById(response.getUserId()).get();
         List<Response> userResponses = new ArrayList<>(user.getResponses());
         userResponses.remove(response);
 
-        Rental rental = rentalRepository.getRentalById(response.getRentalId());
-        List<Response> rentalResponses = new ArrayList<>(rental.getResponses());
-        rentalResponses.remove(response);
+//        Rental rental = rentalRepository.getRentalById(response.getRentalId());
+//        List<Response> rentalResponses = new ArrayList<>(rental.getResponses());
+//        rentalResponses.remove(response);
 
         Response newResponse = new Response(response);
         newResponse.setStatus(newStatus);
@@ -36,11 +35,11 @@ public class ChangeResponseStatusUseCase {
         userResponses.add(newResponse);
         user.setResponses(userResponses);
 
-        rentalResponses.add(newResponse);
-        rental.setResponses(rentalResponses);
+//        rentalResponses.add(newResponse);
+//        rental.setResponses(rentalResponses);
 
         userRepository.setCreatingUser(user);
-        rentalRepository.updateRental(rental);
+        // rentalRepository.updateRental(rental);
         return newResponse;
     }
 }

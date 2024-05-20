@@ -1,5 +1,9 @@
 package com.monke.rental;
 
+import androidx.lifecycle.LiveData;
+
+import com.monke.data.Result;
+
 import javax.inject.Inject;
 
 public class GetRentalByIdUseCase {
@@ -11,7 +15,7 @@ public class GetRentalByIdUseCase {
         this.rentalRepository = rentalRepository;
     }
 
-    public Rental execute(String id) {
+    public LiveData<Result<Rental>> execute(String id) {
         return rentalRepository.getRentalById(id);
     }
 }

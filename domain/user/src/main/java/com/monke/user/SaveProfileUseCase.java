@@ -1,5 +1,8 @@
 package com.monke.user;
 
+import androidx.lifecycle.LiveData;
+
+import com.monke.data.Result;
 import com.monke.identity.Identity;
 
 import java.util.List;
@@ -15,13 +18,13 @@ public class SaveProfileUseCase {
         this.userRepository = userRepository;
     }
 
-    public void execute(String bio, List<Identity> identities, List<String> photos) {
-        User user = userRepository.getCurrentUser().getValue();
+    public LiveData<Result<?>> execute(String bio, List<Identity> identities, List<String> photos) {
+        User user = userRepository.getCurrentUser().getValue().clone();
         Profile profile = user.getProfile();
         profile.setIdentities(identities);
         profile.setBio(bio);
         profile.setPhotosUrl(photos);
         user.setProfile(profile);
-        userRepository.setCurrentUser(user);
+        return userRepository.setCurrentUser(user);
     }
 }

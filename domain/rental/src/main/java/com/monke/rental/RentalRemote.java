@@ -40,7 +40,7 @@ public class RentalRemote {
         this.responsesIds = rental.getResponses().stream().map(Response::getResponseId).collect(Collectors.toList());
     }
 
-    public Rental toDomain()  {
+    public Rental toDomain(List<Identity> identities)  {
         return new Rental(
                 id,
                 authorId,
@@ -48,7 +48,7 @@ public class RentalRemote {
                 price,
                 realty.toDomain(),
                 description,
-                List.of(),
+                identities,
                 maxFlatmatesCount,
                 flatmatesIds,
                 creationDate,

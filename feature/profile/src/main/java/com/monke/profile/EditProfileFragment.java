@@ -3,6 +3,7 @@ package com.monke.profile;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.navigation.PickIdentitiesNavigationContract;
 import com.monke.identity.Identity;
@@ -26,6 +28,7 @@ import com.monke.profile.databinding.FragmentEditProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.DimensionsHelper;
 import com.monke.ui.chips.IdentityChipAdapter;
+import com.monke.ui.dialogs.LoadingDialog;
 import com.monke.ui.photo.PhotoRWAdapter;
 import com.monke.ui.TextChangedListener;
 
@@ -41,6 +44,7 @@ public class EditProfileFragment extends Fragment {
     private FragmentEditProfileBinding mBinding;
     private IdentityChipAdapter mIdentityChipAdapter;
     private PhotoRWAdapter mPictureAdapter;
+    private DialogFragment loadingDialog;
 
     private ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -81,6 +85,7 @@ public class EditProfileFragment extends Fragment {
         initPhotosRecyclerView();
         initSaveButton();
         observePhotos();
+        observeUiStatusState();
     }
 
     private void setFragmentResultListener() {
@@ -154,13 +159,26 @@ public class EditProfileFragment extends Fragment {
     private void initSaveButton() {
         mBinding.btnSave.setOnClickListener(v -> {
             mViewModel.save();
-            NavHostFragment.findNavController(this).navigateUp();
+            loadingDialog = new LoadingDialog();
+            loadingDialog.show(getChildFragmentManager(), LoadingDialog.TAG);
         });
     }
 
     private void observePhotos() {
         mViewModel.photos.observe(getViewLifecycleOwner(), photos -> {
             mPictureAdapter.setPhotoUris(photos);
+        });
+    }
+
+    private void observeUiStatusState() {
+        mViewModel.getUiStatusState().observe(getViewLifecycleOwner(), uiStatusState -> {
+            if (uiStatusState.isSuccess()) {
+                NavHostFragment.findNavController(this).navigateUp();
+
+            } else if (uiStatusState.isFailure()){
+                loadingDialog.dismiss();
+                Toast.makeText(getContext(), uiStatusState.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

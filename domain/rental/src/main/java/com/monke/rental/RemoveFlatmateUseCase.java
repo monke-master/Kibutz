@@ -15,11 +15,11 @@ public class RemoveFlatmateUseCase {
     }
 
     public void execute(String rentalId, String userId) {
-        Rental rental = rentalRepository.getRentalById(rentalId);
-        List<String> flatmates = new ArrayList<>(rental.getFlatmatesIds());
-        flatmates.remove(userId);
-        rental.setFlatmatesIds(flatmates);
-
-        rentalRepository.updateRental(rental);
+//        Rental rental = rentalRepository.getRentalById(rentalId);
+//        List<String> flatmates = new ArrayList<>(rental.getFlatmatesIds());
+//        flatmates.remove(userId);
+//        rental.setFlatmatesIds(flatmates);
+//
+//        rentalRepository.updateRental(rental);
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.monke.data.UiStatusState;
 import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
 import com.monke.profile.di.ProfileComponentProvider;
@@ -37,6 +38,10 @@ public class EditProfileViewModel extends ViewModel {
     public LiveData<List<String>> photos = _photos;
 
     public EditProfileUiState uiState = new EditProfileUiState();
+
+    private final MutableLiveData<UiStatusState> _uiStatusState =
+            new MutableLiveData<>(new UiStatusState.Default());
+    private final LiveData<UiStatusState> uiStatusState = _uiStatusState;
 
     public EditProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
                                 SaveProfileUseCase saveProfileUseCase,
@@ -76,7 +81,13 @@ public class EditProfileViewModel extends ViewModel {
     }
 
     public void save() {
-        saveProfileUseCase.execute(uiState.getBio(), _identities.getValue(), _photos.getValue());
+        saveProfileUseCase.execute(
+                uiState.getBio(),
+                _identities.getValue(),
+                _photos.getValue()
+        ).observeForever(result ->
+                _uiStatusState.setValue(UiStatusState.fromResult(result))
+        );
     }
 
     public ArrayList<String> getIdentitiesIds() {
@@ -86,6 +97,10 @@ public class EditProfileViewModel extends ViewModel {
                 .map(Identity::getId)
                 .collect(Collectors.toList());
         return new ArrayList<>(list);
+    }
+
+    public LiveData<UiStatusState> getUiStatusState() {
+        return uiStatusState;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.monke.user;
 
 import com.monke.identity.Identity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,5 +75,14 @@ public class Profile {
                 ", bio='" + bio + '\'' +
                 ", identities=" + identities +
                 '}';
+    }
+
+    public Profile clone() {
+        return new Profile(
+                id,
+                new ArrayList<>(photosUrl),
+                bio,
+                new ArrayList<>(identities)
+        );
     }
 }

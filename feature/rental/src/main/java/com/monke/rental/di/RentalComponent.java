@@ -4,6 +4,7 @@ import com.example.map.MapModule;
 import com.monke.di.AppScope;
 import com.monke.di.RentalScope;
 import com.monke.firebase.RemoteModule;
+import com.monke.identity.di.IdentityModule;
 import com.monke.rental.RentalFragment;
 import com.monke.rental.RentalModule;
 import com.monke.rental.RentalUserListFragment;
@@ -26,7 +27,8 @@ import dagger.Component;
         modules = {
                 RentalModule.class,
                 MapModule.class,
-                RemoteModule.class
+                RemoteModule.class,
+                IdentityModule.class
         },
         dependencies = RentalComponentDeps.class
 )

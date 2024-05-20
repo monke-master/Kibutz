@@ -5,9 +5,10 @@ import java.util.List;
 
 public interface FilesRepository {
 
-    void uploadImages(HashMap<String, String> imagesUrls, OnCompleteListener<Result<?>> listener);
+    void uploadImages(String collection, List<String> imagesUrls, OnCompleteListener<Result<?>> listener);
 
     void getFileDownloadUrl(String path, OnCompleteListener<Result<String>> listener);
 
-    HashMap<String, String> createUrlsToPath(List<String> urls);
+    void getFilesDownloadUrls(List<String> pathList, OnCompleteListener<Result<List<String>>> listener);
+
 }

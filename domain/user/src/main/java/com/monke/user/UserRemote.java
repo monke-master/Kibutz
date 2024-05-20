@@ -2,6 +2,7 @@ package com.monke.user;
 
 
 import com.monke.identity.Identity;
+import com.monke.rental.Rental;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,8 @@ public class UserRemote {
     public ProfileRemote profile;
     public String password;
     public List<String> rentalsIds = new ArrayList<>();
+
+    private List<Identity> identities;
 
     public UserRemote(String id, String name, String email, long dateOfBirth,
                       List<String> responsesIds, Profile profile, String password,
@@ -46,7 +49,7 @@ public class UserRemote {
         this.rentalsIds = user.getRentals().stream().map(i -> i.getId()).collect(Collectors.toList());
     }
 
-    public User toDomain(List<Identity> identities) {
+    public User toDomain(List<Rental> rentals) {
         return new User(
                 this.id,
                 this.name,
@@ -54,8 +57,17 @@ public class UserRemote {
                 this.dateOfBirth,
                 Collections.emptyList(),
                 this.profile.toDomain(identities),
-                Collections.emptyList()
+                rentals
         );
     }
 
+
+
+    public void setIdentities(List<Identity> identities) {
+        this.identities = identities;
+    }
+
+    public List<Identity> getIdentities() {
+        return identities;
+    }
 }

@@ -41,6 +41,7 @@ dependencies {
     implementation project(':domain:data')
     implementation project(':data:user')
     implementation project(':data:rental')
+    implementation project(':data:identity')
 
     implementation libs.appcompat
     implementation libs.material
