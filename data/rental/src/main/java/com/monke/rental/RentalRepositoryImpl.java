@@ -170,8 +170,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     }
 
     @Override
-    public LiveData<Result<?>> uploadResponse(Response response) {
-        var res = new MutableLiveData<Result<?>>();
-        return null;
+    public void uploadResponse(Response response, OnCompleteListener<Result<?>> listener) {
+        responseDataSource.uploadResponse(new ResponseRemote(response), listener);
     }
 }

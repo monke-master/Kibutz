@@ -117,7 +117,7 @@ public class RentalFragment extends Fragment {
                         .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
             });
         } else {
-            mBinding.btnRespond.setVisibility(View.GONE);
+            // mBinding.btnRespond.setVisibility(View.GONE);
         }
     }
 

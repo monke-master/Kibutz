@@ -25,5 +25,5 @@ public interface RentalRepository {
 
     void getRentalById(String id, OnCompleteListener<Result<Rental>> listener);
 
-    LiveData<Result<?>> uploadResponse(Response response);
+    void uploadResponse(Response response, OnCompleteListener<Result<?>> listener);
 }
