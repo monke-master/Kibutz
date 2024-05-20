@@ -1,6 +1,5 @@
 package com.monke.rental;
 
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -29,6 +28,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     private final RentalRemoteDataSource remoteDataSource;
     private final FilesRepository filesRepository;
     private final IdentityRepository identityRepository;
+    private final ResponseRemoteDataSource responseDataSource;
     private final String FILES_COLLECTION = "rentals";
 
     private ArrayList<Rental> rentals = new ArrayList<>();
@@ -37,11 +37,13 @@ public class RentalRepositoryImpl implements RentalRepository {
     public RentalRepositoryImpl(RentalCacheDataSource cacheSource,
                                 RentalRemoteDataSource remoteDataSource,
                                 FilesRepository filesRepository,
-                                IdentityRepository identityRepository) {
+                                IdentityRepository identityRepository,
+                                ResponseRemoteDataSource responseDataSource) {
         this.cacheSource = cacheSource;
         this.remoteDataSource = remoteDataSource;
         this.filesRepository = filesRepository;
         this.identityRepository = identityRepository;
+        this.responseDataSource = responseDataSource;
         rentals.add(Mocks.mockRental);
         rentals.add(Mocks.mockRental2);
     }
@@ -58,22 +60,41 @@ public class RentalRepositoryImpl implements RentalRepository {
 
     @Override
     public LiveData<Result<?>> publishRental(Rental rental) {
-        rentals.add(rental);
+        return updateRental(null, rental);
+    }
+
+    @Override
+    public LiveData<Result<?>> updateRental(Rental oldRental, Rental rental) {
         MutableLiveData<Result<?>> result = new MutableLiveData<>();
-        filesRepository.uploadImages(FILES_COLLECTION, rental.getPhotos(), uploadRes -> {
+        List<String> photoToUpload = getPhotosToUpload(oldRental, rental);
+        filesRepository.uploadImages(FILES_COLLECTION, photoToUpload, uploadRes -> {
             if (uploadRes.isFailure()) {
                 result.setValue(uploadRes);
                 return;
             }
-            remoteDataSource.publishRental(new RentalRemote(rental), result::setValue);
+
+            var paths = photoToUpload
+                    .stream()
+                    .map(url -> FILES_COLLECTION + "/" + url)
+                    .collect(Collectors.toList());
+            filesRepository.getFilesDownloadUrls(paths, filesResult -> {
+                if (filesResult.isFailure()) {
+                    result.setValue(filesResult);
+                    return;
+                }
+
+                var newPhotos = new ArrayList<String>();
+                if (oldRental != null) {
+                    newPhotos = new ArrayList<>(oldRental.getPhotos());
+                }
+                newPhotos.addAll(filesResult.get());
+                rental.setPhotos(newPhotos);
+
+                remoteDataSource.publishRental(new RentalRemote(rental), result::setValue);
+            });
+
         });
-
         return result;
-    }
-
-    @Override
-    public void updateRental(Rental rental) {
-        Log.d(TAG, rental.toString());
     }
 
     @Override
@@ -124,30 +145,33 @@ public class RentalRepositoryImpl implements RentalRepository {
 
                 var rentalRemote = rentalResult.get();
 
-                var paths = rentalRemote
-                            .photos
-                        .stream()
-                        .map(url -> FILES_COLLECTION + "/" + url)
-                        .collect(Collectors.toList());
-                filesRepository.getFilesDownloadUrls(paths, filesResult -> {
-                    if (filesResult.isFailure()) {
-                        listener.onComplete(new Result.Failure<>(rentalResult.getException()));
-                        return;
-                    }
+                // Get identities data
+                ArrayList<Identity> identities = new ArrayList<>();
+                for (String identityId: rentalRemote.identityFilters) {
+                    identityRepository.getIdentityById(identityId).ifPresent(identities::add);
+                }
 
-                    rentalRemote.photos = filesResult.get();
-
-                    // Get identities data
-                    ArrayList<Identity> identities = new ArrayList<>();
-                    for (String identityId: rentalRemote.identityFilters) {
-                        identityRepository.getIdentityById(identityId).ifPresent(identities::add);
-                    }
-
-                    var rental = rentalRemote.toDomain(identities);
-                    rentals.add(rental);
-                    listener.onComplete(new Result.Success<>(rental));
-                });
+                var rental = rentalRemote.toDomain(identities);
+                rentals.add(rental);
+                listener.onComplete(new Result.Success<>(rental));
             });
         });
+    }
+
+    private List<String> getPhotosToUpload(Rental oldRental, Rental newRental) {
+        if (oldRental == null) {
+            return newRental.getPhotos();
+        }
+        return newRental
+                .getPhotos()
+                .stream()
+                .filter(url -> !oldRental.getPhotos().contains(url))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public LiveData<Result<?>> uploadResponse(Response response) {
+        var res = new MutableLiveData<Result<?>>();
+        return null;
     }
 }

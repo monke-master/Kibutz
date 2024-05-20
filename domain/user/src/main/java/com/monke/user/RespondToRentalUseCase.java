@@ -41,6 +41,6 @@ public class RespondToRentalUseCase {
         rental.setResponses(rentalResponses);
 
         userRepository.setCurrentUser(user);
-        rentalRepository.updateRental(rental);
+        rentalRepository.updateRental(rental, rental);
     }
 }

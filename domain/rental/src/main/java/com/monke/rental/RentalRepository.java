@@ -15,7 +15,7 @@ public interface RentalRepository {
 
     LiveData<Result<?>> publishRental(Rental rental);
 
-    void updateRental(Rental rental);
+    LiveData<Result<?>> updateRental(Rental oldRental, Rental rental);
 
     LiveData<Result<Rental>> getRentalById(String id);
 
@@ -25,5 +25,5 @@ public interface RentalRepository {
 
     void getRentalById(String id, OnCompleteListener<Result<Rental>> listener);
 
-
+    LiveData<Result<?>> uploadResponse(Response response);
 }
