@@ -1,6 +1,7 @@
 package com.monke.main.di;
 
 import com.monke.di.AppScope;
+import com.monke.firebase.RemoteModule;
 import com.monke.main.HomeFragment;
 import com.monke.rental.RentalModule;
 
@@ -9,7 +10,8 @@ import dagger.Component;
 @Component(
         dependencies = HomeComponentDeps.class,
         modules = {
-                RentalModule.class
+                RentalModule.class,
+                RemoteModule.class
         }
 )
 @AppScope

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.monke.kibutz"
-        minSdk 26
+        minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -66,5 +66,7 @@ dependencies {
     annotationProcessor libs.dagger.compiler
 
     implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.firebase.storage
     implementation platform(libs.firebase.bom)
 }

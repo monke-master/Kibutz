@@ -15,7 +15,7 @@ public class Realty {
         this.id = id;
     }
 
-    public Realty(String id, String address, long area, int sleeps, int roomsCount, int floorsCount) {
+    public Realty(String id, String address, float area, int sleeps, int roomsCount, int floorsCount) {
         this.id = id;
         this.address = address;
         this.area = area;

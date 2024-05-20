@@ -11,4 +11,7 @@ public interface RentalModule {
 
     @Binds
     RentalCacheDataSource bindRentalCacheDataSource(RentalCacheDataSourceImpl i);
+
+    @Binds
+    RentalRemoteDataSource bindRentalRemoteDataSource(RentalRemoteDataSourceImpl i);
 }

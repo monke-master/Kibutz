@@ -3,6 +3,7 @@ package com.monke.rental.di;
 import com.example.map.MapModule;
 import com.monke.di.AppScope;
 import com.monke.di.RentalScope;
+import com.monke.firebase.RemoteModule;
 import com.monke.rental.RentalFragment;
 import com.monke.rental.RentalModule;
 import com.monke.rental.RentalUserListFragment;
@@ -24,7 +25,8 @@ import dagger.Component;
 @Component(
         modules = {
                 RentalModule.class,
-                MapModule.class
+                MapModule.class,
+                RemoteModule.class
         },
         dependencies = RentalComponentDeps.class
 )

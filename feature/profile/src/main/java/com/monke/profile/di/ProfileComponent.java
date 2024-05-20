@@ -1,5 +1,6 @@
 package com.monke.profile.di;
 
+import com.monke.firebase.RemoteModule;
 import com.monke.identity.di.IdentityModule;
 import com.monke.profile.EditProfileFragment;
 import com.monke.profile.IdentitiesFragment;
@@ -15,7 +16,8 @@ import dagger.Component;
 @Component(
         modules = {
                 IdentityModule.class,
-                RentalModule.class
+                RentalModule.class,
+                RemoteModule.class
         },
         dependencies = ProfileComponentDeps.class
 )

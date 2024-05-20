@@ -1,5 +1,9 @@
 package com.monke.rental;
 
+import androidx.lifecycle.LiveData;
+
+import com.monke.data.Result;
+
 import java.util.List;
 
 public interface RentalRepository {
@@ -8,7 +12,7 @@ public interface RentalRepository {
 
     Rental getCreatingRental();
 
-    void publishRental(Rental rental);
+    LiveData<Result<?>> publishRental(Rental rental);
 
     void updateRental(Rental rental);
 

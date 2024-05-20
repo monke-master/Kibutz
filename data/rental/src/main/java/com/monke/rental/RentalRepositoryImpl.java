@@ -2,12 +2,14 @@ package com.monke.rental;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.monke.data.Result;
 import com.monke.di.AppScope;
-import com.monke.di.RentalScope;
 import com.monke.user.Mocks;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -17,12 +19,14 @@ public class RentalRepositoryImpl implements RentalRepository {
 
     private final String TAG = "RentalRepositoryImpl";
     private final RentalCacheDataSource cacheSource;
+    private final RentalRemoteDataSource remoteDataSource;
 
     private ArrayList<Rental> rentals = new ArrayList<>();
 
     @Inject
-    public RentalRepositoryImpl(RentalCacheDataSource cacheSource) {
+    public RentalRepositoryImpl(RentalCacheDataSource cacheSource, RentalRemoteDataSource remoteDataSource) {
         this.cacheSource = cacheSource;
+        this.remoteDataSource = remoteDataSource;
         rentals.add(Mocks.mockRental);
         rentals.add(Mocks.mockRental2);
     }
@@ -38,8 +42,11 @@ public class RentalRepositoryImpl implements RentalRepository {
     }
 
     @Override
-    public void publishRental(Rental rental) {
+    public LiveData<Result<?>> publishRental(Rental rental) {
+        MutableLiveData<Result<?>> result = new MutableLiveData<>();
+
         rentals.add(rental);
+        return result;
     }
 
     @Override
