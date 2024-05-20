@@ -10,8 +10,8 @@ public class House extends Realty{
         super(id);
     }
 
-    public House(String id, String address, long area, int sleeps, int roomsCount, int floorsCount,
-                 int plotArea) {
+    public House(String id, String address, float area, int sleeps, int roomsCount, int floorsCount,
+                 float plotArea) {
         super(id, address, area, sleeps, roomsCount, floorsCount);
         this.plotArea = plotArea;
     }
@@ -43,5 +43,17 @@ public class House extends Realty{
         return super.toString() + "House{" +
                 "plotArea=" + plotArea +
                 '}';
+    }
+
+    public House clone() {
+        return new House(
+                id,
+                address,
+                area,
+                sleeps,
+                roomsCount,
+                floorsCount,
+                plotArea
+        );
     }
 }

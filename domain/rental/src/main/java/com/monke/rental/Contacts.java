@@ -13,6 +13,10 @@ public class Contacts {
         this.email = email;
     }
 
+    public Contacts clone() {
+        return new Contacts(phoneNumber, telegramLogin, email);
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

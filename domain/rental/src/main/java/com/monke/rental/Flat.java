@@ -8,8 +8,8 @@ public class Flat extends Realty{
     private float livingArea;
     private float kitchenArea;
 
-    public Flat(String id, String address, long area, int sleeps, int roomsCount,
-                int floor, int floorCount, int livingArea, int kitchenArea) {
+    public Flat(String id, String address, float area, int sleeps, int roomsCount,
+                int floorCount, int floor, float livingArea, float kitchenArea) {
         super(id, address, area, sleeps, roomsCount, floorCount);
         this.floor = floor;
         this.livingArea = livingArea;
@@ -67,5 +67,19 @@ public class Flat extends Realty{
                 ", livingArea=" + livingArea +
                 ", kitchenArea=" + kitchenArea +
                 '}';
+    }
+
+    public Flat clone() {
+        return new Flat(
+                id,
+                address,
+                area,
+                sleeps,
+                roomsCount,
+                floorsCount,
+                floor,
+                livingArea,
+                kitchenArea
+        );
     }
 }

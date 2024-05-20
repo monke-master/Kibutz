@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Realty {
 
-    private String id;
-    private String address;
-    private float area;
-    private int sleeps;
-    private int roomsCount;
-    private int floorsCount;
+    protected String id;
+    protected String address;
+    protected float area;
+    protected int sleeps;
+    protected int roomsCount;
+    protected int floorsCount;
 
     public Realty(String id) {
         this.id = id;
@@ -98,5 +98,16 @@ public class Realty {
                 ", sleeps=" + sleeps +
                 ", roomsCount=" + roomsCount +
                 '}';
+    }
+
+    public Realty clone() {
+        return new Realty(
+                id,
+                address,
+                area,
+                sleeps,
+                roomsCount,
+                floorsCount
+        );
     }
 }

@@ -44,6 +44,23 @@ public class Rental {
         this.responses = responses;
     }
 
+    public Rental clone() {
+        return new Rental(
+                id,
+                authorId,
+                photos,
+                price,
+                realty,
+                description,
+                new ArrayList<>(identityFilters),
+                maxFlatmatesCount,
+                new ArrayList<>(flatmatesIds),
+                creationDate,
+                contacts.clone(),
+                new ArrayList<>(responses)
+        );
+    }
+
     public String getId() {
         return id;
     }

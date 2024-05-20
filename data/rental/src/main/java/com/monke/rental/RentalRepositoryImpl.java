@@ -51,15 +51,15 @@ public class RentalRepositoryImpl implements RentalRepository {
     public LiveData<Result<?>> publishRental(Rental rental) {
         rentals.add(rental);
         MutableLiveData<Result<?>> result = new MutableLiveData<>();
-        filesRepository.uploadImages(filesRepository.createPath(rental.getPhotos()), uploadRes -> {
+        var urlsToPath = filesRepository.createUrlsToPath(rental.getPhotos());
+        filesRepository.uploadImages(urlsToPath, uploadRes -> {
             if (uploadRes.isFailure()) {
                 result.setValue(uploadRes);
                 return;
             }
-            remoteDataSource.publishRental(new RentalRemote(rental),
-                    (OnCompleteListener<Result<RentalRemote>>) publishRes -> {
-                result.setValue(publishRes);
-            });
+            var newRental = rental.clone();
+            newRental.setPhotos(new ArrayList<>(urlsToPath.values()));
+            remoteDataSource.publishRental(new RentalRemote(rental), result::setValue);
         });
 
 

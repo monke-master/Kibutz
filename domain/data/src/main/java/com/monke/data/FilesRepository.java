@@ -1,7 +1,5 @@
 package com.monke.data;
 
-import androidx.lifecycle.LiveData;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,5 +9,5 @@ public interface FilesRepository {
 
     void getFileDownloadUrl(String path, OnCompleteListener<Result<String>> listener);
 
-    HashMap<String, String> createPath(List<String> urls);
+    HashMap<String, String> createUrlsToPath(List<String> urls);
 }

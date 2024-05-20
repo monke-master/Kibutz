@@ -48,7 +48,7 @@ public class FilesRepositoryImpl implements FilesRepository {
     }
 
     @Override
-    public HashMap<String, String> createPath(List<String> urls) {
+    public HashMap<String, String> createUrlsToPath(List<String> urls) {
         HashMap<String, String> pathAndUrls = new HashMap<>();
         for (String url: urls) {
             pathAndUrls.put(url, UUID.randomUUID().toString());
