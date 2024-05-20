@@ -13,6 +13,7 @@ import com.monke.rental.GetRentalByIdUseCase;
 import com.monke.rental.Rental;
 import com.monke.rental.Response;
 import com.monke.user.GetCurrentUserUseCase;
+import com.monke.user.GetResponsedRentals;
 import com.monke.user.GetUserRentalByIdUseCase;
 import com.monke.user.User;
 
@@ -25,7 +26,7 @@ import javax.inject.Inject;
 public class ProfileViewModel extends ViewModel {
 
     private GetCurrentUserUseCase getCurrentUserUseCase;
-    private GetUserRentalByIdUseCase getRentalByIdUseCase;
+    private GetResponsedRentals getResponsedRentals;
 
     private MutableLiveData<User> _user = new MutableLiveData<>();
     public LiveData<User> user = _user;
@@ -37,21 +38,28 @@ public class ProfileViewModel extends ViewModel {
 
     @Inject
     public ProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
-                            GetUserRentalByIdUseCase getRentalByIdUseCase) {
+                            GetResponsedRentals getResponsedRentals) {
         this.getCurrentUserUseCase = getCurrentUserUseCase;
-        this.getRentalByIdUseCase = getRentalByIdUseCase;
+        this.getResponsedRentals = getResponsedRentals;
     }
 
     public void init() {
         responses = new HashMap<>();
         user = getCurrentUserUseCase.execute();
 
-        var rentalsList = user.getValue().getResponses().stream().map(response -> {
-            var rental = getRentalByIdUseCase.execute(response.getRentalId());
-            responses.put(rental.getId(), response);
-            return rental;
-        }).collect(Collectors.toList());
-        _rentals.setValue(rentalsList);
+        fetchRentals();
+    }
+
+    private void fetchRentals() {
+        getResponsedRentals.execute(user.getValue()).observeForever(result -> {
+            if (result.isSuccess()) {
+                var rentals = result.get();
+                _rentals.setValue(rentals);
+                for (Response response: user.getValue().getResponses()) {
+                    responses.put(response.getRentalId(), response);
+                }
+            }
+        });
     }
 
     @Override
@@ -64,19 +72,19 @@ public class ProfileViewModel extends ViewModel {
     public static class Factory implements ViewModelProvider.Factory {
 
        private final GetCurrentUserUseCase getCurrentUserUseCase;
-       private final GetUserRentalByIdUseCase getRentalByIdUseCase;
+       private final GetResponsedRentals getResponsedRentals;
 
         @Inject
         public Factory(GetCurrentUserUseCase getCurrentUserUseCase,
-                       GetUserRentalByIdUseCase getRentalByIdUseCase) {
+                       GetResponsedRentals getResponsedRentals) {
             this.getCurrentUserUseCase = getCurrentUserUseCase;
-            this.getRentalByIdUseCase = getRentalByIdUseCase;
+            this.getResponsedRentals = getResponsedRentals;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new ProfileViewModel(getCurrentUserUseCase, getRentalByIdUseCase));
+            return (T) (new ProfileViewModel(getCurrentUserUseCase, getResponsedRentals));
         }
     }
 }

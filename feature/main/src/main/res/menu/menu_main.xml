@@ -9,12 +9,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/searchFragment"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/nav_rental_feature"
         android:title="@string/rentals"
         android:icon="@drawable/ic_rent"
