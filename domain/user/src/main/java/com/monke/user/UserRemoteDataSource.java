@@ -2,12 +2,12 @@ package com.monke.user;
 
 import androidx.lifecycle.LiveData;
 
+import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 
 public interface UserRemoteDataSource {
 
-    LiveData<Result<String>> createUser(User user);
+    void createUser(UserRemote user, OnCompleteListener<Result<?>> completeListener);
 
-    LiveData<Result<Boolean>> sendConfirmationLetter(String email);
-
+    LiveData<Result<User>> getUserById(String id);
 }

@@ -46,7 +46,7 @@ dependencies {
     implementation project(':data:user')
     implementation project(':domain:user')
     implementation project(':core:di')
-    implementation project(':core:firebase')
+    implementation project(':core:remote')
 
     implementation libs.appcompat
     implementation libs.material

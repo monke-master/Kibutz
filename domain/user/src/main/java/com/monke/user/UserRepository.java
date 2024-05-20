@@ -18,7 +18,7 @@ public interface UserRepository {
 
     void setCurrentUser(User user);
 
-    void signUp();
+    LiveData<Result<?>> signUp();
 
     LiveData<Result<Boolean>> sendConfirmationLetter(String email);
 }

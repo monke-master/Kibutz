@@ -4,7 +4,10 @@ package com.monke.user;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.monke.data.FilesRepository;
+import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 import com.monke.di.AppScope;
 
@@ -18,16 +21,22 @@ import javax.inject.Inject;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserCacheDataSource cacheDataSource;
+    private final AuthDataSource authDataSource;
     private final UserRemoteDataSource remoteDataSource;
+    private final FilesRepository filesRepository;
 
     private ArrayList<User> users;
 
     @Inject
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource,
-                              UserRemoteDataSource userRemoteDataSource) {
-        this.cacheDataSource = cacheDataSource;
+                              AuthDataSource authDataSource,
+                              UserRemoteDataSource remoteDataSource,
+                              FilesRepository filesRepository) {
         Log.d("UserRepositoryImpl", "constructor");
-        this.remoteDataSource = userRemoteDataSource;
+        this.cacheDataSource = cacheDataSource;
+        this.authDataSource = authDataSource;
+        this.remoteDataSource = remoteDataSource;
+        this.filesRepository = filesRepository;
     }
 
     @Override
@@ -56,12 +65,32 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void signUp() {
-        cacheDataSource.saveCurrentUser(cacheDataSource.getCreatingUser());
+    public LiveData<Result<?>> signUp() {
+        MutableLiveData<Result<?>> res = new MutableLiveData<>();
+        User user = cacheDataSource.getCreatingUser();
+        authDataSource.createUser(user, result -> {
+            if (result.isFailure()) {
+                res.setValue(result);
+                return;
+            }
+            String id = result.get();
+            user.setId(id);
+
+            remoteDataSource.createUser(new UserRemote(user), creationRes -> {
+                if (creationRes.isFailure()) {
+                    res.setValue(creationRes);
+                    return;
+                }
+                cacheDataSource.saveCurrentUser(user);
+                res.setValue(new Result.Success<>());
+            });
+        });
+
+        return res;
     }
 
     @Override
     public LiveData<Result<Boolean>> sendConfirmationLetter(String email) {
-        return remoteDataSource.sendConfirmationLetter(email);
+        return authDataSource.sendConfirmationLetter(email);
     }
 }

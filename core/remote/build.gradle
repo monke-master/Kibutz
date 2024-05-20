@@ -27,6 +27,8 @@ android {
 
 dependencies {
 
+    implementation project(':domain:data')
+
 
     implementation libs.appcompat
     implementation libs.material
@@ -36,7 +38,11 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.firebase.storage
 
     implementation libs.dagger2
     annotationProcessor libs.dagger.compiler
+
+
 }

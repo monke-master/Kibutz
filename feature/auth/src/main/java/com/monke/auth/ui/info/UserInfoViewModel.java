@@ -60,7 +60,17 @@ public class UserInfoViewModel extends ViewModel {
     public void saveData() {
         var state = uiState.getValue();
         createUserInfoUseCase.execute(state.getName(), state.getDateOfBirth(), state.isMale());
-        _uiStatusState.setValue(new UiStatusState.Success());
+        signUp();
+    }
+
+    private void signUp() {
+        signUpUseCase.execute().observeForever(result -> {
+            if (result.isFailure()) {
+                _uiStatusState.setValue(new UiStatusState.Error(result.getException()));
+            } else {
+                _uiStatusState.setValue(new UiStatusState.Success());
+            }
+        });
     }
 
     public static class Factory implements ViewModelProvider.Factory {
