@@ -22,4 +22,13 @@ public class ProfileRemote {
         this.bio = profile.getBio();
         this.identitiesIds = profile.getIdentities().stream().map(i -> i.getId()).collect(Collectors.toList());
     }
+
+    public Profile toDomain(List<Identity> identities) {
+        return new Profile(
+                this.id,
+                this.photosUrl,
+                this.bio,
+                identities
+        );
+    }
 }

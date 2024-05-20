@@ -27,7 +27,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     @Override
-    public void createUser(UserRemote user, OnCompleteListener<Result<?>> completeListener) {
+    public void setUser(UserRemote user, OnCompleteListener<Result<?>> completeListener) {
         firestore
                 .collection(USERS_COLLECTION)
                 .document(user.id)

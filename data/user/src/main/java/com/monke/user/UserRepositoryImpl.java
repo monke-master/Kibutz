@@ -7,9 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.monke.data.FilesRepository;
-import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 import com.monke.di.AppScope;
+import com.monke.identity.Identity;
+import com.monke.identity.IdentityRepository;
 
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final AuthDataSource authDataSource;
     private final UserRemoteDataSource remoteDataSource;
     private final FilesRepository filesRepository;
+    private final IdentityRepository identityRepository;
 
     private ArrayList<User> users;
 
@@ -31,12 +33,14 @@ public class UserRepositoryImpl implements UserRepository {
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource,
                               AuthDataSource authDataSource,
                               UserRemoteDataSource remoteDataSource,
-                              FilesRepository filesRepository) {
+                              FilesRepository filesRepository,
+                              IdentityRepository identityRepository) {
         Log.d("UserRepositoryImpl", "constructor");
         this.cacheDataSource = cacheDataSource;
         this.authDataSource = authDataSource;
         this.remoteDataSource = remoteDataSource;
         this.filesRepository = filesRepository;
+        this.identityRepository = identityRepository;
     }
 
     @Override
@@ -76,7 +80,7 @@ public class UserRepositoryImpl implements UserRepository {
             String id = result.get();
             user.setId(id);
 
-            remoteDataSource.createUser(new UserRemote(user), creationRes -> {
+            remoteDataSource.setUser(new UserRemote(user), creationRes -> {
                 if (creationRes.isFailure()) {
                     res.setValue(creationRes);
                     return;
@@ -109,10 +113,17 @@ public class UserRepositoryImpl implements UserRepository {
                     return;
                 }
 
-                cacheDataSource.saveCurrentUser(userResult.get().toDomain());
+                var userRemote = userResult.get();
+
+                ArrayList<Identity> identities = new ArrayList<>();
+                for (String identityId: userRemote.profile.identitiesIds) {
+                    identityRepository.getIdentityById(identityId).ifPresent(identities::add);
+                }
+                cacheDataSource.saveCurrentUser(userRemote.toDomain(identities));
                 result.setValue(new Result.Success<>());
             });
         });
         return result;
     }
+
 }

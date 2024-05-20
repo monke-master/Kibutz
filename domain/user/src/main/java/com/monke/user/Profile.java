@@ -65,4 +65,14 @@ public class Profile {
     public int hashCode() {
         return Objects.hash(id, photosUrl, bio, identities);
     }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id='" + id + '\'' +
+                ", photosUrl=" + photosUrl +
+                ", bio='" + bio + '\'' +
+                ", identities=" + identities +
+                '}';
+    }
 }

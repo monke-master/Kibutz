@@ -44,7 +44,9 @@ dependencies {
     implementation project(':feature:main')
     implementation project(':feature:profile')
     implementation project(':data:user')
+    implementation project(':data:identity')
     implementation project(':domain:user')
+    implementation project(':domain:identity')
     implementation project(':core:di')
     implementation project(':core:remote')
 

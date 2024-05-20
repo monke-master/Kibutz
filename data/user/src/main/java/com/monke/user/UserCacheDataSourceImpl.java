@@ -38,6 +38,7 @@ public class UserCacheDataSourceImpl implements UserCacheDataSource {
 
     @Override
     public void saveCurrentUser(User user) {
+        Log.d("UserCacheDataSourceImpl", user.toString());
         currentUser.setValue(user);
     }
 }
