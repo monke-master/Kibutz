@@ -3,9 +3,12 @@ package com.monke.rental.newrental;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.monke.data.UiStatusState;
 import com.monke.rental.CreateRentalUseCase;
 import com.monke.user.PublishRentalUseCase;
 
@@ -16,6 +19,10 @@ public class ContactsViewModel extends ViewModel {
     private ContactsUiState contactsUiState = new ContactsUiState();
     private CreateRentalUseCase createRentalUseCase;
     private PublishRentalUseCase publishRentalUseCase;
+
+    private final MutableLiveData<UiStatusState> _uiStatusState =
+            new MutableLiveData<>(new UiStatusState.Default());
+    private final LiveData<UiStatusState> uiStatusState = _uiStatusState;
 
     private final String TAG = "ContactsViewModel";
 
@@ -37,7 +44,12 @@ public class ContactsViewModel extends ViewModel {
         );
         publishRentalUseCase.execute().observeForever(result -> {
             Log.d(TAG, result.toString());
+            _uiStatusState.setValue(UiStatusState.fromResult(result));
         });
+    }
+
+    public LiveData<UiStatusState> getUiStatusState() {
+        return uiStatusState;
     }
 
     public static class Factory implements ViewModelProvider.Factory {
