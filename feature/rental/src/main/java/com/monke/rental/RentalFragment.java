@@ -85,6 +85,7 @@ public class RentalFragment extends Fragment {
         if (mViewModel.userIfAuthor()) {
             mBinding.responses.btnContact.setVisibility(View.GONE);
             mBinding.responses.txtStatus.setVisibility(View.GONE);
+            mBinding.responses.btnResponses.setVisibility(View.VISIBLE);
             mBinding.responses.btnResponses.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putString(
@@ -94,9 +95,10 @@ public class RentalFragment extends Fragment {
                         .findNavController(this)
                         .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
             });
+        } else {
+            mBinding.responses.btnResponses.setVisibility(View.GONE);
         }
         if (mViewModel.getResponseStatus() != null) {
-            mBinding.responses.btnResponses.setVisibility(View.GONE);
             String responseStatus = "";
             switch (mViewModel.getResponseStatus()) {
                 case HANGING -> {
@@ -116,8 +118,10 @@ public class RentalFragment extends Fragment {
                         .findNavController(this)
                         .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
             });
+            mBinding.btnRespond.setVisibility(View.GONE);
         } else {
-            // mBinding.btnRespond.setVisibility(View.GONE);
+            mBinding.responses.txtStatus.setVisibility(View.GONE);
+            mBinding.responses.btnContact.setVisibility(View.GONE);
         }
     }
 
@@ -192,6 +196,9 @@ public class RentalFragment extends Fragment {
     private void initRespondBtn() {
         mBinding.btnRespond.setOnClickListener(v -> {
             mViewModel.respondToRental();
+            v.setVisibility(View.GONE);
+            mBinding.responses.txtStatus.setText(getString(com.monke.ui.R.string.response_status_hanging));
+            mBinding.responses.txtStatus.setVisibility(View.VISIBLE);
         });
     }
 }

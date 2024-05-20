@@ -1,12 +1,11 @@
 package com.monke.rental;
 
-import android.util.Log;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
-import com.monke.user.Mocks;
-import com.monke.user.UserRemote;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -45,6 +44,27 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
                     if (task.isSuccessful()) {
                         var rental = task.getResult().toObject(RentalRemote.class);
                         listener.onComplete(new Result.Success<>(rental));
+                    } else {
+                        listener.onComplete(new Result.Failure<>(task.getException()));
+                    }
+                });
+    }
+
+    @Override
+    public void getAvailableRentals(String userId, OnCompleteListener<Result<List<RentalRemote>>> listener) {
+        firestore
+                .collection(RENTAL_COLLECTION)
+                .whereNotEqualTo("authorId", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        var rentals = task
+                                .getResult()
+                                .getDocuments()
+                                .stream()
+                                .map(doc -> doc.toObject(RentalRemote.class))
+                                .collect(Collectors.toList());
+                        listener.onComplete(new Result.Success<>(rentals));
                     } else {
                         listener.onComplete(new Result.Failure<>(task.getException()));
                     }

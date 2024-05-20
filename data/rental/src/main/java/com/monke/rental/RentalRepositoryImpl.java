@@ -206,4 +206,29 @@ public class RentalRepositoryImpl implements RentalRepository {
             });
         }
     }
+
+    @Override
+    public LiveData<Result<List<Rental>>> getAvailableRentals(String userId) {
+        var result = new MutableLiveData<Result<List<Rental>>>();
+        ThreadUtils.runOnBackground(() -> {
+            remoteDataSource.getAvailableRentals(userId, rentalsRes -> {
+                if (rentalsRes.isFailure()) {
+                    result.setValue(new Result.Failure<>(rentalsRes.getException()));
+                    return;
+                }
+
+                var rentals = rentalsRes
+                                    .get()
+                                    .stream()
+                                    .map(rental -> rental.toDomain(
+                                            Collections.emptyList(),
+                                            Collections.emptyList()))
+                                    .collect(Collectors.toList());
+                result.setValue(new Result.Success<>(rentals));
+            });
+
+        });
+        return result;
+    }
+
 }

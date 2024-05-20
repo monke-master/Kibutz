@@ -29,11 +29,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void fetchData() {
-        var result = getAvailableRentalsUseCase.execute();
-
-        if (result.isSuccess()) {
-            _rentals.setValue(result.get());
-        }
+        getAvailableRentalsUseCase.execute().observeForever(listResult -> {
+            if (listResult.isSuccess()) {
+                _rentals.setValue(listResult.get());
+            }
+        });
     }
 
     public static class Factory implements ViewModelProvider.Factory {

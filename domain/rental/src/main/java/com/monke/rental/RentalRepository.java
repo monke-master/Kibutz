@@ -28,4 +28,6 @@ public interface RentalRepository {
     void uploadResponse(Response response, OnCompleteListener<Result<?>> listener);
 
     void getResponses(List<String> responsesIds, OnCompleteListener<Result<List<Response>>> listener);
+
+    LiveData<Result<List<Rental>>> getAvailableRentals(String userId);
 }

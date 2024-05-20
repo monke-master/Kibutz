@@ -28,13 +28,14 @@ android {
 dependencies {
     implementation project(':domain:rental')
     implementation project(':domain:data')
+    implementation project(':domain:user')
     implementation project(':domain:identity')
     implementation project(':core:di')
     implementation project(':core:utils')
 
     implementation libs.appcompat
     implementation libs.material
-    implementation project(':domain:user')
+
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
