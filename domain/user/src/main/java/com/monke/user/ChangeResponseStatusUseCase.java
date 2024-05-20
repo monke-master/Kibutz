@@ -1,5 +1,10 @@
 package com.monke.user;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.monke.data.Result;
+import com.monke.rental.Rental;
 import com.monke.rental.RentalRepository;
 import com.monke.rental.Response;
 
@@ -20,26 +25,19 @@ public class ChangeResponseStatusUseCase {
         this.rentalRepository = rentalRepository;
     }
 
-    public Response execute(Response response, Response.Status newStatus) {
-        User user = userRepository.getLocalUserById(response.getUserId()).get();
-        List<Response> userResponses = new ArrayList<>(user.getResponses());
-        userResponses.remove(response);
-
-//        Rental rental = rentalRepository.getRentalById(response.getRentalId());
-//        List<Response> rentalResponses = new ArrayList<>(rental.getResponses());
-//        rentalResponses.remove(response);
+    public LiveData<Result<Response>> execute(Response response, Response.Status newStatus) {
+        var result = new MutableLiveData<Result<Response>>();
 
         Response newResponse = new Response(response);
         newResponse.setStatus(newStatus);
+        rentalRepository.uploadResponse(newResponse, uploadRes -> {
+            if (uploadRes.isFailure()) {
+                result.setValue(new Result.Failure<>(uploadRes.getException()));
+                return;
+            }
+            result.setValue(new Result.Success<>(newResponse));
+        });
 
-        userResponses.add(newResponse);
-        user.setResponses(userResponses);
-
-//        rentalResponses.add(newResponse);
-//        rental.setResponses(rentalResponses);
-
-        userRepository.setCreatingUser(user);
-        // rentalRepository.updateRental(rental);
-        return newResponse;
+        return result;
     }
 }

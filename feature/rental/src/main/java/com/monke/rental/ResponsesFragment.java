@@ -111,7 +111,7 @@ public class ResponsesFragment extends Fragment {
 
     private void observeResponses() {
         mViewModel.responses.observe(getViewLifecycleOwner(), responses -> {
-            mResponseRWAdapter.setResponses(responses);
+            mResponseRWAdapter.setResponses(new ArrayList<>(responses));
         });
     }
 }

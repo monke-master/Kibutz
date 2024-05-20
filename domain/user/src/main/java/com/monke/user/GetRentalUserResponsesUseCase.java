@@ -26,6 +26,9 @@ public class GetRentalUserResponsesUseCase {
     public LiveData<Result<List<Pair<Response, User>>>> execute(Rental rental) {
         var result = new MutableLiveData<Result<List<Pair<Response, User>>>>();
         ArrayList<Pair<Response, User>> list = new ArrayList<>();
+        if (rental.getResponses().isEmpty()) {
+            result.setValue(new Result.Success<>(list));
+        }
         for (Response response: rental.getResponses()) {
             userRepository.getUserById(response.getUserId()).observeForever(userResult -> {
                 if (userResult.isFailure()) {

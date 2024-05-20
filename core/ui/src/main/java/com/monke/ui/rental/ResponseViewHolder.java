@@ -37,7 +37,7 @@ public class ResponseViewHolder extends RecyclerView.ViewHolder {
     public void bind(Pair<Response, User> response, ResponseInteractor interactor) {
         this.interactor = interactor;
         this.response = response.first;
-        mBinding.getRoot().setOnClickListener(v -> interactor.onClicked(response.second));
+        mBinding.image.setOnClickListener(v -> interactor.onClicked(response.second));
         Glide
             .with(itemView.getContext())
             .load(response.second.getProfile().getPhotosUrl().get(0))

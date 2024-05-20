@@ -1,5 +1,6 @@
 package com.monke.rental;
 
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
 
 public class ResponsesViewModel extends ViewModel {
 
-    private final GetUserRentalByIdUseCase getRentalByIdUseCase;
+    private final GetRentalByIdUseCase getRentalByIdUseCase;
     private final GetRentalUserResponsesUseCase getRentalUserResponsesUseCase;
     private final ChangeResponseStatusUseCase changeResponseStatusUseCase;
     private final RemoveResponseUseCase removeResponseUseCase;
@@ -33,7 +34,7 @@ public class ResponsesViewModel extends ViewModel {
 
     private String rentalId;
 
-    public ResponsesViewModel(GetUserRentalByIdUseCase getRentalByIdUseCase,
+    public ResponsesViewModel(GetRentalByIdUseCase getRentalByIdUseCase,
                               GetRentalUserResponsesUseCase getRentalUserResponsesUseCase,
                               ChangeResponseStatusUseCase changeResponseStatusUseCase,
                               RemoveResponseUseCase removeResponseUseCase,
@@ -53,33 +54,55 @@ public class ResponsesViewModel extends ViewModel {
     }
 
     private void fetchData() {
-        Rental rental = getRentalByIdUseCase.execute(rentalId);
-        getRentalUserResponsesUseCase.execute(rental).observeForever(result -> {
-            if (result.isSuccess()) {
-                _responses.setValue(result.get());
+        getRentalByIdUseCase.execute(rentalId).observeForever(rentalRes -> {
+            if (rentalRes.isFailure()) {
+                return;
             }
+            Log.d("ResponsesViewModel", rentalRes.get().toString());
+            var rental = rentalRes.get();
+            getRentalUserResponsesUseCase.execute(rental).observeForever(result -> {
+                if (result.isSuccess()) {
+                    Log.d("ResponsesViewModel", result.get().size() + "");
+                    _responses.setValue(result.get());
+                }
+            });
         });
+
     }
 
     public void changeResponseStatus(Response response, Response.Status status) {
-        var newResponse = changeResponseStatusUseCase.execute(response, status);
-        switch (status) {
-            case DISLIKED -> removeResponseUseCase.execute(newResponse);
-            case FLATMATE -> addFlatmateUseCase.execute(newResponse.getRentalId(), newResponse.getUserId());
-            case LIKED -> removeFlatmatesIfNeeds(response, newResponse);
-        }
-        fetchData();
+        changeResponseStatusUseCase.execute(response, status).observeForever(responseResult -> {
+            if (responseResult.isSuccess()) {
+                var newResponse = responseResult.get();
+                switch (status) {
+                    case DISLIKED -> removeResponseUseCase
+                                            .execute(newResponse)
+                                            .observeForever(r -> fetchData());
+                    case FLATMATE ->
+                            addFlatmateUseCase
+                                    .execute(newResponse.getRentalId(), newResponse.getUserId())
+                                    .observeForever(r -> fetchData());
+                    case LIKED -> removeFlatmatesIfNeeds(response, newResponse);
+                    default -> fetchData();
+                }
+            }
+        });
+
     }
 
     private void removeFlatmatesIfNeeds(Response oldResponse, Response newResponse) {
         if (oldResponse.getStatus().equals(Response.Status.FLATMATE)) {
-            removeFlatmateUseCase.execute(newResponse.getRentalId(), newResponse.getUserId());
+            removeFlatmateUseCase
+                    .execute(newResponse.getRentalId(), newResponse.getUserId())
+                    .observeForever(r -> fetchData());
+        } else {
+            fetchData();
         }
     }
 
     public static class Factory implements ViewModelProvider.Factory {
 
-        private final GetUserRentalByIdUseCase getUserRentalByIdUseCase;
+        private final GetRentalByIdUseCase getUserRentalByIdUseCase;
         private final GetRentalUserResponsesUseCase getRentalUserResponsesUseCase;
         private final ChangeResponseStatusUseCase changeResponseStatusUseCase;
         private final RemoveResponseUseCase removeResponseUseCase;
@@ -87,7 +110,7 @@ public class ResponsesViewModel extends ViewModel {
         private final RemoveFlatmateUseCase removeFlatmateUseCase;
 
         @Inject
-        public Factory(GetUserRentalByIdUseCase getUserRentalByIdUseCase,
+        public Factory(GetRentalByIdUseCase getUserRentalByIdUseCase,
                        GetRentalUserResponsesUseCase getRentalUserResponsesUseCase,
                        ChangeResponseStatusUseCase changeResponseStatusUseCase,
                        RemoveResponseUseCase removeResponseUseCase,
