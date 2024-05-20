@@ -40,7 +40,7 @@ public class RespondToRentalUseCase {
         rentalResponses.add(response);
         rental.setResponses(rentalResponses);
 
-        userRepository.saveUser(user);
+        userRepository.setCurrentUser(user);
         rentalRepository.updateRental(rental);
     }
 }

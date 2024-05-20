@@ -36,6 +36,7 @@ dependencies {
     implementation project(':core:remote')
     implementation project(':domain:user')
     implementation project(':domain:identity')
+    implementation project(':domain:data')
     implementation project(':data:user')
     implementation project(':data:identity')
 

@@ -1,5 +1,9 @@
 package com.monke.user;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.monke.data.Result;
 import com.monke.rental.Rental;
 import com.monke.rental.RentalRepository;
 
@@ -19,18 +23,28 @@ public class PublishRentalUseCase {
         this.rentalRepository = rentalRepository;
     }
 
-    public void execute() {
+    public LiveData<Result<?>> execute() {
+        MutableLiveData<Result<?>> result = new MutableLiveData<>();
+
         User user = userRepository.getCurrentUser().getValue();
         Rental rental = rentalRepository.getCreatingRental();
         rental.setAuthorId(user.getId());
         rental.setCreationDate(Calendar.getInstance().getTimeInMillis());
         rental.setFlatmatesIds(List.of(user.getId()));
-        rentalRepository.publishRental(rental);
+        rentalRepository.publishRental(rental).observeForever(rentalRes -> {
+            if (rentalRes.isFailure()) {
+                result.setValue(rentalRes);
+                return;
+            }
+            ArrayList<Rental> rentalList = new ArrayList<>(user.getRentals());
+            rentalList.add(rental);
+            user.setRentals(rentalList);
 
-        ArrayList<Rental> rentalList = new ArrayList<>(user.getRentals());
-        rentalList.add(rental);
-        user.setRentals(rentalList);
+            userRepository.setCurrentUser(user);
 
-        userRepository.saveUser(user);
+            result.setValue(new Result.Success<>());
+        });
+
+        return result;
     }
 }

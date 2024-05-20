@@ -13,6 +13,6 @@ public class SaveEmailUseCase {
 
     public void execute(String email) {
         User user = new User(email);
-        userRepository.saveUser(user);
+        userRepository.setCreatingUser(user);
     }
 }

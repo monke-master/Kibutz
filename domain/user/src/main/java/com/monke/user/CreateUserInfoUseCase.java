@@ -39,6 +39,6 @@ public class CreateUserInfoUseCase {
                     .ifPresent(identity -> profile.setIdentities(List.of(identity)));
         }
         user.setProfile(profile);
-        userRepository.saveUser(user);
+        userRepository.setCreatingUser(user);
     }
 }

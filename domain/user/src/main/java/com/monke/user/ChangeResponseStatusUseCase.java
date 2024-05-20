@@ -39,7 +39,7 @@ public class ChangeResponseStatusUseCase {
         rentalResponses.add(newResponse);
         rental.setResponses(rentalResponses);
 
-        userRepository.saveUser(user);
+        userRepository.setCreatingUser(user);
         rentalRepository.updateRental(rental);
         return newResponse;
     }

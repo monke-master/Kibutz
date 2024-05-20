@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.monke.data.FilesRepository;
+import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 import com.monke.di.AppScope;
 import com.monke.user.Mocks;
@@ -20,13 +22,17 @@ public class RentalRepositoryImpl implements RentalRepository {
     private final String TAG = "RentalRepositoryImpl";
     private final RentalCacheDataSource cacheSource;
     private final RentalRemoteDataSource remoteDataSource;
+    private final FilesRepository filesRepository;
 
     private ArrayList<Rental> rentals = new ArrayList<>();
 
     @Inject
-    public RentalRepositoryImpl(RentalCacheDataSource cacheSource, RentalRemoteDataSource remoteDataSource) {
+    public RentalRepositoryImpl(RentalCacheDataSource cacheSource,
+                                RentalRemoteDataSource remoteDataSource,
+                                FilesRepository filesRepository) {
         this.cacheSource = cacheSource;
         this.remoteDataSource = remoteDataSource;
+        this.filesRepository = filesRepository;
         rentals.add(Mocks.mockRental);
         rentals.add(Mocks.mockRental2);
     }
@@ -43,9 +49,20 @@ public class RentalRepositoryImpl implements RentalRepository {
 
     @Override
     public LiveData<Result<?>> publishRental(Rental rental) {
-        MutableLiveData<Result<?>> result = new MutableLiveData<>();
-
         rentals.add(rental);
+        MutableLiveData<Result<?>> result = new MutableLiveData<>();
+        filesRepository.uploadImages(filesRepository.createPath(rental.getPhotos()), uploadRes -> {
+            if (uploadRes.isFailure()) {
+                result.setValue(uploadRes);
+                return;
+            }
+            remoteDataSource.publishRental(new RentalRemote(rental),
+                    (OnCompleteListener<Result<RentalRemote>>) publishRes -> {
+                result.setValue(publishRes);
+            });
+        });
+
+
         return result;
     }
 

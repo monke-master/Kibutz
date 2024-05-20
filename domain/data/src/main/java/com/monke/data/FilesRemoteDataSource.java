@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 
 public interface FilesRemoteDataSource {
 
-    LiveData<Result> uploadFile(Uri uri, String path);
+    void uploadFile(Uri uri, String path, OnCompleteListener<Result<?>> onCompleteListener);
 
-    LiveData<Result<String>> getFileDownloadUrl(String path);
+    void getFileDownloadUrl(String path, OnCompleteListener<Result<String>> onCompleteListener);
 }

@@ -10,7 +10,7 @@ public interface UserRepository {
 
     Optional<User> getUserById(String id);
 
-    void saveUser(User user);
+    void setCreatingUser(User user);
 
     User getCreatingUser();
 

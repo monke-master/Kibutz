@@ -1,5 +1,7 @@
 package com.monke.rental.newrental;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +16,8 @@ public class ContactsViewModel extends ViewModel {
     private ContactsUiState contactsUiState = new ContactsUiState();
     private CreateRentalUseCase createRentalUseCase;
     private PublishRentalUseCase publishRentalUseCase;
+
+    private final String TAG = "ContactsViewModel";
 
     public ContactsViewModel(CreateRentalUseCase createRentalUseCase,
                              PublishRentalUseCase publishRentalUseCase) {
@@ -31,7 +35,9 @@ public class ContactsViewModel extends ViewModel {
                 contactsUiState.getPhone(),
                 contactsUiState.getTelegram()
         );
-        publishRentalUseCase.execute();
+        publishRentalUseCase.execute().observeForever(result -> {
+            Log.d(TAG, result.toString());
+        });
     }
 
     public static class Factory implements ViewModelProvider.Factory {

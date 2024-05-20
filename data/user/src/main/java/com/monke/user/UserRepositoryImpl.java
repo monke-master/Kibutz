@@ -28,6 +28,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final IdentityRepository identityRepository;
 
     private ArrayList<User> users;
+    private final String TAG = "UserRepositoryImpl";
 
     @Inject
     public UserRepositoryImpl(UserCacheDataSource cacheDataSource,
@@ -36,6 +37,9 @@ public class UserRepositoryImpl implements UserRepository {
                               FilesRepository filesRepository,
                               IdentityRepository identityRepository) {
         Log.d("UserRepositoryImpl", "constructor");
+        users = new ArrayList<>();
+        users.add(Mocks.cockUser);
+        users.add(Mocks.mockUser);
         this.cacheDataSource = cacheDataSource;
         this.authDataSource = authDataSource;
         this.remoteDataSource = remoteDataSource;
@@ -49,7 +53,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void setCreatingUser(User user) {
         cacheDataSource.saveCreatingUser(user);
     }
 
@@ -60,6 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void setCurrentUser(User user) {
+        Log.d(TAG, user.toString());
         cacheDataSource.saveCurrentUser(user);
     }
 
