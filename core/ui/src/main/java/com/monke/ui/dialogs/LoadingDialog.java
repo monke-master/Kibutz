@@ -1,6 +1,5 @@
-package com.monke.auth.ui.email;
+package com.monke.ui.dialogs;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.monke.auth.databinding.DialogConfirmEmailBinding;
+import com.monke.ui.databinding.DialogLoadingBinding;
 
-public class EmailConfirmationDialog extends DialogFragment {
+public class LoadingDialog extends DialogFragment {
 
-    public static final String TAG = "EmailConfirmationDialog";
+    public static final String TAG = "LoadingDialog";
 
     @Override
     public void onStart() {
@@ -29,7 +28,7 @@ public class EmailConfirmationDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        var binding = DialogConfirmEmailBinding.inflate(inflater, container, false);
+        var binding = DialogLoadingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

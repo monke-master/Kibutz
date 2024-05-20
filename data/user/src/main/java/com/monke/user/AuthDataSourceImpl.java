@@ -47,6 +47,18 @@ public class AuthDataSourceImpl implements AuthDataSource {
         return emailConfirmed;
     }
 
+    @Override
+    public void signIn(String email, String password, OnCompleteListener<Result<String>> listener) {
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        listener.onComplete(new Result.Success<>(auth.getCurrentUser().getUid()));
+                    } else {
+                        listener.onComplete(new Result.Failure<>(task.getException()));
+                    }
+                });
+    }
+
     private void sendLetter(String email) {
         auth.createUserWithEmailAndPassword(email, rawPassword)
                 .addOnCompleteListener(task -> {

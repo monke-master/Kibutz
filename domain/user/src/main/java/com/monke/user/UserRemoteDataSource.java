@@ -7,7 +7,7 @@ import com.monke.data.Result;
 
 public interface UserRemoteDataSource {
 
-    void createUser(UserRemote user, OnCompleteListener<Result<?>> completeListener);
+    void createUser(UserRemote user, OnCompleteListener<Result<?>> listener);
 
-    LiveData<Result<User>> getUserById(String id);
+    void getUserById(String id, OnCompleteListener<Result<UserRemote>> listener);
 }

@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
@@ -28,7 +30,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     public void createUser(UserRemote user, OnCompleteListener<Result<?>> completeListener) {
         firestore
                 .collection(USERS_COLLECTION)
-                .document(user.getId())
+                .document(user.id)
                 .set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -40,7 +42,18 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     @Override
-    public LiveData<Result<User>> getUserById(String id) {
-        return null;
+    public void getUserById(String id, OnCompleteListener<Result<UserRemote>> onCompleteListener) {
+        firestore
+                .collection(USERS_COLLECTION)
+                .document(id)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        var user = task.getResult().toObject(UserRemote.class);
+                        onCompleteListener.onComplete(new Result.Success<>(user));
+                    } else {
+                        onCompleteListener.onComplete(new Result.Failure<>(task.getException()));
+                    }
+                });
     }
 }

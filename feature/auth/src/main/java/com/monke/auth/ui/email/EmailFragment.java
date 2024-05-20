@@ -73,7 +73,7 @@ public class EmailFragment extends Fragment {
             mViewModel.verifyEmail();
             observeConfirmationStatus();
             var dialog = new EmailConfirmationDialog();
-            dialog.show(getChildFragmentManager(), "EmailConfirmationDialog");
+            dialog.show(getChildFragmentManager(), EmailConfirmationDialog.TAG);
         });
     }
 

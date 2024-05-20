@@ -11,4 +11,5 @@ public interface AuthDataSource {
 
     LiveData<Result<Boolean>> sendConfirmationLetter(String email);
 
+    void signIn(String email, String password, OnCompleteListener<Result<String>> listener);
 }

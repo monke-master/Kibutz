@@ -5,6 +5,17 @@ public sealed class UiStatusState permits
         UiStatusState.Error,
         UiStatusState.Success {
 
+    public static UiStatusState fromResult(Result result) {
+        if (result.isFailure()) {
+            return new UiStatusState.Error(result.getException());
+        }
+        return new UiStatusState.Success();
+    }
+
+    public Exception getException() {
+        return ((Error) this).exception;
+    }
+
     public boolean isSuccess() {
         return this instanceof Success;
     }

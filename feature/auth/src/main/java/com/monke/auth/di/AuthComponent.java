@@ -1,5 +1,6 @@
 package com.monke.auth.di;
 
+import com.monke.auth.ui.SignInFragment;
 import com.monke.auth.ui.email.EmailFragment;
 import com.monke.auth.ui.StartFragment;
 import com.monke.auth.ui.info.UserInfoFragment;
@@ -21,12 +22,10 @@ import dagger.Component;
 public interface AuthComponent {
 
     void inject(StartFragment fragment);
-
     void inject(EmailFragment fragment);
-
     void inject(PasswordFragment fragment);
-
     void inject(UserInfoFragment fragment);
+    void inject(SignInFragment fragment);
 
     @Component.Builder
     interface Builder {

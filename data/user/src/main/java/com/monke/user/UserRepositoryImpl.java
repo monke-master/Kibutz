@@ -93,4 +93,26 @@ public class UserRepositoryImpl implements UserRepository {
     public LiveData<Result<Boolean>> sendConfirmationLetter(String email) {
         return authDataSource.sendConfirmationLetter(email);
     }
+
+    @Override
+    public LiveData<Result<?>> signIn(String email, String password) {
+        MutableLiveData<Result<?>> result = new MutableLiveData<>();
+        authDataSource.signIn(email, password, signInResult -> {
+            if (signInResult.isFailure()) {
+                result.setValue(signInResult);
+                return;
+            }
+
+            remoteDataSource.getUserById(signInResult.get(), userResult -> {
+                if (userResult.isFailure()) {
+                    result.setValue(userResult);
+                    return;
+                }
+
+                cacheDataSource.saveCurrentUser(userResult.get().toDomain());
+                result.setValue(new Result.Success<>());
+            });
+        });
+        return result;
+    }
 }
