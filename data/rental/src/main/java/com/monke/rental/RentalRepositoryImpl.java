@@ -145,18 +145,29 @@ public class RentalRepositoryImpl implements RentalRepository {
 
                 var rentalRemote = rentalResult.get();
 
-                // Get identities data
-                ArrayList<Identity> identities = new ArrayList<>();
-                for (String identityId: rentalRemote.identityFilters) {
-                    identityRepository.getIdentityById(identityId).ifPresent(identities::add);
-                }
+                // Get responses
+                getResponses(rentalRemote.responsesIds, responsesResult -> {
+                    if (responsesResult.isFailure()) {
+                        listener.onComplete(new Result.Failure<>(responsesResult.getException()));
+                        return;
+                    }
 
-                var rental = rentalRemote.toDomain(identities);
-                rentals.add(rental);
-                listener.onComplete(new Result.Success<>(rental));
+                    // Get identities data
+                    ArrayList<Identity> identities = new ArrayList<>();
+                    for (String identityId: rentalRemote.identityFilters) {
+                        identityRepository.getIdentityById(identityId).ifPresent(identities::add);
+                    }
+
+                    var rental = rentalRemote.toDomain(identities, responsesResult.get());
+                    rentals.add(rental);
+                    listener.onComplete(new Result.Success<>(rental));
+                });
+
             });
         });
     }
+
+
 
     private List<String> getPhotosToUpload(Rental oldRental, Rental newRental) {
         if (oldRental == null) {
@@ -172,5 +183,27 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void uploadResponse(Response response, OnCompleteListener<Result<?>> listener) {
         responseDataSource.uploadResponse(new ResponseRemote(response), listener);
+    }
+
+    @Override
+    public void getResponses(List<String> responsesIds, OnCompleteListener<Result<List<Response>>> listener) {
+        var responses = new ArrayList<Response>();
+        if (responsesIds.isEmpty()) {
+            listener.onComplete(new Result.Success<>(responses));
+            return;
+        }
+        for (String responseId: responsesIds) {
+            responseDataSource.getResponseById(responseId, result -> {
+                if (result.isFailure()) {
+                    listener.onComplete(new Result.Failure<>(result.getException()));
+                    return;
+                }
+
+                responses.add(result.get().toDomain());
+                if (responses.size() == responsesIds.size()) {
+                    listener.onComplete(new Result.Success<>(responses));
+                }
+            });
+        }
     }
 }

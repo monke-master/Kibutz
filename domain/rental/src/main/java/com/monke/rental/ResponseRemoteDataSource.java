@@ -7,5 +7,5 @@ public interface ResponseRemoteDataSource {
 
     void uploadResponse(ResponseRemote response, OnCompleteListener<Result<?>> listener);
 
-    void getResponseId(String responseId, OnCompleteListener<Result<ResponseRemote>> listener);
+    void getResponseById(String responseId, OnCompleteListener<Result<ResponseRemote>> listener);
 }

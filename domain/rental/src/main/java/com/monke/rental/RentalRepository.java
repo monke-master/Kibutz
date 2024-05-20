@@ -26,4 +26,6 @@ public interface RentalRepository {
     void getRentalById(String id, OnCompleteListener<Result<Rental>> listener);
 
     void uploadResponse(Response response, OnCompleteListener<Result<?>> listener);
+
+    void getResponses(List<String> responsesIds, OnCompleteListener<Result<List<Response>>> listener);
 }

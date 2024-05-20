@@ -54,7 +54,11 @@ public class ResponsesViewModel extends ViewModel {
 
     private void fetchData() {
         Rental rental = getRentalByIdUseCase.execute(rentalId);
-        _responses.setValue(new ArrayList<>(getRentalUserResponsesUseCase.execute(rental)));
+        getRentalUserResponsesUseCase.execute(rental).observeForever(result -> {
+            if (result.isSuccess()) {
+                _responses.setValue(result.get());
+            }
+        });
     }
 
     public void changeResponseStatus(Response response, Response.Status status) {

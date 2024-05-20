@@ -2,6 +2,7 @@ package com.monke.ui.rental;
 
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -20,6 +21,7 @@ public class ResponseViewHolder extends RecyclerView.ViewHolder {
         void onLike(Response response);
         void onAddFlatmate(Response response);
         void onRemoveFlatmate(Response response);
+        void onClicked(User user);
     }
 
     private ItemResponseBinding mBinding;
@@ -35,6 +37,7 @@ public class ResponseViewHolder extends RecyclerView.ViewHolder {
     public void bind(Pair<Response, User> response, ResponseInteractor interactor) {
         this.interactor = interactor;
         this.response = response.first;
+        mBinding.getRoot().setOnClickListener(v -> interactor.onClicked(response.second));
         Glide
             .with(itemView.getContext())
             .load(response.second.getProfile().getPhotosUrl().get(0))
@@ -47,6 +50,8 @@ public class ResponseViewHolder extends RecyclerView.ViewHolder {
             case LIKED -> initAsAddFlatmateBtn();
             case FLATMATE -> initAsRemoveFlatmateBtn();
         }
+
+
     }
 
     private void initAsLikeBtn() {

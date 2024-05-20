@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.navigation.ResponsesNavigationContract;
+import com.example.navigation.UserNavigationContract;
 import com.monke.rental.databinding.FragmentResponsesBinding;
 import com.monke.rental.di.RentalComponentProvider;
 import com.monke.ui.rental.ResponseRWAdapter;
@@ -95,6 +96,13 @@ public class ResponsesFragment extends Fragment {
             @Override
             public void onRemoveFlatmate(Response response) {
                 mViewModel.changeResponseStatus(response, Response.Status.LIKED);
+            }
+
+            @Override
+            public void onClicked(User user) {
+                NavHostFragment
+                        .findNavController(ResponsesFragment.this)
+                        .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()));
             }
         });
         recyclerView.setAdapter(mResponseRWAdapter);

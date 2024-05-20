@@ -32,7 +32,7 @@ public class ResponseRemoteDataSourceImpl implements ResponseRemoteDataSource {
     }
 
     @Override
-    public void getResponseId(String responseId, OnCompleteListener<Result<ResponseRemote>> listener) {
+    public void getResponseById(String responseId, OnCompleteListener<Result<ResponseRemote>> listener) {
         firestore
                 .collection(RESPONSE_COLLECTION)
                 .document(responseId)
