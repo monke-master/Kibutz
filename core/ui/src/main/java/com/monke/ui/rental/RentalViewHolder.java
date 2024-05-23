@@ -12,6 +12,9 @@ import com.monke.rental.Realty;
 import com.monke.rental.Rental;
 import com.monke.ui.R;
 import com.monke.ui.databinding.ItemRentalBinding;
+import com.monke.utils.StringsHelper;
+
+import java.util.Formatter;
 
 public class RentalViewHolder extends RecyclerView.ViewHolder {
     private final ItemRentalBinding mBinding;
@@ -37,7 +40,10 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
         Realty realty = rental.getRealty();
         mBinding.txtPrice.setText(context.getString(R.string.price_info, rental.getPrice()));
         mBinding.txtRooms.setText(context.getString(R.string.rooms_info, realty.getRoomsCount()));
-        mBinding.txtArea.setText(context.getString(R.string.area_info, realty.getArea()));
+        mBinding.txtArea.setText(context.getString(
+                                R.string.area_info,
+                                StringsHelper.formatFloat(realty.getArea()))
+        );
 
         String flatmatesInfo = context.getResources().getQuantityString(
                 R.plurals.flatmates,

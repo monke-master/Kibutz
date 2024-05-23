@@ -34,6 +34,7 @@ dependencies {
     implementation project(':domain:identity')
     implementation project(':domain:user')
     implementation project(':core:navigation')
+    implementation project(':core:utils')
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'

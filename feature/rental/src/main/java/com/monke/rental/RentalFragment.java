@@ -25,6 +25,7 @@ import com.monke.ui.photo.PhotoPagerAdapter;
 import com.monke.ui.rental.RealtyUiHelpers;
 import com.monke.ui.user.FlatmateRWAdapter;
 import com.monke.ui.rental.RealtyDetailRWAdapter;
+import com.monke.utils.StringsHelper;
 
 import javax.inject.Inject;
 
@@ -170,7 +171,9 @@ public class RentalFragment extends Fragment {
                             rental.getRealty().getRoomsCount())
             );
             info.txtType.setText(com.monke.ui.R.string.flat);
-            info.txtArea.setText(getString(com.monke.ui.R.string.area_info, rental.getRealty().getArea()));
+            info.txtArea.setText(getString(
+                    com.monke.ui.R.string.area_info,
+                    StringsHelper.formatFloat(rental.getRealty().getArea())));
             if (rental.getRealty() instanceof Flat) {
                 bindFlatInfo((Flat) rental.getRealty());
             }

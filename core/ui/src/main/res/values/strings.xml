@@ -79,7 +79,7 @@
     <string name="flatmates_count">Количество соседей</string>
     <string name="rooms_info">%d комн. кв</string>
     <string name="floors_info">%d/%d этаж</string>
-    <string name="area_info">%f м<sup>2</sup></string>
+    <string name="area_info">%s м<sup>2</sup></string>
     <string name="price_info">%d ₽/мес</string>
     <string name="responses">Отклики</string>
     <string name="response_status_like">Поздравляем! Вы подошли друг другу. Свяжитесь с владельцем объявления, чтобы договориться о дальнейших действиях</string>
