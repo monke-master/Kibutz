@@ -28,8 +28,12 @@ public class RealtyRemote {
         this.floorsCount = realty.getFloorsCount();
         if (realty instanceof Flat) {
             type = Type.FLAT;
-        } else {
+            floor = ((Flat) realty).getFloor();
+            kitchenArea = ((Flat) realty).getKitchenArea();
+            livingArea = ((Flat) realty).getLivingArea();
+        } else if (realty instanceof House) {
             type = Type.HOUSE;
+            plotArea = ((House) realty).getPlotArea();
         }
     }
 

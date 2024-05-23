@@ -77,6 +77,7 @@ public class EditProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mIdentityChipAdapter = new IdentityChipAdapter(mBinding.chips, getLayoutInflater());
+        initToolbar();
         fillUserInfo();
         initEditTextBio();
         initAddIdentityChip();
@@ -86,6 +87,10 @@ public class EditProfileFragment extends Fragment {
         initSaveButton();
         observePhotos();
         observeUiStatusState();
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(this).navigateUp());
     }
 
     private void setFragmentResultListener() {

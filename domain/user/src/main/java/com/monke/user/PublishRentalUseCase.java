@@ -1,5 +1,7 @@
 package com.monke.user;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -16,6 +18,7 @@ import javax.inject.Inject;
 public class PublishRentalUseCase {
     private final UserRepository userRepository;
     private final RentalRepository rentalRepository;
+    private final String TAG = "PublishRentalUseCase";
 
     @Inject
     public PublishRentalUseCase(UserRepository userRepository, RentalRepository rentalRepository) {
@@ -31,6 +34,7 @@ public class PublishRentalUseCase {
         rental.setAuthorId(user.getId());
         rental.setCreationDate(Calendar.getInstance().getTimeInMillis());
         rental.setFlatmatesIds(List.of(user.getId()));
+        Log.d(TAG, rental.toString());
         rentalRepository.publishRental(rental).observeForever(rentalRes -> {
             if (rentalRes.isFailure()) {
                 result.setValue(rentalRes);

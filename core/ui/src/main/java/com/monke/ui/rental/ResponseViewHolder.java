@@ -38,10 +38,12 @@ public class ResponseViewHolder extends RecyclerView.ViewHolder {
         this.interactor = interactor;
         this.response = response.first;
         mBinding.image.setOnClickListener(v -> interactor.onClicked(response.second));
-        Glide
-            .with(itemView.getContext())
-            .load(response.second.getProfile().getPhotosUrl().get(0))
-            .into(mBinding.image);
+        if (!response.second.getProfile().getPhotosUrl().isEmpty()) {
+            Glide
+                    .with(itemView.getContext())
+                    .load(response.second.getProfile().getPhotosUrl().get(0))
+                    .into(mBinding.image);
+        }
 
         mBinding.btnCancel.setOnClickListener(v -> interactor.onDislike(response.first));
 
