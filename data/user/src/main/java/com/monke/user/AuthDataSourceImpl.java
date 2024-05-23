@@ -22,6 +22,7 @@ public class AuthDataSourceImpl implements AuthDataSource {
     private MutableLiveData<Result<Boolean>> _emailConfirmed = new MutableLiveData<>(new Result.Success(false));
     private LiveData<Result<Boolean>> emailConfirmed = _emailConfirmed;
     private final String rawPassword;
+    private final String TAG = "AuthDataSourceImpl";
 
     @Inject
     public AuthDataSourceImpl(FirebaseAuth auth) {
@@ -31,14 +32,16 @@ public class AuthDataSourceImpl implements AuthDataSource {
 
     @Override
     public void createUser(User user, OnCompleteListener<Result<String>> listener) {
-        auth.getCurrentUser().updatePassword(user.getPassword())
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        listener.onComplete(new Result.Success(auth.getCurrentUser().getUid()));
-                    } else {
-                        listener.onComplete(new Result.Failure<>(task.getException()));
-                    }
-                });
+        ThreadUtils.runOnBackground(() -> {
+            auth.getCurrentUser().updatePassword(user.getPassword())
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            listener.onComplete(new Result.Success(auth.getCurrentUser().getUid()));
+                        } else {
+                            listener.onComplete(new Result.Failure<>(task.getException()));
+                        }
+                    });
+        });
     }
 
     @Override
@@ -49,14 +52,16 @@ public class AuthDataSourceImpl implements AuthDataSource {
 
     @Override
     public void signIn(String email, String password, OnCompleteListener<Result<String>> listener) {
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        listener.onComplete(new Result.Success<>(auth.getCurrentUser().getUid()));
-                    } else {
-                        listener.onComplete(new Result.Failure<>(task.getException()));
-                    }
-                });
+        ThreadUtils.runOnBackground(() -> {
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            listener.onComplete(new Result.Success<>(auth.getCurrentUser().getUid()));
+                        } else {
+                            listener.onComplete(new Result.Failure<>(task.getException()));
+                        }
+                    });
+        });
     }
 
     private void sendLetter(String email) {
@@ -65,7 +70,7 @@ public class AuthDataSourceImpl implements AuthDataSource {
                     if (task.isSuccessful()) {
                         ThreadUtils.runOnBackground(() -> {
                             auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
-                                ThreadUtils.runOnBackground(() -> checkConfirmationStatus(email, rawPassword));
+                                checkConfirmationStatus(email, rawPassword);
                             });
                         });
                     } else {
@@ -75,23 +80,25 @@ public class AuthDataSourceImpl implements AuthDataSource {
     }
 
     private void checkConfirmationStatus(String email, String password) {
-        Log.d("awaitForEmailConfirmation", Thread.currentThread().getName());
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                _emailConfirmed.setValue(new Result.Failure<>(task.getException()));
-            }
-            if (auth.getCurrentUser().isEmailVerified()) {
-                _emailConfirmed.setValue(new Result.Success<>(true));
-            } else {
-                ThreadUtils.runOnBackground(() -> {
-                    try {
-                        Thread.sleep(5000L);
-                        checkConfirmationStatus(email, password);
-                    } catch (InterruptedException e) {
-
-                    }
-                });
-            }
+        ThreadUtils.runOnBackground(() -> {
+            Log.d("awaitForEmailConfirmation", Thread.currentThread().getName());
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    _emailConfirmed.setValue(new Result.Failure<>(task.getException()));
+                }
+                if (auth.getCurrentUser().isEmailVerified()) {
+                    _emailConfirmed.setValue(new Result.Success<>(true));
+                } else {
+                    ThreadUtils.runOnBackground(() -> {
+                        try {
+                            Thread.sleep(5000L);
+                            checkConfirmationStatus(email, password);
+                        } catch (InterruptedException e) {
+                            Log.e(TAG, e.getMessage());
+                        }
+                    });
+                }
+            });
         });
     }
 }

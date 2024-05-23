@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
+import com.monke.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,24 +55,26 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
 
     @Override
     public void getAvailableRentalsIds(String userId, OnCompleteListener<Result<List<String>>> listener) {
-        firestore
-                .collection(RENTAL_COLLECTION)
-                .whereNotEqualTo("authorId", userId)
-                .orderBy("creationDate", Query.Direction.DESCENDING)
-                .limit(DATA_LIMIT)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        var rentals = task
-                                .getResult()
-                                .getDocuments()
-                                .stream()
-                                .map(doc -> doc.getId())
-                                .collect(Collectors.toList());
-                        listener.onComplete(new Result.Success<>(rentals));
-                    } else {
-                        listener.onComplete(new Result.Failure<>(task.getException()));
-                    }
-                });
+        ThreadUtils.runOnBackground(() -> {
+            firestore
+                    .collection(RENTAL_COLLECTION)
+                    .whereNotEqualTo("authorId", userId)
+                    .orderBy("creationDate", Query.Direction.DESCENDING)
+                    .limit(DATA_LIMIT)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            var rentals = task
+                                    .getResult()
+                                    .getDocuments()
+                                    .stream()
+                                    .map(doc -> doc.getId())
+                                    .collect(Collectors.toList());
+                            listener.onComplete(new Result.Success<>(rentals));
+                        } else {
+                            listener.onComplete(new Result.Failure<>(task.getException()));
+                        }
+                    });
+        });
     }
 }

@@ -63,7 +63,6 @@ public class RentalViewModel extends ViewModel {
                 _rental.setValue(rental);
                 if (!userIfAuthor()) {
                     _responseStatus.setValue(getResponseStatusUseCase.execute(user, rental));
-                    Log.d(TAG, _responseStatus.getValue().toString());
                 }
             }
         });
