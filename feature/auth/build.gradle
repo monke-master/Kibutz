@@ -38,6 +38,7 @@ dependencies {
     implementation project(':data:rental')
     implementation project(':core:ui')
     implementation project(':core:remote')
+    implementation project(':core:navigation')
     implementation project(':domain:data')
     implementation project(':core:di')
     implementation project(':core:utils')

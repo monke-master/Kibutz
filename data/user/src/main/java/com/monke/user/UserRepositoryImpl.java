@@ -32,6 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final FilesRepository filesRepository;
     private final IdentityRepository identityRepository;
     private final RentalRepository rentalRepository;
+    private final UserPrefDataSource userPrefDataSource;
     private final String FILES_COLLECTION = "users";
 
     private ArrayList<User> users;
@@ -43,7 +44,8 @@ public class UserRepositoryImpl implements UserRepository {
                               UserRemoteDataSource remoteDataSource,
                               FilesRepository filesRepository,
                               IdentityRepository identityRepository,
-                              RentalRepository rentalRepository) {
+                              RentalRepository rentalRepository,
+                              UserPrefDataSource userPrefDataSource) {
         Log.d("UserRepositoryImpl", "constructor");
         users = new ArrayList<>();
         users.add(Mocks.cockUser);
@@ -54,6 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
         this.filesRepository = filesRepository;
         this.identityRepository = identityRepository;
         this.rentalRepository = rentalRepository;
+        this.userPrefDataSource = userPrefDataSource;
     }
 
     @Override
@@ -149,6 +152,7 @@ public class UserRepositoryImpl implements UserRepository {
                     return;
                 }
                 cacheDataSource.saveCurrentUser(user);
+                userPrefDataSource.saveUserCredentials(user.getEmail(), user.getPassword());
                 res.setValue(new Result.Success<>());
             });
         });
@@ -197,6 +201,7 @@ public class UserRepositoryImpl implements UserRepository {
                         // Save data to cache
                         cacheDataSource.saveCurrentUser(userRemote.toDomain(
                                 rentalsRes.get(), responsesResult.get()));
+                        userPrefDataSource.saveUserCredentials(email, password);
                         result.setValue(new Result.Success<>());
                     });
                 });
@@ -240,5 +245,16 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void updateLocalUserData(User user) {
         cacheDataSource.saveCurrentUser(user);
+    }
+
+    @Override
+    public boolean hasAuthenticatedUser() {
+        return userPrefDataSource.getUserCredentials() != null;
+    }
+
+    @Override
+    public LiveData<Result<?>> signInWithSavedCredentials() {
+        var credentials = userPrefDataSource.getUserCredentials();
+        return signIn(credentials.first, credentials.second);
     }
 }

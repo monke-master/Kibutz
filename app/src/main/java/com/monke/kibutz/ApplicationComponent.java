@@ -1,5 +1,7 @@
 package com.monke.kibutz;
 
+import android.content.Context;
+
 import com.monke.auth.di.AuthComponentDeps;
 import com.monke.di.AppScope;
 import com.monke.firebase.RemoteModule;
@@ -12,6 +14,7 @@ import com.monke.rental.di.RentalComponentDeps;
 import com.monke.user.UserRepository;
 import com.monke.user.di.UserModule;
 
+import dagger.BindsInstance;
 import dagger.Component;
 
 @Component(modules = {
@@ -32,5 +35,7 @@ public interface ApplicationComponent extends
     @Component.Builder
     interface Builder {
         ApplicationComponent build();
+        @BindsInstance
+        Builder setContext(Context context);
     }
 }

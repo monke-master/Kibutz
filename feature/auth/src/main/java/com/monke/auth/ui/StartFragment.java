@@ -14,25 +14,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.navigation.MainNavigationContract;
 import com.monke.auth.R;
 import com.monke.auth.databinding.FragmentStartBinding;
+import com.monke.auth.di.AuthComponentProvider;
+
+import javax.inject.Inject;
 
 public class StartFragment extends Fragment {
+
+    @Inject
+    public StartViewModel.Factory factory;
 
     private StartViewModel mViewModel;
     private FragmentStartBinding mBinding;
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        mViewModel = new ViewModelProvider(this).get(StartViewModel.class);
-        mViewModel.init();
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = FragmentStartBinding.inflate(inflater, container, false);
+        AuthComponentProvider.component.inject(this);
+        mViewModel = new ViewModelProvider(this, factory).get(StartViewModel.class);
+        mViewModel.init();
         return mBinding.getRoot();
     }
 
@@ -42,6 +45,7 @@ public class StartFragment extends Fragment {
 
         initSignUpBtn();
         initSignInBtn();
+        observeAuthStatus();
     }
 
     private void initSignUpBtn() {
@@ -58,5 +62,15 @@ public class StartFragment extends Fragment {
                         .findNavController(this)
                         .navigate(R.id.action_startFragment_to_signInFragment)
         );
+    }
+
+    private void observeAuthStatus() {
+        mViewModel.authenticated.observe(getViewLifecycleOwner(), authenticated -> {
+            if (authenticated) {
+                NavHostFragment
+                        .findNavController(this)
+                        .navigate(MainNavigationContract.createDeepLink());
+            }
+        });
     }
 }

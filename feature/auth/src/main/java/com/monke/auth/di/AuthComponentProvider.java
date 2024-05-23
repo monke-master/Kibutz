@@ -5,10 +5,12 @@ public class AuthComponentProvider {
     private static AuthComponentDeps dependencies;
 
     public static void initialize() {
-        component = DaggerAuthComponent
-                .builder()
-                .setDependencies(dependencies)
-                .build();
+        if (component == null) {
+            component = DaggerAuthComponent
+                    .builder()
+                    .setDependencies(dependencies)
+                    .build();
+        }
     }
 
     public static void setDependencies(AuthComponentDeps deps) {

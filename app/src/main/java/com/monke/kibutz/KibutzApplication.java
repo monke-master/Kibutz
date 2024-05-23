@@ -30,11 +30,13 @@ public class KibutzApplication extends Application {
     }
 
     private void initComponents() {
-        applicationComponent = DaggerApplicationComponent.builder().build();
+        applicationComponent = DaggerApplicationComponent.builder().setContext(this).build();
         AuthComponentProvider.setDependencies(applicationComponent);
         ProfileComponentProvider.setDependencies(applicationComponent);
         RentalComponentProvider.setDependencies(applicationComponent);
         HomeComponentProvider.setDependencies(applicationComponent);
+
+        AuthComponentProvider.initialize();
     }
 
     private void initUtils() {

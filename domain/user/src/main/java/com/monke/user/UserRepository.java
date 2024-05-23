@@ -28,4 +28,8 @@ public interface UserRepository {
 
     void updateLocalUserData(User user);
 
+    boolean hasAuthenticatedUser();
+
+    LiveData<Result<?>> signInWithSavedCredentials();
+
 }
