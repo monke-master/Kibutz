@@ -1,6 +1,8 @@
 package com.monke.rental;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -211,22 +213,27 @@ public class RentalRepositoryImpl implements RentalRepository {
     public LiveData<Result<List<Rental>>> getAvailableRentals(String userId) {
         var result = new MutableLiveData<Result<List<Rental>>>();
         ThreadUtils.runOnBackground(() -> {
-            remoteDataSource.getAvailableRentals(userId, rentalsRes -> {
+            remoteDataSource.getAvailableRentalsIds(userId, rentalsRes -> {
                 if (rentalsRes.isFailure()) {
                     result.setValue(new Result.Failure<>(rentalsRes.getException()));
+                    Log.e(TAG, rentalsRes.getException().toString());
                     return;
                 }
 
-                var rentals = rentalsRes
-                                    .get()
-                                    .stream()
-                                    .map(rental -> rental.toDomain(
-                                            Collections.emptyList(),
-                                            Collections.emptyList()))
-                                    .collect(Collectors.toList());
-                result.setValue(new Result.Success<>(rentals));
-            });
+                ArrayList<Rental> rentals = new ArrayList<>();
+                for (String id: rentalsRes.get()) {
+                    getRentalById(id, rentalResult -> {
+                        if (rentalResult.isFailure()) {
+                            result.setValue(new Result.Failure<>(rentalResult.getException()));
+                            Log.e(TAG, rentalResult.getException().toString());
+                            return;
+                        }
 
+                        rentals.add(rentalResult.get());
+                        result.setValue(new Result.Success<>(rentals));
+                    });
+                }
+            });
         });
         return result;
     }

@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
                 result.setValue(new Result.Failure<>(userRes.getException()));
                 return;
             }
-            result.setValue(new Result.Success<>(userRes.get().toDomain(Collections.emptyList())));
+            result.setValue(new Result.Success<>(userRes.get().toDomain(Collections.emptyList(), Collections.emptyList())));
         });
         return result;
     }
@@ -187,12 +187,19 @@ public class UserRepositoryImpl implements UserRepository {
                         return;
                     }
 
-                    // Save data to cache
-                    cacheDataSource.saveCurrentUser(userRemote.toDomain(rentalsRes.get()));
-                    result.setValue(new Result.Success<>());
+                    // Get responses
+                    rentalRepository.getResponses(userRemote.responsesIds, responsesResult -> {
+                        if (responsesResult.isFailure()) {
+                            result.setValue(responsesResult);
+                            return;
+                        }
+
+                        // Save data to cache
+                        cacheDataSource.saveCurrentUser(userRemote.toDomain(
+                                rentalsRes.get(), responsesResult.get()));
+                        result.setValue(new Result.Success<>());
+                    });
                 });
-
-
             });
         });
         return result;

@@ -3,6 +3,7 @@ package com.monke.user;
 
 import com.monke.identity.Identity;
 import com.monke.rental.Rental;
+import com.monke.rental.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,13 +50,13 @@ public class UserRemote {
         this.rentalsIds = user.getRentals().stream().map(i -> i.getId()).collect(Collectors.toList());
     }
 
-    public User toDomain(List<Rental> rentals) {
+    public User toDomain(List<Rental> rentals, List<Response> responses) {
         return new User(
                 this.id,
                 this.name,
                 this.email,
                 this.dateOfBirth,
-                Collections.emptyList(),
+                responses,
                 this.profile.toDomain(identities),
                 rentals
         );

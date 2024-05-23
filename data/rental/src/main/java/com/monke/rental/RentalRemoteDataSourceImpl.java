@@ -1,6 +1,7 @@
 package com.monke.rental;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.monke.data.OnCompleteListener;
 import com.monke.data.Result;
 
@@ -13,6 +14,7 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
 
     private final FirebaseFirestore firestore;
     private final String RENTAL_COLLECTION = "rentals";
+    private final int DATA_LIMIT = 10000;
 
     @Inject
     public RentalRemoteDataSourceImpl(FirebaseFirestore firestore) {
@@ -51,10 +53,12 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
     }
 
     @Override
-    public void getAvailableRentals(String userId, OnCompleteListener<Result<List<RentalRemote>>> listener) {
+    public void getAvailableRentalsIds(String userId, OnCompleteListener<Result<List<String>>> listener) {
         firestore
                 .collection(RENTAL_COLLECTION)
                 .whereNotEqualTo("authorId", userId)
+                .orderBy("creationDate", Query.Direction.DESCENDING)
+                .limit(DATA_LIMIT)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -62,7 +66,7 @@ public class RentalRemoteDataSourceImpl implements RentalRemoteDataSource {
                                 .getResult()
                                 .getDocuments()
                                 .stream()
-                                .map(doc -> doc.toObject(RentalRemote.class))
+                                .map(doc -> doc.getId())
                                 .collect(Collectors.toList());
                         listener.onComplete(new Result.Success<>(rentals));
                     } else {

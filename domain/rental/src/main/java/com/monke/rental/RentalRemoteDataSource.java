@@ -11,6 +11,6 @@ public interface RentalRemoteDataSource {
 
     void getRentalById(String id, OnCompleteListener<Result<RentalRemote>> listener);
 
-    void getAvailableRentals(String userId, OnCompleteListener<Result<List<RentalRemote>>> listener);
+    void getAvailableRentalsIds(String userId, OnCompleteListener<Result<List<String>>> listener);
 
 }

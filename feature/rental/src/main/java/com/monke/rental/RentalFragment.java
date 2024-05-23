@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.example.navigation.ContactsNavigationContract;
 import com.example.navigation.PhotoNavigationContract;
 import com.example.navigation.RentalNavigationContract;
@@ -64,16 +63,13 @@ public class RentalFragment extends Fragment {
         observeRental();
         observeFlatmates();
         initRespondBtn();
+        observeResponseStatus();
     }
 
     private void getArgs() {
         String rentalId = getArguments().getString(RentalNavigationContract.RENTAL_ID_KEY);
         mViewModel.setRentalId(rentalId);
 
-        String responseStatus = getArguments().getString(RentalNavigationContract.RESPONSE_STATUS_KEY);
-        if (responseStatus != null) {
-            mViewModel.setResponseStatus(Response.Status.valueOf(responseStatus));
-        }
     }
 
     private void initToolbar() {
@@ -87,43 +83,31 @@ public class RentalFragment extends Fragment {
             mBinding.responses.btnContact.setVisibility(View.GONE);
             mBinding.responses.txtStatus.setVisibility(View.GONE);
             mBinding.responses.btnResponses.setVisibility(View.VISIBLE);
-            mBinding.responses.btnResponses.setOnClickListener(v -> {
-                Bundle bundle = new Bundle();
-                bundle.putString(
-                        ResponsesNavigationContract.RENTAL_ID_KEY,
-                        mViewModel.rental.getValue().getId());
-                NavHostFragment
-                        .findNavController(this)
-                        .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
-            });
+            mBinding.responses.btnResponses.setOnClickListener(v -> navigateToResponses());
+            mBinding.btnRespond.setVisibility(View.GONE);
         } else {
             mBinding.responses.btnResponses.setVisibility(View.GONE);
         }
-        if (mViewModel.getResponseStatus() != null) {
-            String responseStatus = "";
-            switch (mViewModel.getResponseStatus()) {
-                case HANGING -> {
-                    responseStatus = getString(com.monke.ui.R.string.response_status_hanging);
-                    mBinding.responses.btnContact.setVisibility(View.GONE);
-                }
-                case LIKED -> responseStatus = getString(com.monke.ui.R.string.response_status_like);
-                case FLATMATE -> responseStatus = getString(com.monke.ui.R.string.response_status_flatmate);
-            }
-            mBinding.responses.txtStatus.setText(responseStatus);
-            mBinding.responses.btnContact.setOnClickListener(v -> {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(
-                        ContactsNavigationContract.CONTACTS_KEY,
-                        new ContactsModel(mViewModel.rental.getValue().getContacts()));
-                NavHostFragment
-                        .findNavController(this)
-                        .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
-            });
-            mBinding.btnRespond.setVisibility(View.GONE);
-        } else {
-            mBinding.responses.txtStatus.setVisibility(View.GONE);
-            mBinding.responses.btnContact.setVisibility(View.GONE);
-        }
+    }
+
+    private void navigateToResponses() {
+        Bundle bundle = new Bundle();
+        bundle.putString(
+                ResponsesNavigationContract.RENTAL_ID_KEY,
+                mViewModel.rental.getValue().getId());
+        NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
+    }
+
+    private void navigateToContacts() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(
+                ContactsNavigationContract.CONTACTS_KEY,
+                new ContactsModel(mViewModel.rental.getValue().getContacts()));
+        NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
     }
 
     private void initFlatmateAdapter() {
@@ -202,6 +186,28 @@ public class RentalFragment extends Fragment {
             v.setVisibility(View.GONE);
             mBinding.responses.txtStatus.setText(getString(com.monke.ui.R.string.response_status_hanging));
             mBinding.responses.txtStatus.setVisibility(View.VISIBLE);
+        });
+    }
+
+    private void observeResponseStatus() {
+        mViewModel.responseStatus.observe(getViewLifecycleOwner(), status -> {
+            if (status == null) return;
+            String responseStatus = "";
+            switch (status) {
+                case HANGING, DISLIKED -> responseStatus = getString(com.monke.ui.R.string.response_status_hanging);
+                case LIKED ->  {
+                    responseStatus = getString(com.monke.ui.R.string.response_status_like);
+                    mBinding.responses.btnContact.setVisibility(View.VISIBLE);
+                }
+                case FLATMATE -> {
+                    responseStatus = getString(com.monke.ui.R.string.response_status_flatmate);
+                    mBinding.responses.btnContact.setVisibility(View.VISIBLE);
+                }
+            }
+            mBinding.responses.txtStatus.setText(responseStatus);
+            mBinding.responses.txtStatus.setVisibility(View.VISIBLE);
+            mBinding.responses.btnContact.setOnClickListener(v -> navigateToContacts());
+            mBinding.btnRespond.setVisibility(View.GONE);
         });
     }
 }

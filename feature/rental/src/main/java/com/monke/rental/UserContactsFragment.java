@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,10 +42,17 @@ public class UserContactsFragment extends Fragment {
 
         var contactsViewController = new ContactsViewController(getActivity(), mBinding.getRoot(), contacts);
         contactsViewController.initViews();
+        initToolbar();
     }
 
     private void getArgs() {
         contacts = ((ContactsModel)getArguments().getParcelable(ContactsNavigationContract.CONTACTS_KEY))
                 .getContacts();
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp()
+        );
     }
 }
