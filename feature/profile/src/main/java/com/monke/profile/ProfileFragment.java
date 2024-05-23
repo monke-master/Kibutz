@@ -19,6 +19,7 @@ import com.example.navigation.RentalNavigationContract;
 import com.monke.profile.databinding.FragmentProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.rental.RentalRWAdapter;
+import com.monke.utils.StringsHelper;
 
 import java.util.stream.Collectors;
 
@@ -61,9 +62,13 @@ public class ProfileFragment extends Fragment {
 
     private void fillUserInfo() {
         mViewModel.user.observe(getViewLifecycleOwner(), user -> {
-            mBinding.txtName.setText(user.getName());
+            mBinding.txtName.setText(user.getName() + ", " + StringsHelper.getAge(user.getDateOfBirth()));
             if (!user.getProfile().getPhotosUrl().isEmpty()) {
-                Glide.with(getContext()).load(user.getProfile().getPhotosUrl().get(0)).circleCrop().into(mBinding.image);
+                Glide
+                    .with(getContext())
+                    .load(user.getProfile().getPhotosUrl().get(0))
+                    .circleCrop()
+                    .into(mBinding.image);
             }
         });
     }

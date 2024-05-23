@@ -21,6 +21,7 @@ import com.monke.profile.databinding.FragmentUserBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.chips.IdentityChipAdapter;
 import com.monke.ui.photo.PhotoPagerAdapter;
+import com.monke.utils.StringsHelper;
 
 import javax.inject.Inject;
 
@@ -82,7 +83,7 @@ public class UserFragment extends Fragment {
             });
             mBinding.image.setAdapter(photoPagerAdapter);
 
-            mBinding.txtName.setText(user.getName());
+            mBinding.txtName.setText(user.getName() + ", " + StringsHelper.getAge(user.getDateOfBirth()));
             mBinding.txtAboutMe.setText(user.getProfile().getBio());
 
             mIdentityChipAdapter.bind(user.getProfile().getIdentities(), false);

@@ -1,7 +1,11 @@
 package com.monke.utils;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Locale;
 
@@ -37,5 +41,12 @@ public class StringsHelper {
 
     public static Locale getLocale() {
         return context.getResources().getConfiguration().getLocales().get(0);
+    }
+
+    public static long getAge(long dateOfBirth) {
+        long now = Calendar.getInstance().getTimeInMillis();
+        long diff = now - dateOfBirth;
+
+        return diff / 1000 / 3600 / 24 / 365;
     }
 }
