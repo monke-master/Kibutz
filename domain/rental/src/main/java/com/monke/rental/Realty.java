@@ -110,4 +110,12 @@ public class Realty {
                 floorsCount
         );
     }
+
+    public boolean isFlat() {
+        return this instanceof Flat;
+    }
+
+    public boolean isHouse() {
+        return this instanceof House;
+    }
 }

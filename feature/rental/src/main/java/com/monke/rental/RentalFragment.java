@@ -154,24 +154,43 @@ public class RentalFragment extends Fragment {
                             rental.getRealty().getRoomsCount(),
                             rental.getRealty().getRoomsCount())
             );
-            info.txtType.setText(com.monke.ui.R.string.flat);
+
             info.txtArea.setText(getString(
                     com.monke.ui.R.string.area_info,
                     StringsHelper.formatFloat(rental.getRealty().getArea())));
-            if (rental.getRealty() instanceof Flat) {
+            info.txtFlatmates.setText(String.valueOf(rental.getMaxFlatmatesCount()));
+            info.txtFlatmatesHdr.setText(getResources().getQuantityString(
+                    com.monke.ui.R.plurals.flatmates_string_only,
+                    rental.getMaxFlatmatesCount()
+                    ));
+            if (rental.getRealty().isFlat()) {
                 bindFlatInfo((Flat) rental.getRealty());
+            } else {
+                bindHouseInfo((House) rental.getRealty());
             }
-
 
         });
     }
 
     private void bindFlatInfo(Flat flat) {
+        mBinding.info.txtType.setText(com.monke.ui.R.string.flat);
         mBinding.info.txtFloor.setText(
-                getString(com.monke.ui.R.string.floors_info, flat.getFloor(), flat.getFloorsCount())
+                getString(com.monke.ui.R.string.floors, flat.getFloor(), flat.getFloorsCount())
         );
 
         realtyDetailRWAdapter.setDetailList(RealtyUiHelpers.getFlatRealtyDetails(getContext(), flat));
+    }
+
+    private void bindHouseInfo(House house) {
+        mBinding.info.txtType.setText(com.monke.ui.R.string.house);
+        mBinding.info.txtFloor.setText(String.valueOf(house.getFloorsCount()));
+
+        realtyDetailRWAdapter.setDetailList(RealtyUiHelpers.getHouseRealtyDetails(getContext(), house));
+        mBinding.info.txtFloorCount.setText(getResources().getQuantityString(
+                com.monke.ui.R.plurals.floors,
+                house.getFloorsCount(),
+                house.getFloorsCount())
+        );
     }
 
     private void observeFlatmates() {

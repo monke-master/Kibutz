@@ -26,6 +26,7 @@ public class RoomsFragment extends Fragment {
 
     private FragmentRoomsBinding mBinding;
     private RoomsViewModel mViewModel;
+    private TextChipAdapter adapter;
 
     @Inject
     public RoomsViewModel.Factory factory;
@@ -48,21 +49,41 @@ public class RoomsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initChipsGroup();
-    }
-
-    private void initChipsGroup() {
-        var adapter = new TextChipAdapter(mBinding.chipsRoom, getLayoutInflater());
+        initToolbar();
+        adapter = new TextChipAdapter(mBinding.chipsRoom, getLayoutInflater());
         adapter.setOnChipSelectedListener(index -> {
             mViewModel.saveRoomsCount(index);
             NavHostFragment.findNavController(this).navigate(R.id.action_roomsFragment_to_areaFragment);
         });
+        if (mViewModel.isFlat()) {
+            bindAsFlat();
+        } else {
+            bindAsHouse();
+        }
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp()
+        );
+    }
+
+    private void bindAsFlat() {
         adapter.bind(
                 com.monke.ui.R.string.studio,
                 com.monke.ui.R.plurals.rooms,
                 Constants.MAX_ROOMS,
                 com.monke.ui.R.layout.item_chip_button);
+    }
 
+    private void bindAsHouse() {
+        mBinding.txtHdr.setText(com.monke.ui.R.string.rooms_count_house);
+        adapter.bind(
+                com.monke.ui.R.string.studio,
+                com.monke.ui.R.plurals.rooms,
+                Constants.MAX_ROOMS_HOUSE,
+                com.monke.ui.R.layout.item_chip_button,
+                1);
     }
 
 

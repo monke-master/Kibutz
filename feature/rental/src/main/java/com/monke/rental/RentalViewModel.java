@@ -62,6 +62,11 @@ public class RentalViewModel extends ViewModel {
                 if (!userIfAuthor()) {
                     _responseStatus.setValue(getResponseStatusUseCase.execute(user, rental));
                 }
+                getRentalFlatmatesUseCase.execute(rental).observeForever(flatmatesRes -> {
+                    if (flatmatesRes.isSuccess()) {
+                        _flatmates.setValue(flatmatesRes.get());
+                    }
+                });
             }
         });
     }

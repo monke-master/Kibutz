@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_room_count" />
 
     <TextView
-        android:id="@+id/txt_sleeps"
+        android:id="@+id/txt_flatmates"
         style="@style/Header2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,14 +37,14 @@
         android:text="2 " />
 
     <TextView
-        android:id="@+id/txt_sleeps_hdr"
+        android:id="@+id/txt_flatmates_hdr"
         style="@style/DefaultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/txt_sleeps"
-        app:layout_constraintStart_toStartOf="@+id/txt_sleeps"
-        app:layout_constraintTop_toBottomOf="@+id/txt_sleeps"
-        android:text="спальных места" />
+        app:layout_constraintEnd_toEndOf="@+id/txt_flatmates"
+        app:layout_constraintStart_toStartOf="@+id/txt_flatmates"
+        app:layout_constraintTop_toBottomOf="@+id/txt_flatmates"
+        tools:text="соседа" />
 
     <TextView
         android:id="@+id/txt_area"

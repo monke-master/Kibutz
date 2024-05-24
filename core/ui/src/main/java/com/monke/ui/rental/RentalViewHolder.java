@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.monke.rental.Flat;
+import com.monke.rental.House;
 import com.monke.rental.Realty;
 import com.monke.rental.Rental;
 import com.monke.ui.R;
@@ -39,7 +40,6 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
 
         Realty realty = rental.getRealty();
         mBinding.txtPrice.setText(context.getString(R.string.price_info, rental.getPrice()));
-        mBinding.txtRooms.setText(context.getString(R.string.rooms_info, realty.getRoomsCount()));
         mBinding.txtArea.setText(context.getString(
                                 R.string.area_info,
                                 StringsHelper.formatFloat(realty.getArea()))
@@ -65,10 +65,20 @@ public class RentalViewHolder extends RecyclerView.ViewHolder {
             mBinding.btnRespond.setOnClickListener(v -> onItemClickListener.onRespondBtnClick(rental));
         }
 
-        bindFlatInfo((Flat) realty);
+        if (realty.isFlat()) {
+            bindFlatInfo((Flat) realty);
+        } else {
+            bindHouseInfo((House) realty);
+        }
     }
 
     private void bindFlatInfo(Flat flat) {
         mBinding.txtFloor.setText(context.getString(R.string.floors_info, flat.getFloor(), flat.getFloorsCount()));
+        mBinding.txtRooms.setText(context.getString(R.string.rooms_info, flat.getRoomsCount()));
+    }
+
+    private void bindHouseInfo(House house) {
+        mBinding.txtFloor.setText(context.getString(R.string.floors_info_house, house.getFloorsCount()));
+        mBinding.txtRooms.setText(context.getString(R.string.rooms_info_house, house.getRoomsCount()));
     }
 }

@@ -17,13 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.navigation.Navigator;
 import com.example.navigation.RentalNavigationContract;
-import com.example.navigation.StartNavigationContract;
 import com.monke.profile.databinding.FragmentProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.rental.RentalRWAdapter;
 import com.monke.utils.StringsHelper;
-
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 

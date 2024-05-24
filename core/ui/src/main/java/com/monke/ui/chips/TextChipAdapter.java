@@ -28,7 +28,11 @@ public class TextChipAdapter {
     }
 
     public void bind(int zeroQuantityText, int pluralsId, int count, int layoutId) {
-        for (int i = 0; i < count; i++) {
+        bind(zeroQuantityText, pluralsId, count, layoutId, 0);
+    }
+
+    public void bind(int zeroQuantityText, int pluralsId, int count, int layoutId, int start) {
+        for (int i = start; i < count; i++) {
             if (i == 0) {
                 bindChip(getResources().getString(zeroQuantityText), layoutId, i);
             } else {

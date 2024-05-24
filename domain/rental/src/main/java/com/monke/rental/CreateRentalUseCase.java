@@ -59,6 +59,18 @@ public class CreateRentalUseCase {
         return this;
     }
 
+    public CreateRentalUseCase saveHomeArea(float area, float plotArea) {
+        Rental rental = rentalRepository.getCreatingRental();
+
+        House realty = (House) rental.getRealty();
+        realty.setArea(area);
+        realty.setPlotArea(plotArea);
+
+        rental.setRealty(realty);
+        rentalRepository.saveCreatingRental(rental);
+        return this;
+    }
+
     public CreateRentalUseCase saveFloorCount(int floorsCount) {
         Rental rental = rentalRepository.getCreatingRental();
         Realty realty = rental.getRealty();

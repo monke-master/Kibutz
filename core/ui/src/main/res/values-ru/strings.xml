@@ -32,6 +32,8 @@
     <string name="choose_rental_type">Выберите тип недвижимости</string>
     <string name="choose_address">Укажите адрес недвижимости</string>
     <string name="area_flat">Площадь квартиры</string>
+    <string name="house_area">Площадь дома</string>
+    <string name="plot_area">Площадь участка</string>
     <string name="common_area_square">Общая, м<sup>2</sup></string>
     <string name="living_area">Жилая, м<sup>2</sup></string>
     <string name="kitchen">Кухня, м<sup>2</sup></string>
@@ -39,7 +41,8 @@
     <string name="flat_floor">Этаж квартиры</string>
     <string name="floors_count">Этажей в доме</string>
     <string name="rooms_count">Сколько комнат в квартире</string>
-    <string name="enter_rooms_count">Введите количество комнат</string>
+    <string name="rooms_count_house">Сколько комнат в доме</string>
+    <string name="enter_sleeps_count">Введите количество спальных мест</string>
     <string name="roommates_hdr">Сколько ищите соседей</string>
     <string name="more_rooms">Больше %s</string>
     <string name="requirements">Требования к соседям</string>
@@ -79,7 +82,9 @@
     <string name="studio">Студия</string>
     <string name="flatmates_count">Количество соседей</string>
     <string name="rooms_info">%d комн. кв</string>
+    <string name="rooms_info_house">%d комн. дом</string>
     <string name="floors_info">%d/%d этаж</string>
+    <string name="floors_info_house">%d этажей</string>
     <string name="area_info">%s м<sup>2</sup></string>
     <string name="price_info">%d ₽/мес</string>
     <string name="responses">Отклики</string>
@@ -92,6 +97,7 @@
     <string name="waiting_for_confirmation">Ожидание подтверждения</string>
     <string name="cancel">Отмена</string>
     <string name="sign_out">Выйти из аккаунта</string>
+    <string name="floors">%d из %d</string>
 
     <plurals name="rooms">
         <item quantity="one">%s комната</item>
@@ -102,6 +108,18 @@
         <item quantity="one">%s сосед</item>
         <item quantity="few">%s соседа</item>
         <item quantity="many">%s соседей</item>
+    </plurals>
+
+    <plurals name="flatmates_string_only">
+        <item quantity="one">сосед</item>
+        <item quantity="few">соседа</item>
+        <item quantity="many">соседей</item>
+    </plurals>
+
+    <plurals name="floors">
+        <item quantity="one">этаж</item>
+        <item quantity="few">этажа</item>
+        <item quantity="many">этажей</item>
     </plurals>
 
 </resources>

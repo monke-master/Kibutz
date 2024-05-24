@@ -47,6 +47,7 @@ public class RentalTypeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initToolbar();
         mBinding.btnFlat.setOnClickListener(v -> {
             mViewModel.setRentalType(true);
             NavHostFragment.findNavController(this)
@@ -58,5 +59,11 @@ public class RentalTypeFragment extends Fragment {
             NavHostFragment.findNavController(this)
                     .navigate(R.id.action_rentalTypeFragment_to_addressFragment);
         });
+    }
+
+    private void initToolbar() {
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigateUp()
+        );
     }
 }

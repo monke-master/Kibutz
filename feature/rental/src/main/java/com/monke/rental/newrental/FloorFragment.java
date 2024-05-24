@@ -67,6 +67,10 @@ public class FloorFragment extends Fragment {
     }
 
     private void initEditTextFloor() {
+        if (!mViewModel.isFlat()) {
+            mBinding.editTxtFloor.setVisibility(View.GONE);
+            return;
+        }
         mBinding.editTxtFloor.getEditText().setText(
                 StringsHelper.getIntOrEmpty(mViewModel.getFloorUiState().getFloor()));
         mBinding.editTxtFloor.getEditText().addTextChangedListener(new TextChangedListener() {
