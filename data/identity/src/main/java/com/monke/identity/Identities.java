@@ -53,4 +53,53 @@ public class Identities {
             Constants.HAS_ANIMALS_ID,
             Identity.Type.NEGATIVE
     );
+
+    public static Identity MUSICIAN = new Identity(
+            Constants.MUSICIAN,
+            "Музицирую",
+            "",
+            Constants.NO_MUSICIAN,
+            Identity.Type.POSITIVE
+    );
+
+    public static Identity NO_MUSIC = new Identity(
+            Constants.NO_MUSICIAN,
+            "Без живой музыки",
+            "",
+            Constants.MUSICIAN,
+            Identity.Type.NEGATIVE
+    );
+
+    public static Identity LOVE_GUESTS = new Identity(
+            Constants.LOVE_GUESTS,
+            "Люблю гостей",
+            "",
+            Constants.NO_GUESTS,
+            Identity.Type.POSITIVE
+    );
+
+    public static Identity NO_GUESTS = new Identity(
+            Constants.NO_GUESTS,
+            "Без гостей",
+            "",
+            Constants.LOVE_GUESTS,
+            Identity.Type.NEGATIVE
+    );
+
+    public static Identity HAS_CHILD = new Identity(
+            Constants.HAS_CHILD,
+            "Есть ребенок",
+            "",
+            Constants.NO_CHILDREN,
+            Identity.Type.POSITIVE
+    );
+
+    public static Identity NO_CHILDREN = new Identity(
+            Constants.NO_CHILDREN,
+            "Никаких детей",
+            "",
+            Constants.HAS_CHILD,
+            Identity.Type.NEGATIVE
+    );
+
 }
