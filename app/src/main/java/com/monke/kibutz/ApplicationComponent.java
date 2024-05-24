@@ -2,6 +2,7 @@ package com.monke.kibutz;
 
 import android.content.Context;
 
+import com.example.navigation.Navigator;
 import com.monke.auth.di.AuthComponentDeps;
 import com.monke.di.AppScope;
 import com.monke.firebase.RemoteModule;
@@ -21,7 +22,8 @@ import dagger.Component;
         UserModule.class,
         RemoteModule.class,
         IdentityModule.class,
-        RentalModule.class
+        RentalModule.class,
+        ApplicationModule.class
 })
 @AppScope
 public interface ApplicationComponent extends
@@ -31,6 +33,8 @@ public interface ApplicationComponent extends
         HomeComponentDeps {
 
     UserRepository getUserRepository();
+
+    Navigator getNavigator();
 
     @Component.Builder
     interface Builder {

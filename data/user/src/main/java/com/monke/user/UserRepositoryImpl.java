@@ -257,4 +257,10 @@ public class UserRepositoryImpl implements UserRepository {
         var credentials = userPrefDataSource.getUserCredentials();
         return signIn(credentials.first, credentials.second);
     }
+
+    @Override
+    public void signOut() {
+        authDataSource.signOut();
+        userPrefDataSource.clearUserCredentials();
+    }
 }

@@ -63,16 +63,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_name" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sign_out"
+        style="@style/OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/sign_out"
+        android:textColor="@color/red"
+        app:icon="@drawable/ic_out"
+        app:iconTint="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile"
+        app:strokeColor="@color/red" />
+
     <TextView
         android:id="@+id/txt_count"
         style="@style/Header2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/your_responses"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_rental"

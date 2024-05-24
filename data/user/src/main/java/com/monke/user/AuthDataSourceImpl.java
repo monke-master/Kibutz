@@ -101,4 +101,9 @@ public class AuthDataSourceImpl implements AuthDataSource {
             });
         });
     }
+
+    @Override
+    public void signOut() {
+        auth.signOut();
+    }
 }

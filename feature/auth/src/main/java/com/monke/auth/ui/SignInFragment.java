@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDeepLinkRequest;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.navigation.MainNavigationContract;
 import com.monke.auth.R;
 import com.monke.auth.databinding.FragmentSignInBinding;
 import com.monke.auth.di.AuthComponent;
@@ -101,10 +103,11 @@ public class SignInFragment extends Fragment {
     private void observeUiStatus() {
         mViewModel.getUiStatusState().observe(getViewLifecycleOwner(), uiStatusState -> {
             if (uiStatusState.isSuccess()) {
-                NavDeepLinkRequest request = NavDeepLinkRequest.Builder
-                        .fromUri(Uri.parse(getString(com.monke.ui.R.string.main_fragment_deeplink)))
+                var controller = NavHostFragment.findNavController(this);
+                var navOptions = new NavOptions.Builder()
+                        .setPopUpTo(controller.getGraph().getStartDestinationId(), true)
                         .build();
-                NavHostFragment.findNavController(this).navigate(request);
+                controller.navigate(MainNavigationContract.createDeepLink(), navOptions);
                 AuthComponentProvider.clear();
             } else if (uiStatusState.isFailure()) {
                 loadingDialog.dismiss();

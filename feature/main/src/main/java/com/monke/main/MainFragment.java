@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.navigation.Navigator;
 import com.monke.main.databinding.FragmentMainBinding;
 
 public class MainFragment extends Fragment {
@@ -38,8 +39,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-
+        Navigator.setMainFragment(this);
     }
 
     @Override

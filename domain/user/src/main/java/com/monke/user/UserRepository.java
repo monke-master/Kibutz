@@ -32,4 +32,6 @@ public interface UserRepository {
 
     LiveData<Result<?>> signInWithSavedCredentials();
 
+    void signOut();
+
 }

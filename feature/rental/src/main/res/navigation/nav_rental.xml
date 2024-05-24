@@ -11,7 +11,7 @@
         android:label="fragment_rental"
         tools:layout="@layout/fragment_rental" >
 
-        <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}&amp;responseStatus={responseStatus}"/>
+
         <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}"/>
         <argument
             android:name="rentalId"

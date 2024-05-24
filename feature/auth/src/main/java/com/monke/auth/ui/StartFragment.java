@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -28,6 +29,12 @@ public class StartFragment extends Fragment {
 
     private StartViewModel mViewModel;
     private FragmentStartBinding mBinding;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        AuthComponentProvider.initialize();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -67,9 +74,11 @@ public class StartFragment extends Fragment {
     private void observeAuthStatus() {
         mViewModel.authenticated.observe(getViewLifecycleOwner(), authenticated -> {
             if (authenticated) {
-                NavHostFragment
-                        .findNavController(this)
-                        .navigate(MainNavigationContract.createDeepLink());
+                var controller = NavHostFragment.findNavController(this);
+                var navOptions = new NavOptions.Builder()
+                        .setPopUpTo(controller.getGraph().getStartDestinationId(), true)
+                        .build();
+                controller.navigate(MainNavigationContract.createDeepLink(), navOptions);
             }
         });
     }

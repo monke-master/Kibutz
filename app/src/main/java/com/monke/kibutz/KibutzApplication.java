@@ -35,8 +35,6 @@ public class KibutzApplication extends Application {
         ProfileComponentProvider.setDependencies(applicationComponent);
         RentalComponentProvider.setDependencies(applicationComponent);
         HomeComponentProvider.setDependencies(applicationComponent);
-
-        AuthComponentProvider.initialize();
     }
 
     private void initUtils() {

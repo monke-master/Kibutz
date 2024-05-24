@@ -10,7 +10,19 @@
         android:name="com.monke.main.MainFragment"
         android:label="MainFragment">
 
-        <deepLink app:uri="@string/main_fragment_deeplink"/>
+        <deepLink app:uri="@string/main_fragment_deeplink"
+            app:destination="@id/nav_auth"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/mainFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
+
+
+    <action
+        android:id="@+id/close_main_fragment"
+        app:destination="@id/nav_auth"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/nav_auth"
+        app:popUpToInclusive="true"/>
 
 </navigation>

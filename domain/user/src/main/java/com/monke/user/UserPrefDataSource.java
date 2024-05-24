@@ -7,4 +7,6 @@ public interface UserPrefDataSource {
     void saveUserCredentials(String email, String password);
 
     Pair<String, String> getUserCredentials();
+
+    void clearUserCredentials();
 }

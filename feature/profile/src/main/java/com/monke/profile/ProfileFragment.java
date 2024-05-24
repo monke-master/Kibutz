@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.navigation.Navigator;
 import com.example.navigation.RentalNavigationContract;
+import com.example.navigation.StartNavigationContract;
 import com.monke.profile.databinding.FragmentProfileBinding;
 import com.monke.profile.di.ProfileComponentProvider;
 import com.monke.ui.rental.RentalRWAdapter;
@@ -29,6 +31,9 @@ public class ProfileFragment extends Fragment {
 
     @Inject
     public ProfileViewModel.Factory factory;
+
+    @Inject
+    public Navigator navigator;
 
     private ProfileViewModel mViewModel;
     private FragmentProfileBinding mBinding;
@@ -58,6 +63,7 @@ public class ProfileFragment extends Fragment {
         initResponsesRecyclerView();
         fillUserInfo();
         observeRentalsList();
+        initSignUpBtn();
     }
 
     private void fillUserInfo() {
@@ -97,5 +103,12 @@ public class ProfileFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(rentalRWAdapter);
+    }
+
+    private void initSignUpBtn() {
+        mBinding.btnSignOut.setOnClickListener(v -> {
+            mViewModel.signOut();
+            navigator.closeMainFragment();
+        });
     }
 }

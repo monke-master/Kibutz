@@ -51,6 +51,7 @@ dependencies {
     implementation project(':domain:rental')
     implementation project(':core:di')
     implementation project(':core:remote')
+    implementation project(':core:navigation')
 
     implementation libs.appcompat
     implementation libs.material

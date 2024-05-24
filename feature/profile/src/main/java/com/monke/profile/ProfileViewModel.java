@@ -15,6 +15,7 @@ import com.monke.rental.Response;
 import com.monke.user.GetCurrentUserUseCase;
 import com.monke.user.GetResponsedRentals;
 import com.monke.user.GetUserRentalByIdUseCase;
+import com.monke.user.SignOutUseCase;
 import com.monke.user.User;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class ProfileViewModel extends ViewModel {
 
     private GetCurrentUserUseCase getCurrentUserUseCase;
     private GetResponsedRentals getResponsedRentals;
+    private SignOutUseCase signOutUseCase;
 
     private MutableLiveData<User> _user = new MutableLiveData<>();
     public LiveData<User> user = _user;
@@ -38,9 +40,11 @@ public class ProfileViewModel extends ViewModel {
 
     @Inject
     public ProfileViewModel(GetCurrentUserUseCase getCurrentUserUseCase,
-                            GetResponsedRentals getResponsedRentals) {
+                            GetResponsedRentals getResponsedRentals,
+                            SignOutUseCase signOutUseCase) {
         this.getCurrentUserUseCase = getCurrentUserUseCase;
         this.getResponsedRentals = getResponsedRentals;
+        this.signOutUseCase = signOutUseCase;
     }
 
     public void init() {
@@ -62,6 +66,10 @@ public class ProfileViewModel extends ViewModel {
         });
     }
 
+    public void signOut() {
+        signOutUseCase.execute();
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -73,18 +81,22 @@ public class ProfileViewModel extends ViewModel {
 
        private final GetCurrentUserUseCase getCurrentUserUseCase;
        private final GetResponsedRentals getResponsedRentals;
+       private final SignOutUseCase signOutUseCase;
 
         @Inject
         public Factory(GetCurrentUserUseCase getCurrentUserUseCase,
-                       GetResponsedRentals getResponsedRentals) {
+                       GetResponsedRentals getResponsedRentals,
+                       SignOutUseCase signOutUseCase) {
             this.getCurrentUserUseCase = getCurrentUserUseCase;
             this.getResponsedRentals = getResponsedRentals;
+            this.signOutUseCase = signOutUseCase;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) (new ProfileViewModel(getCurrentUserUseCase, getResponsedRentals));
+            return (T) (new ProfileViewModel(getCurrentUserUseCase,
+                    getResponsedRentals, signOutUseCase));
         }
     }
 }

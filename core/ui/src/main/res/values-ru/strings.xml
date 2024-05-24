@@ -91,6 +91,7 @@
     <string name="show_on_map">Указать на карте</string>
     <string name="waiting_for_confirmation">Ожидание подтверждения</string>
     <string name="cancel">Отмена</string>
+    <string name="sign_out">Выйти из аккаунта</string>
 
     <plurals name="rooms">
         <item quantity="one">%s комната</item>

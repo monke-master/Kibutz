@@ -5,6 +5,8 @@
     android:id="@+id/nav_auth"
     app:startDestination="@id/startFragment">
 
+
+
     <fragment
         android:id="@+id/startFragment"
         android:name="com.monke.auth.ui.StartFragment"

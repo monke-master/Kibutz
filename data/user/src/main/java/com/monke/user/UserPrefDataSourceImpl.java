@@ -33,4 +33,9 @@ public class UserPrefDataSourceImpl implements UserPrefDataSource {
         if (email == null) return null;
         return new Pair<>(email, sharedPreferences.getString(PASSWORD_KEY, null));
     }
+
+    @Override
+    public void clearUserCredentials() {
+        sharedPreferences.edit().clear().apply();
+    }
 }
