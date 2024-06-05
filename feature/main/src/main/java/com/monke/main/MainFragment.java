@@ -1,7 +1,5 @@
 package com.monke.main;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,13 +18,7 @@ import com.monke.main.databinding.FragmentMainBinding;
 
 public class MainFragment extends Fragment {
 
-    private MainViewModel mViewModel;
-
     private FragmentMainBinding mBinding;
-
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -38,7 +30,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         Navigator.setMainFragment(this);
     }
 
@@ -52,6 +43,5 @@ public class MainFragment extends Fragment {
         NavController navController = navHostFragment.getNavController();
 
         NavigationUI.setupWithNavController(mBinding.bottomNavigationView, navController);
-        // mBinding.bottomNavigationView.setItemIconTintList(null);
     }
 }
