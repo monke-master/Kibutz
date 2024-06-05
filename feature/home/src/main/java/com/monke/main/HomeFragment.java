@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import com.example.navigation.RentalNavigationContract;
 import com.monke.main.databinding.FragmentHomeBinding;
 import com.monke.main.di.HomeComponentProvider;
+import com.monke.ui.DimensionsHelper;
+import com.monke.ui.GridSpacingItemDecoration;
 import com.monke.ui.rental.RentalRWAdapter;
 
 import javax.inject.Inject;
@@ -65,9 +67,11 @@ public class HomeFragment extends Fragment {
                     .findNavController(this)
                     .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
         });
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(
+                DimensionsHelper.dpToPx(12), 2, DimensionsHelper.dpToPx(180)));
 
         recyclerView.setLayoutManager(
-                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(mAdapter);
     }
 

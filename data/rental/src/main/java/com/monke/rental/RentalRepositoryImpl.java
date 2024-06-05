@@ -212,6 +212,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public LiveData<Result<List<Rental>>> getAvailableRentals(String userId) {
         var result = new MutableLiveData<Result<List<Rental>>>();
+
         ThreadUtils.runOnBackground(() -> {
             remoteDataSource.getAvailableRentalsIds(userId, rentalsRes -> {
                 if (rentalsRes.isFailure()) {
@@ -233,6 +234,7 @@ public class RentalRepositoryImpl implements RentalRepository {
                         result.setValue(new Result.Success<>(rentals));
                     });
                 }
+                rentals.addAll(Mocks.mockedRentalList);
             });
         });
         return result;
