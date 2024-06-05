@@ -16,11 +16,23 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_main"/>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/menu_main" />
+        android:elevation="16dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="0dp"
+        app:strokeColor="@color/white"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_anchorGravity="bottom">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/BottomNavigationView"
+            app:menu="@menu/menu_main" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

@@ -52,5 +52,6 @@ public class MainFragment extends Fragment {
         NavController navController = navHostFragment.getNavController();
 
         NavigationUI.setupWithNavController(mBinding.bottomNavigationView, navController);
+        // mBinding.bottomNavigationView.setItemIconTintList(null);
     }
 }

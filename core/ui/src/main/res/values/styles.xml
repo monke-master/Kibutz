@@ -92,4 +92,17 @@
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 
+    <style name="BottomNavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/transparent</item>
+    </style>
+
+
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/white</item>
+        <item name="itemActiveIndicatorStyle">@style/BottomNavIndicator</item>
+        <item name="itemIconTint">@color/color_nav_selectable</item>
+        <item name="itemTextColor">@color/color_nav_selectable</item>
+    </style>
+
+
 </resources>
