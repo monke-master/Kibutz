@@ -68,7 +68,9 @@ public class HomeFragment extends Fragment {
                     .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
         });
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(
-                DimensionsHelper.dpToPx(12), 2, DimensionsHelper.dpToPx(180)));
+                (int) getResources().getDimension(com.monke.ui.R.dimen.grid_layout_vertical_padding),
+                2,
+                (int) getResources().getDimension(com.monke.ui.R.dimen.rental_small_image_width)));
 
         recyclerView.setLayoutManager(
                 new GridLayoutManager(getContext(), 2));

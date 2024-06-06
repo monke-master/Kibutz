@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/rental_small_image_width"
+        android:layout_height="@dimen/rental_small_image_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
