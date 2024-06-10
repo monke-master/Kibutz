@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navigation.RentalNavigationContract;
 import com.monke.rental.databinding.FragmentUserRentalListBinding;
 import com.monke.rental.di.RentalComponentProvider;
+import com.monke.ui.LinearSpacingItemDecoration;
 import com.monke.ui.rental.RentalRWAdapter;
 
 import javax.inject.Inject;
@@ -69,6 +70,9 @@ public class RentalUserListFragment extends Fragment {
                 false
         ));
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new LinearSpacingItemDecoration(
+                (int)getResources().getDimension(com.monke.ui.R.dimen.linear_layout_vertical_padding)
+        ));
     }
 
     private void observeUser() {

@@ -27,6 +27,6 @@
     <dimen name="rental_small_image_height">100dp</dimen>
     
     <dimen name="grid_layout_vertical_padding">32dp</dimen>
-
+    <dimen name="linear_layout_vertical_padding">32dp</dimen>
 
 </resources>

@@ -1,24 +1,21 @@
 package com.monke.main;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.example.navigation.RentalNavigationContract;
 import com.monke.main.databinding.FragmentHomeBinding;
 import com.monke.main.di.HomeComponentProvider;
-import com.monke.ui.DimensionsHelper;
 import com.monke.ui.GridSpacingItemDecoration;
 import com.monke.ui.rental.RentalRWAdapter;
 
