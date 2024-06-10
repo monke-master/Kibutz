@@ -234,7 +234,6 @@ public class RentalRepositoryImpl implements RentalRepository {
                         result.setValue(new Result.Success<>(rentals));
                     });
                 }
-                rentals.addAll(Mocks.mockedRentalList);
             });
         });
         return result;
