@@ -23,7 +23,11 @@
         android:label="fragment_user"
         tools:layout="@layout/fragment_user">
 
-        <deepLink app:uri="kibutz://com.monke.identity/pick_identities/userId={userId}"/>
+        <deepLink app:uri="kibutz://com.monke.identity/pick_identities/userId={userId}"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
         <argument
             android:name="userId"
             app:argType="string" />
@@ -37,7 +41,7 @@
         android:label="fragment_photo"
         tools:layout="@layout/fragment_photo">
 
-        <deepLink app:uri="kibutz://com.monke.ui.photo/photo/photo={photo}"/>
+        <deepLink app:uri="kibutz://com.monke.ui.photo/photo/photo={photo}" />
 
         <argument
             android:name="photo"

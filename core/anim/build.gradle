@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.navigation'
+    namespace 'ru.monke.anim'
     compileSdk 34
 
     defaultConfig {
@@ -27,12 +27,8 @@ android {
 
 dependencies {
 
-    implementation project(':domain:identity')
-    implementation project(':core:anim')
-
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.navigation.fragment
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

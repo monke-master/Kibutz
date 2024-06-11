@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.navigation.MainNavigationContract;
+import com.example.navigation.Navigator;
 import com.monke.auth.R;
 import com.monke.auth.databinding.FragmentSignInBinding;
 import com.monke.auth.di.AuthComponent;
@@ -104,7 +105,7 @@ public class SignInFragment extends Fragment {
         mViewModel.getUiStatusState().observe(getViewLifecycleOwner(), uiStatusState -> {
             if (uiStatusState.isSuccess()) {
                 var controller = NavHostFragment.findNavController(this);
-                var navOptions = new NavOptions.Builder()
+                var navOptions = Navigator.DEFAULT_OPTIONS
                         .setPopUpTo(controller.getGraph().getStartDestinationId(), true)
                         .build();
                 controller.navigate(MainNavigationContract.createDeepLink(), navOptions);

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.navigation.Navigator;
 import com.example.navigation.PickIdentitiesNavigationContract;
 import com.monke.identity.Identity;
 import com.monke.identity.IdentityModel;
@@ -86,7 +87,7 @@ public class FlatmatesFragment extends Fragment {
                     List.of(Identity.Type.NEGATIVE.name(), Identity.Type.GENDER.name())
             );
 
-            NavHostFragment.findNavController(this).navigate(request);
+            NavHostFragment.findNavController(this).navigate(request, Navigator.DEFAULT_OPTIONS.build());
         });
     }
 

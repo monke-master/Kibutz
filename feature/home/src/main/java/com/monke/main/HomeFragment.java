@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.navigation.Navigator;
 import com.example.navigation.RentalNavigationContract;
 import com.monke.main.databinding.FragmentHomeBinding;
 import com.monke.main.di.HomeComponentProvider;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment {
         mAdapter.setOnItemClickListener(rental -> {
             NavHostFragment
                     .findNavController(this)
-                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
+                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()), Navigator.DEFAULT_OPTIONS.build());
         });
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(
                 (int) getResources().getDimension(com.monke.ui.R.dimen.grid_layout_vertical_padding),

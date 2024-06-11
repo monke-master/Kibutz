@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.navigation.Navigator;
 import com.example.navigation.ResponsesNavigationContract;
 import com.example.navigation.UserNavigationContract;
 import com.monke.rental.databinding.FragmentResponsesBinding;
@@ -102,7 +103,7 @@ public class ResponsesFragment extends Fragment {
             public void onClicked(User user) {
                 NavHostFragment
                         .findNavController(ResponsesFragment.this)
-                        .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()));
+                        .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()), Navigator.DEFAULT_OPTIONS.build());
             }
         });
         recyclerView.setAdapter(mResponseRWAdapter);

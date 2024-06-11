@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navigation.Navigator;
 import com.example.navigation.RentalNavigationContract;
 import com.monke.rental.databinding.FragmentUserRentalListBinding;
 import com.monke.rental.di.RentalComponentProvider;
@@ -60,7 +61,7 @@ public class RentalUserListFragment extends Fragment {
         adapter.setOnItemClickListener(rental -> {
             NavHostFragment
                     .findNavController(this)
-                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
+                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()), Navigator.DEFAULT_OPTIONS.build());
         });
 
         RecyclerView recyclerView = mBinding.listRental;

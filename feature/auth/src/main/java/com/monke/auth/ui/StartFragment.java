@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.navigation.MainNavigationContract;
+import com.example.navigation.Navigator;
 import com.monke.auth.R;
 import com.monke.auth.databinding.FragmentStartBinding;
 import com.monke.auth.di.AuthComponentProvider;
@@ -75,7 +76,7 @@ public class StartFragment extends Fragment {
         mViewModel.authenticated.observe(getViewLifecycleOwner(), authenticated -> {
             if (authenticated) {
                 var controller = NavHostFragment.findNavController(this);
-                var navOptions = new NavOptions.Builder()
+                var navOptions = Navigator.DEFAULT_OPTIONS
                         .setPopUpTo(controller.getGraph().getStartDestinationId(), true)
                         .build();
                 controller.navigate(MainNavigationContract.createDeepLink(), navOptions);

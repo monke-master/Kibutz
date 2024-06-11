@@ -42,6 +42,7 @@ dependencies {
     implementation project(':domain:data')
     implementation project(':core:di')
     implementation project(':core:utils')
+    implementation project(':core:anim')
     implementation project(':domain:data')
 
     implementation libs.appcompat

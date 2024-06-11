@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.navigation.Navigator;
 import com.example.navigation.SearchAddressNavigationContract;
 import com.monke.rental.R;
 import com.monke.rental.databinding.FragmentAddressBinding;
@@ -130,7 +131,7 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
         mViewModel.saveAddress();
         NavHostFragment
                 .findNavController(this)
-                .navigate(R.id.action_addressFragment_to_roomsFragment);
+                .navigate(R.id.action_addressFragment_to_roomsFragment, null, Navigator.DEFAULT_OPTIONS.build());
     }
 
     @Override
@@ -139,6 +140,6 @@ public class AddressFragment extends Fragment implements AddressBottomSheetDialo
         bundle.putString(SearchAddressNavigationContract.ADDRESS_KEY, mViewModel.address.getValue());
         NavHostFragment
                 .findNavController(this)
-                .navigate(R.id.action_addressFragment_to_searchAddressFragment, bundle);
+                .navigate(R.id.action_addressFragment_to_searchAddressFragment, bundle, Navigator.DEFAULT_OPTIONS.build());
     }
 }

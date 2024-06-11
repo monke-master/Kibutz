@@ -15,18 +15,34 @@
         <deepLink app:uri="kibutz://com.monke.rental/rental/rentalId={rentalId}"/>
         <argument
             android:name="rentalId"
-            app:argType="string" />
+            app:argType="string"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
         <argument
             android:name="responseStatus"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="true"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
 
         <action
             android:id="@+id/action_rentalFragment_to_responsesFragment"
-            app:destination="@id/responsesFragment" />
+            app:destination="@id/responsesFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
         <action
             android:id="@+id/action_rentalFragment_to_userContactsFragment"
-            app:destination="@id/userContactsFragment" />
+            app:destination="@id/userContactsFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/responsesFragment"

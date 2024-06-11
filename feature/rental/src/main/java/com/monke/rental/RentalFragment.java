@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.navigation.ContactsNavigationContract;
+import com.example.navigation.Navigator;
 import com.example.navigation.PhotoNavigationContract;
 import com.example.navigation.RentalNavigationContract;
 import com.example.navigation.ResponsesNavigationContract;
@@ -97,7 +98,7 @@ public class RentalFragment extends Fragment {
                 mViewModel.rental.getValue().getId());
         NavHostFragment
                 .findNavController(this)
-                .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle);
+                .navigate(R.id.action_rentalFragment_to_responsesFragment, bundle, Navigator.DEFAULT_OPTIONS.build());
     }
 
     private void navigateToContacts() {
@@ -107,7 +108,7 @@ public class RentalFragment extends Fragment {
                 new ContactsModel(mViewModel.rental.getValue().getContacts()));
         NavHostFragment
                 .findNavController(this)
-                .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle);
+                .navigate(R.id.action_rentalFragment_to_userContactsFragment, bundle, Navigator.DEFAULT_OPTIONS.build());
     }
 
     private void initFlatmateAdapter() {
@@ -118,7 +119,7 @@ public class RentalFragment extends Fragment {
         flatmateRWAdapter.setOnItemClickedListener(user -> {
             NavHostFragment
                     .findNavController(this)
-                    .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()));
+                    .navigate(UserNavigationContract.createDeepLinkRequest(user.getId()), Navigator.DEFAULT_OPTIONS.build());
         });
     }
 

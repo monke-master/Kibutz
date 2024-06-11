@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.example.navigation.MainNavigationContract;
+import com.example.navigation.Navigator;
 import com.monke.auth.databinding.FragmentUserInfoBinding;
 import com.monke.auth.di.AuthComponentProvider;
 import com.monke.ui.DatePickerFragment;
@@ -122,7 +123,7 @@ public class UserInfoFragment extends Fragment {
         mViewModel.getUiStatusState().observe(getViewLifecycleOwner(), uiStatusState -> {
             if (uiStatusState.isSuccess()) {
                 var controller = NavHostFragment.findNavController(this);
-                var navOptions = new NavOptions.Builder()
+                var navOptions = Navigator.DEFAULT_OPTIONS
                         .setPopUpTo(controller.getGraph().getStartDestinationId(), true)
                         .build();
                 controller.navigate(MainNavigationContract.createDeepLink(), navOptions);

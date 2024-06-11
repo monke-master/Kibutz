@@ -95,7 +95,7 @@ public class ProfileFragment extends Fragment {
         rentalRWAdapter.setOnItemClickListener(rental -> {
             NavHostFragment
                     .findNavController(this)
-                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()));
+                    .navigate(RentalNavigationContract.createDeepLinkRequest(rental.getId()), Navigator.DEFAULT_OPTIONS.build());
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

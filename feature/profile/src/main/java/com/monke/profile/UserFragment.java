@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.navigation.Navigator;
 import com.example.navigation.PhotoNavigationContract;
 import com.example.navigation.UserNavigationContract;
 import com.monke.profile.databinding.FragmentUserBinding;

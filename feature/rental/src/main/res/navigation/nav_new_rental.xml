@@ -14,7 +14,11 @@
         tools:layout="@layout/fragment_rental_type" >
         <action
             android:id="@+id/action_rentalTypeFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
+            app:destination="@id/addressFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -23,10 +27,18 @@
         tools:layout="@layout/fragment_address" >
         <action
             android:id="@+id/action_addressFragment_to_roomsFragment"
-            app:destination="@id/roomsFragment" />
+            app:destination="@id/roomsFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
         <action
             android:id="@+id/action_addressFragment_to_searchAddressFragment"
-            app:destination="@id/searchAddressFragment" />
+            app:destination="@id/searchAddressFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/roomsFragment"
@@ -35,7 +47,11 @@
         tools:layout="@layout/fragment_rooms">
         <action
             android:id="@+id/action_roomsFragment_to_areaFragment"
-            app:destination="@id/areaFragment" />
+            app:destination="@id/areaFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/areaFragment"
@@ -44,7 +60,11 @@
         tools:layout="@layout/fragment_area">
         <action
             android:id="@+id/action_areaFragment_to_floorFragment"
-            app:destination="@id/floorFragment" />
+            app:destination="@id/floorFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/floorFragment"
@@ -53,7 +73,11 @@
         tools:layout="@layout/fragment_floor" >
         <action
             android:id="@+id/action_floorFragment_to_flatmatesFragment"
-            app:destination="@id/flatmatesFragment" />
+            app:destination="@id/flatmatesFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/flatmatesFragment"
@@ -62,7 +86,11 @@
         tools:layout="@layout/fragment_flatmates" >
         <action
             android:id="@+id/action_flatmatesFragment_to_photosFragment"
-            app:destination="@id/photosFragment" />
+            app:destination="@id/photosFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/photosFragment"
@@ -80,7 +108,11 @@
         tools:layout="@layout/fragment_price" >
         <action
             android:id="@+id/action_priceFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -89,7 +121,11 @@
         tools:layout="@layout/fragment_description" >
         <action
             android:id="@+id/action_descriptionFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
+            app:destination="@id/contactsFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/contactsFragment"
@@ -99,7 +135,11 @@
 
         <action
             android:id="@+id/action_contactsFragment_to_rentalUserListFragment"
-            app:destination="@id/rentalUserListFragment" />
+            app:destination="@id/rentalUserListFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
     <fragment
         android:id="@+id/searchAddressFragment"
@@ -108,6 +148,10 @@
         tools:layout="@layout/fragment_search_address" >
         <action
             android:id="@+id/action_searchAddressFragment_to_roomsFragment"
-            app:destination="@id/roomsFragment" />
+            app:destination="@id/roomsFragment"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
+            app:popEnterAnim="@anim/push_right_in"
+            app:popExitAnim="@anim/push_right_out"/>
     </fragment>
 </navigation>
